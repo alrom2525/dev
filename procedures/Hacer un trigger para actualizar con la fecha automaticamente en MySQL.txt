@@ -1,0 +1,7 @@
+Hacer un trigger para actualizar con la fecha automaticamente
+http://www.forosdelweb.com/f86/trigger-actualizacion-campo-tras-update-1066559/
+
+CREATE TRIGGER updateSettingg  
+BEFORE UPDATE ON ges_inscriptiong 
+FOR EACH ROW
+SET NEW.modified = NOW();

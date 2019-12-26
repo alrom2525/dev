@@ -1,0 +1,33 @@
+ #jWtop {
+    display:block;
+    width:100%;
+    margin-left:0;
+}
+#jWcover {
+    display:block;
+    position:relative;
+    width:100%;
+    height:100%;
+    margin:0px 0px 10px 0px;
+}
+#jWlogoLarge {
+    display:none;
+}
+#jWtrackList {
+    display:none;
+    margin-bottom:10px;
+}
+
+#jWlist {
+    line-height:14px;
+    font-size:12px;
+}
+#jWtrack {
+    line-height:15px;
+}
+#jWtrackName {
+    font-size:13px;
+}
+#jWtrackBy {
+    font-size:12px;
+}

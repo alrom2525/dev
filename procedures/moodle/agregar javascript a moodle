@@ -1,0 +1,31 @@
+agregar javascript a moodle
+(todavia no lo he probado bien)
+https://dzone.com/articles/adding-external-javascript-files-js-into-moodle
+
+Steps
+Go inside your “/theme/YourThemeName” folder. If you don’t have “javascript” folder inside “/theme/YourThemeName”, create a new folder called “javascript”.
+Inside the new javascript folder that you have created, upload the .js files.
+Next, go inside your “/theme/YourThemeName/config.php”. At the very bottom of the file, add a new line of code to include our javascript files.
+#To load the js files in your header:
+$THEME->javascripts = array(‘yourfirstjsfile’,’yoursecondjsfile’); 
+#To load the js files in your footer:
+$THEME->javascripts_footer = array(‘yourfirstjsfile’,’yoursecondjsfile’);
+
+
+4. In order to see the changes, the caches of the site must be purged. Clear the browser cache and refresh to see the changes.
+
+
+
+
+Otro:
+In Moodle 2.0 this is used $PAGE->requires->js().
+
+Make $PAGE available to your code by doing:
+
+require_once($CFG->libdir . '/pagelib.php');
+global $PAGE;
+Add your code:
+
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/mod/mymod/script.js') );
+It is required to put moodle_url() around your path!
+

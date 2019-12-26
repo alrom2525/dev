@@ -1,0 +1,21 @@
+500 Internal Error despues de cambiar Site admnistration>>Development>>Debugging view all errors
+500 Internal Error after changing Site admnistration>>Development>>Debugging view all errors
+
+https://moodle.org/mod/forum/discuss.php?d=394307
+
+
+In order to force the debugging messages to be off (so that you can revert to the previous state), try adding the following line to your config.php:
+
+$CFG->debug=0;
+
+
+Original question:
+Hi Everybody,
+
+We have a critical problem, I was trying to solve a problem in moodle. So i think that if i active error messages i can understand what should i do.
+
+So i changed error shown type under "Site admnistration>>Development>>Debugging" to "All". After that i cant open moodle anymore. Displaying 500 Error. 
+
+Please it is so critical for us.
+
+Thank u.

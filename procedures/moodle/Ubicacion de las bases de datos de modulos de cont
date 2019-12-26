@@ -1,0 +1,12 @@
+Ubicacion de las bases de datos de modulos de contenidos sofadauter
+estas bases de datos proceden de wordpress
+ir a la carpeta /var/www/dev.mocn.ca/www/mod/standalone/content
+y dentro de todos esos directorios buscar la cadena $db['default']['database']
+en los archivos de base de datos ejemplo:
+
+	/var/www/dev.mocn.ca/www/mod/standalone/content/385/application/config/database.php
+
+	$db['default']['database'] = 'standalone_miseniveaumath';
+
+
+Hacer una busqueda de la cadena de texto con el comando grep

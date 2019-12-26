@@ -1,0 +1,9 @@
+
+Evento que se activa al refrescar una pagina:
+
+<body onpageshow="myFunction()">
+Try it Yourself »
+
+https://www.w3schools.com/jsref/event_onpageshow.asp
+
+ it occurs after the onload event when the page first loads. Also, the onpageshow event occurs every time the page is loaded, whereas the onload event does not occur when the page is loaded from the cache.

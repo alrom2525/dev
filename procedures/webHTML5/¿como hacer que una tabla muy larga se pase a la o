@@ -1,0 +1,6 @@
+¿como hacer que una tabla muy larga se pase a la otra página en dompdf?
+
+Agregándole este atributo table{width:100%;page-break-inside: avoid;} al CSS de la etiqueta table
+https://es.stackoverflow.com/questions/176568/como-hacer-que-una-tabla-muy-larga-se-pase-a-la-otra-p%C3%A1gina-en-dompdf
+
+

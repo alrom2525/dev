@@ -1,0 +1,10 @@
+¿como obtener penúltimo registro en MySQL?
+https://es.stackoverflow.com/questions/172662/como-obtener-pen%C3%BAltimo-registro-en-mysql
+
+Lo puedes hacer utilizando ordenamiento y paginado a la misma vez, o sea, la idea es, ordenas por el campo fechaBoleta dices que el pageSize sea de 1 elemento y muestras la pagina número 2, la consulta sería algo como esto:
+
+SELECT * FROM tuTabla
+ORDER BY fechaBoleta DESC
+LIMIT 1, 1
+De esta forma obtienes el penultimo elemento de la tabla.
+

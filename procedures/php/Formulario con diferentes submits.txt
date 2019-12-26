@@ -1,0 +1,15 @@
+<?php
+
+Formulario con diferentes submits
+A form with two submit buttons. The first submit button submits the form data to "action_page.php", and the second submits to "action_page2.php":
+
+https://www.w3schools.com/tags/att_button_formaction.asp
+
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+
+<a href="<?php  echo $nav_customers_cinscuni; ?>"  onmouseenter='contextmenuOFF()' 
+        onmouseleave='contextmenuON()' form='form2' >
+</form>
+
+<form id='form2' method="post" action="cinscriptionreguni.php"> </form>

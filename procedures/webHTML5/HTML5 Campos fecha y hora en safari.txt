@@ -1,0 +1,5 @@
+HTML5 Campos fecha y hora en safari
+https://css-tricks.com/how-to-use-the-webshims-polyfill/
+
+https://gomakethings.com/how-to-check-if-a-browser-supports-native-input-date-pickers/
+https://stackoverflow.com/questions/18020950/how-to-make-input-type-date-supported-on-all-browsers-any-alternatives

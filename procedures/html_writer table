@@ -1,0 +1,1106 @@
+Hot Examples
+EN 
+ 
+Example: Zend_Json::decode
+PHP html_writer::table Examples
+
+ 
+PHP html_writer::table - 30 examples found. These are the top rated real world PHP examples of html_writer::table extracted from open source projects. You can rate examples to help us improve the quality of examples.
+Programming Language: PHP
+Class/Type: html_writer
+Method/Function: table
+Examples at hotexamples.com: 30
+
+ 
+
+ 
+FREQUENTLY USED METHODS
+alist (30)
+checkbox (30)
+div (30)
+empty_tag (30)
+end_div (30)
+end_tag (30)
+input_hidden_params (30)
+label (30)
+link (30)
+nonempty_tag (30)
+
+ 
+FREQUENTLY USED METHODS
+random_id (30)
+script (30)
+select (30)
+span (30)
+start_div (30)
+start_tag (30)
+table (30)
+tag (30)
+img (29)
+end_span (16)
+start_span (16)
+select_time (10)
+attributes (3)
+select_yes_no (3)
+FREQUENTLY USED METHODS
+start_span (16)
+select_time (10)
+attributes (3)
+select_yes_no (3)
+Google BookmarkFacebookTwitterPrintEmailMore
+EXAMPLE #10  
+ 
+File: renderer.php  Project: vuchannguyen/web
+ public function render_files_tree_viewer(files_tree_viewer $tree)
+ {
+     $html = $this->output->heading_with_help(get_string('coursefiles'), 'courselegacyfiles', 'moodle');
+     $html .= $this->output->container_start('coursefilesbreadcrumb');
+     foreach ($tree->path as $path) {
+         $html .= $path;
+         $html .= ' / ';
+     }
+     $html .= $this->output->container_end();
+     $html .= $this->output->box_start();
+     $table = new html_table();
+     $table->head = array(get_string('filename', 'backup'), get_string('size'), get_string('modified'));
+     $table->align = array('left', 'right', 'right');
+     $table->width = '100%';
+     $table->data = array();
+     foreach ($tree->tree as $file) {
+         if (!empty($file['isdir'])) {
+             $table->data[] = array(html_writer::link($file['url'], $this->output->pix_icon('f/folder', 'icon') . ' ' . $file['filename']), '', $file['filedate']);
+         } else {
+             $table->data[] = array(html_writer::link($file['url'], $this->output->pix_icon('f/' . mimeinfo('icon', $file['filename']), get_string('icon')) . ' ' . $file['filename']), $file['filesize'], $file['filedate']);
+         }
+     }
+     $html .= html_writer::table($table);
+     $html .= $this->output->single_button(new moodle_url('/files/coursefilesedit.php', array('contextid' => $tree->context->id)), get_string('coursefilesedit'), 'get');
+     $html .= $this->output->box_end();
+     return $html;
+ }
+
+ 
+EXAMPLE #20  
+ 
+File: upgrade.php  Project: CWRTP/facetoface-2.0
+/**
+ *
+ * Sends message to administrator listing all updated
+ * duplicate custom fields
+ * @param array $data
+ */
+function facetoface_send_admin_upgrade_msg($data)
+{
+    global $SITE;
+    // No data - no need to send email.
+    if (empty($data)) {
+        return;
+    }
+    $table = new html_table();
+    $table->head = array('Custom field ID', 'Custom field original shortname', 'Custom field new shortname');
+    $table->data = $data;
+    $table->align = array('center', 'center', 'center');
+    $title = "{$SITE->fullname}: Face to Face upgrade info";
+    $note = 'During the last site upgrade the face-to-face module has been modified. It now
+requires session custom fields to have unique shortnames. Since some of your
+custom fields had duplicate shortnames, they have been renamed to remove
+duplicates (see table below). This could impact on your email messages if you
+reference those custom fields in the message templates.';
+    $message = html_writer::start_tag('html');
+    $message .= html_writer::start_tag('head') . html_writer::tag('title', $title) . html_writer::end_tag('head');
+    $message .= html_writer::start_tag('body');
+    $message .= html_writer::tag('p', $note) . html_writer::table($table, true);
+    $message .= html_writer::end_tag('body');
+    $message .= html_writer::end_tag('html');
+    $admin = get_admin();
+    email_to_user($admin, $admin, $title, '', $message);
+}
+
+ 
+EXAMPLE #30  
+ 
+File: exportroles_form.php  Project: ncsu-delta/moodle-report_rolesmigration
+    function definition() {
+        $mform =& $this->_form;
+        $contextid = $this->_customdata['contextid'];
+
+        $export = $mform->addElement('hidden', 'export', ''); // Will be overwritten below
+
+        $table = new html_table();
+        /* Styling done using HTML table and CSS */
+        $table->attributes['class'] = 'export_form_table';
+        $table->align = array('left', 'left', 'left', 'center');
+        $table->wrap = array('nowrap', '', 'nowrap', 'nowrap');
+        $table->data = array();
+
+        $table->head = array(get_string('name'),
+                            get_string('description'),
+                            get_string('shortname'),
+                            get_string('export', 'report_rolesmigration'));
+
+        $roles = get_all_roles();
+        foreach ($roles as $role) {
+            $row = array();
+            $roleurl = new moodle_url('/admin/roles/define.php', array('roleid' => $role->id, 'action' => 'view'));
+            $row[0] = '<a href="'.$roleurl.'">'.format_string($role->name).'</a>';
+            $row[1] = format_text($role->description, FORMAT_HTML);
+            $row[2] = ($role->shortname);
+            /* Export values are added from role checkboxes */
+            $row[3] = '<input type="checkbox" name="export[]" value="'.$role->shortname.'" />';
+
+            $table->data[] = $row;
+        }
+
+        $mform->addElement('html', html_writer::table($table));
+        $mform->addElement('hidden', 'contextid', $contextid);
+        $this->add_action_buttons(false, get_string('submitexport', 'report_rolesmigration'));
+    }
+
+ 
+EXAMPLE #40  
+ 
+File: exams_list_form.php  Project: tyleung/CMPUT401MoodleExams
+/**
+ *	Function to display a teacher's available exams. This uses all the
+ *  courses that a teacher is enrolled in and checks which course has 
+ *  exams related to it. Shows the exam, the date and adds a 
+ */
+function display_exams_list()
+{
+    global $DB, $CFG, $USER;
+    $IP_Address = $tableName = 'Exams';
+    $user_table = 'user';
+    $table = new html_table();
+    $table->head = array('Course', 'Date', 'Navigation');
+    $table->tablealign = 'center';
+    $table->width = '100%';
+    $user_courses = enrol_get_users_courses($USER->id, true, '*', 'visible DESC,sortorder ASC');
+    /**
+     *	Checks the teachers courses with available tests and if exists add to the main page. 
+     */
+    foreach ($user_courses as $uc) {
+        $rec = $DB->get_records_sql('SELECT booklet_id, year_semester_origin 
+							FROM {mem_booklet_data}
+							WHERE course_id=?', array(intval($uc->id)));
+        $row_info = array();
+        if (count($rec) > 0) {
+            $row = new html_table_row(array($uc->fullname, current($rec)->year_semester_origin, '<div style="text-align: center"><a href=' . $CFG->wwwroot . '/local/memplugin/grid.php?course_id=' . intval($uc->id) . '>' . get_string('startmarking', 'local_memplugin') . '</a></div>'));
+            $table->data[] = $row;
+        }
+    }
+    echo html_writer::table($table);
+}
+EXAMPLE #50  
+ 
+File: class_settings.php  Project: educakanchay/campus
+function class_settings_show_table($classes)
+{
+    $table = new html_table();
+    //
+    $table->head[] = '#';
+    $table->align[] = 'center';
+    $table->size[] = '20px';
+    $table->wrap[] = 'nowrap';
+    $table->head[] = get_string('classname', 'block_autoattend');
+    $table->align[] = 'center';
+    $table->size[] = '60px';
+    $table->wrap[] = 'nowrap';
+    $table->head[] = get_string('delete');
+    $table->align[] = 'center';
+    $table->size[] = '60px';
+    $table->wrap[] = 'nowrap';
+    //
+    $i = 0;
+    foreach ($classes as $class) {
+        $classid_input = '<input type="hidden" name="classids[' . $i . ']" value="' . $class->id . '" />';
+        $table->data[$i][] = $i + 1;
+        $table->data[$i][] = '<input type="text" name="classnames[' . $i . ']" size="24" maxlength="32" value="' . $class->name . '" />';
+        $table->data[$i][] = '<input type="checkbox" name="classdels[' . $i . ']" value="1" />' . $classid_input;
+        $i++;
+    }
+    echo '<div align="center">';
+    echo html_writer::table($table);
+    echo '</div>';
+    return $i;
+}
+EXAMPLE #60  
+ 
+File: rss.php  Project: parksandwildlife/learning
+ /**
+  * Generates the default entry template for a new view instance or when reseting an existing instance.
+  *
+  * @return void
+  */
+ public function set_default_entry_template($content = null)
+ {
+     // Get all the fields.
+     if (!($fields = $this->df->field_manager->get_fields())) {
+         return;
+     }
+     if ($content === null) {
+         // Set content.
+         $table = new html_table();
+         $table->attributes['align'] = 'center';
+         $table->attributes['cellpadding'] = '2';
+         // Fields.
+         foreach ($fields as $field) {
+             if ($field->id > 0) {
+                 $name = new html_table_cell($field->name . ':');
+                 $name->style = 'text-align:right;';
+                 $content = new html_table_cell("[[{$field->name}]]");
+                 $row = new html_table_row();
+                 $row->cells = array($name, $content);
+                 $table->data[] = $row;
+             }
+         }
+         // Actions.
+         $row = new html_table_row();
+         $entryactions = get_string('fieldname', 'dataformfield_entryactions');
+         $actions = new html_table_cell("[[{$entryactions}:edit]]  [[{$entryactions}:delete]]");
+         $actions->colspan = 2;
+         $row->cells = array($actions);
+         $table->data[] = $row;
+         // Construct the table.
+         $entrydefault = html_writer::table($table);
+         $content = html_writer::tag('div', $entrydefault, array('class' => 'entry'));
+     }
+     $this->param2 = $content;
+ }
+EXAMPLE #70  
+ 
+File: renderer.php  Project: rolandovanegas/moodle
+    /**
+     * Display user tokens with buttons to reset them
+     * @param object $tokens
+     * @param int $userid
+     * @return string html code
+     */
+    public function user_rss_token_box($token) {
+        global $OUTPUT, $CFG;
+
+        // display strings
+        $stroperation = get_string('operation', 'webservice');
+        $strtoken = get_string('key', 'webservice');
+
+        $return = $OUTPUT->heading(get_string('rss'), 3, 'main', true);
+        $return .= $OUTPUT->box_start('generalbox webservicestokenui');
+
+        $return .= get_string('rsskeyshelp');
+
+        $table = new html_table();
+        $table->head  = array($strtoken, $stroperation);
+        $table->align = array('left', 'center');
+        $table->width = '100%';
+        $table->data  = array();
+
+        if (!empty($token)) {
+            $reset = "<a href=\"".$CFG->wwwroot."/user/managetoken.php?sesskey=".sesskey().
+                    "&amp;action=resetrsstoken\">".get_string('reset')."</a>";
+
+            $table->data[] = array($token, $reset);
+
+            $return .= html_writer::table($table);
+        } else {
+            $return .= get_string('notoken', 'webservice');
+        }
+
+        $return .= $OUTPUT->box_end();
+        return $return;
+    }
+EXAMPLE #80  
+ 
+File: award_criteria_overall.php  Project: educakanchay/campus
+ /**
+  * Add appropriate form elements to the criteria form
+  *
+  * @param stdClass $data details of overall criterion
+  */
+ public function config_form_criteria($data)
+ {
+     global $OUTPUT;
+     $prefix = 'criteria-' . $this->id;
+     if (count($data->criteria) > 2) {
+         echo $OUTPUT->box_start();
+         if (!empty($this->description)) {
+             $badge = new badge($this->badgeid);
+             echo $OUTPUT->box(format_text($this->description, $this->descriptionformat, array('context' => $badge->get_context())), 'criteria-description');
+         }
+         echo $OUTPUT->heading($this->get_title(), 2);
+         $agg = $data->get_aggregation_methods();
+         if (!$data->is_locked() && !$data->is_active()) {
+             $editurl = new moodle_url('/badges/criteria_settings.php', array('badgeid' => $this->badgeid, 'edit' => true, 'type' => $this->criteriatype, 'crit' => $this->id));
+             $editaction = $OUTPUT->action_icon($editurl, new pix_icon('t/edit', get_string('edit')), null, array('class' => 'criteria-action'));
+             echo $OUTPUT->box($editaction, array('criteria-header'));
+             $url = new moodle_url('criteria.php', array('id' => $data->id, 'sesskey' => sesskey()));
+             $table = new html_table();
+             $table->attributes = array('class' => 'clearfix');
+             $table->colclasses = array('', 'activatebadge');
+             $table->data[] = array($OUTPUT->single_select($url, 'update', $agg, $data->get_aggregation_method($this->criteriatype), null), get_string('overallcrit', 'badges'));
+             echo html_writer::table($table);
+         } else {
+             echo $OUTPUT->box(get_string('criteria_descr_' . $this->criteriatype, 'badges', core_text::strtoupper($agg[$data->get_aggregation_method()])), 'clearfix');
+         }
+         echo $OUTPUT->box_end();
+     }
+ }
+EXAMPLE #90  
+ 
+File: c_assigntolocation.php  Project: jerab/moodle-mod-praxe
+ public function definition()
+ {
+     global $USER, $cm;
+     if (is_array($locations = praxe_get_available_locations($USER->id, praxe_record::getData('isced'), praxe_record::getData('studyfield'))) && count($locations)) {
+         //$mform =& $this->_form;
+         $this->content_before_form .= get_string('assigntolocation_text_forstudents', 'praxe');
+         $form = '<form class="mform" action="' . praxe_get_base_url() . '" method="post">';
+         $form .= '<input type="hidden" name="post_form" value="assignlocation" />';
+         $form .= '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+         $table = new stdClass();
+         $table->head = array('', get_string('school', 'praxe'), get_string('subject', 'praxe'), get_string('teacher', 'praxe'));
+         $table->align = array('center', 'left', 'center', 'center');
+         foreach ($locations as $loc) {
+             $row = array('<input id="praxe_loc_' . $loc->id . '" type="radio" name="location" value="' . $loc->id . '" />');
+             $sch = "<a href=\"" . praxe_get_base_url(array('viewaction' => 'viewschool', 'schoolid' => $loc->school)) . "\" title=\"" . get_string('school_detail', 'praxe') . "\">" . s($loc->name) . "</a>";
+             $sch .= "<div class=\"praxe_detail\">" . s($loc->street) . ', ' . s($loc->city) . "</div>";
+             $row[] = $sch;
+             $row[] = s($loc->subject);
+             if (!is_null($loc->teacherid)) {
+                 $teacher = (object) array('id' => $loc->teacherid, 'firstname' => s($loc->teacher_name), 'lastname' => s($loc->teacher_lastname));
+                 $row[] = praxe_get_user_fullname($teacher);
+             } else {
+                 $row[] = '';
+             }
+             $table->data[] = $row;
+             //$row .= '<label for="praxe_loc_'.$loc->id.'">'.$text.'</label>';
+             //$form .= "<div class=\"tr\">$row</div>";
+         }
+         $form .= html_writer::table($table, true);
+         $form .= '<div class="fitem center" style="margin: 10px 0;">' . '<input type="submit" id="id_submitbutton" value="Submit" name="submitbutton" /> ' . '<input type="submit" id="id_cancel" onclick="skipClientValidation = true; return true;" value="Cancel" name="cancel" />' . '</div>';
+         $form .= '</form>';
+         $this->content .= "<div>{$form}</div>";
+         //$mform->addElement('header', null, get_string('locations', 'praxe'));
+         /*
+         			$options = array();
+         $radioarray = array();
+         foreach($locations as $loc) {
+         	//print_object($loc);
+         	$link = "<a target='_blank' href='view.php?id=$cm->id&amp;praxeaction=viewschool&amp;schoolid=$loc->school' title='".get_string('school_detail','praxe')."'>".get_string('school_detail','praxe')."</a>";
+         	$text = s($loc->name) . "($link) - " . s($loc->subject);
+         	$text .= "<br>".s($loc->street).', '.s($loc->zip).'&nbsp;&nbsp;'.s($loc->city);
+         	if(!is_null($loc->teacherid)) {
+         		$teacher = (object) array('id' => $loc->teacherid, 'firstname' => s($loc->teacher_name), 'lastname' => s($loc->teacher_lastname));
+         		$text .= " (".praxe_get_user_fullname($teacher).")";
+         	}
+         	$radioarray[] = $mform->createElement('radio', 'location', null, $text, $loc->id, array('class'=>'radio location'));
+         }
+         $mform->addGroup($radioarray, 'location', get_string('locations','praxe').':', '<hr>', false);
+         $mform->addRule('location', get_string('locationisrequired', 'praxe'), 'required', null, 'client');
+         $mform->addRule('location', get_string('locationisrequired', 'praxe'), 'required', null, 'server');
+         //$mform->addElement('select', 'location', get_string('chooselocation', 'praxe'), $options, array('size' => count($options) > 15 ? '15' : count($options)+1));
+         $mform->addElement('hidden', 'post_form', 'assigntolocation');
+         */
+         //$this->add_action_buttons(true, get_string('submit'));
+     } else {
+         $this->content_before_form .= get_string('nolocationsavailable', 'praxe');
+     }
+ }
+EXAMPLE #100  
+ 
+File: renderer.php  Project: evltuma/moodle
+ /**
+  * A renderer for the CSV file preview.
+  *
+  * @param array $header Column headers from the CSV file.
+  * @param array $data The rest of the data from the CSV file.
+  * @return string html to be displayed.
+  */
+ public function import_preview_page($header, $data)
+ {
+     $html = $this->output->heading(get_string('importpreview', 'grades'));
+     $table = new html_table();
+     $table->head = $header;
+     $table->data = $data;
+     $html .= html_writer::table($table);
+     return $html;
+ }
+EXAMPLE #110  
+ 
+File: enrol_renderer.php  Project: adonm/learning
+ public function render_course_enrolment_users_table(course_enrolment_users_table $table, moodleform $mform)
+ {
+     $table->initialise_javascript();
+     // Added for the Bootstrap theme. Make this table responsive.
+     $table->attributes['class'] .= ' table table-responsive';
+     $buttons = $table->get_manual_enrol_buttons();
+     $buttonhtml = '';
+     if (count($buttons) > 0) {
+         $buttonhtml .= html_writer::start_tag('div', array('class' => 'enrol_user_buttons'));
+         foreach ($buttons as $button) {
+             $buttonhtml .= $this->render($button);
+         }
+         $buttonhtml .= html_writer::end_tag('div');
+     }
+     $content = '';
+     if (!empty($buttonhtml)) {
+         $content .= $buttonhtml;
+     }
+     $content .= $mform->render();
+     $content .= $this->output->render($table->get_paging_bar());
+     // Check if the table has any bulk operations. If it does we want to wrap the table in a
+     // form so that we can capture and perform any required bulk operations.
+     if ($table->has_bulk_user_enrolment_operations()) {
+         $content .= html_writer::start_tag('form', array('action' => new moodle_url('/enrol/bulkchange.php'), 'method' => 'post'));
+         foreach ($table->get_combined_url_params() as $key => $value) {
+             if ($key == 'action') {
+                 continue;
+             }
+             $content .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => $key, 'value' => $value));
+         }
+         $content .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'action', 'value' => 'bulkchange'));
+         $content .= html_writer::table($table);
+         $content .= html_writer::start_tag('div', array('class' => 'singleselect bulkuserop'));
+         $content .= html_writer::start_tag('select', array('name' => 'bulkuserop'));
+         $content .= html_writer::tag('option', get_string('withselectedusers', 'enrol'), array('value' => ''));
+         $options = array('' => get_string('withselectedusers', 'enrol'));
+         foreach ($table->get_bulk_user_enrolment_operations() as $operation) {
+             $content .= html_writer::tag('option', $operation->get_title(), array('value' => $operation->get_identifier()));
+         }
+         $content .= html_writer::end_tag('select');
+         $content .= html_writer::empty_tag('input', array('type' => 'submit', 'value' => get_string('go')));
+         $content .= html_writer::end_tag('div');
+         $content .= html_writer::end_tag('form');
+     } else {
+         // Added for the Bootstrap theme, a no-overflow wrapper.
+         $content .= html_writer::start_tag('div', array('class' => 'no-overflow'));
+         $content .= html_writer::table($table);
+         $content .= html_writer::end_tag('div');
+     }
+     $content .= $this->output->render($table->get_paging_bar());
+     if (!empty($buttonhtml)) {
+         $content .= $buttonhtml;
+     }
+     return $content;
+ }
+EXAMPLE #120  
+ 
+File: diagnostics.php  Project: stefanotirati/moodle-google-apps
+function gsaml_print_config_table($heading, $table_obj)
+{
+    global $OUTPUT;
+    $OUTPUT->heading($heading);
+    $conf_table = new html_table();
+    $conf_table->head = array('Setting', 'Value');
+    $conf_table->align = array('left', 'left');
+    $conf_table->data = array();
+    foreach ($table_obj as $setting => $value) {
+        $conf_table->data[] = array($setting, $value);
+    }
+    echo html_writer::table($conf_table);
+}
+EXAMPLE #130  
+ 
+File: bulkchange_forms.php  Project: JP-Git/moodle
+ /**
+  * Generates an HTML table to display the users being affected by the bulk change.
+  *
+  * @param array $users
+  * @param array $statusoptions
+  * @return string
+  */
+ protected function get_users_table(array $users, array $statusoptions)
+ {
+     $table = new html_table();
+     $table->head = array(get_string('name'), get_string('participationstatus', 'enrol'), get_string('enroltimestart', 'enrol'), get_string('enroltimeend', 'enrol'));
+     $table->data = array();
+     foreach ($users as $user) {
+         foreach ($user->enrolments as $enrolment) {
+             $input = html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'bulkuser[]', 'value' => $user->id));
+             $table->data[] = array(fullname($user) . $input, $statusoptions[$enrolment->status], !empty($enrolment->timestart) ? userdate($enrolment->timestart) : '', !empty($enrolment->timeend) ? userdate($enrolment->timeend) : '');
+         }
+     }
+     return html_writer::table($table);
+ }
+EXAMPLE #140  
+ 
+File: renderer.php  Project: pauln/local_nagios
+ public function render_servicelist($servicelist)
+ {
+     $table = new html_table();
+     $table->head = array('Plugin', 'Service name', 'Class', 'Description', 'Variable');
+     foreach ($servicelist as $plugin => $pluginservices) {
+         foreach ($pluginservices as $name => $pluginservice) {
+             $row = new html_table_row(array($plugin, $name, $pluginservice['classname']));
+             $row->cells[] = new html_table_cell(get_string("local_nagios:{$name}:description", $plugin));
+             $row->cells[] = new html_table_cell(get_string("local_nagios:{$name}:variable", $plugin));
+             $table->data[] = $row;
+         }
+     }
+     return html_writer::table($table);
+ }
+EXAMPLE #150  
+ 
+File: lib.php  Project: narasimhaeabyas/tataaiapro
+function block_users_team_userdetails(){
+	global $USER, $DB, $CFG, $OUTPUT, $PAGE;
+    $systemcontext = context_system::instance();
+	$sql = 'SELECT DISTINCT(f.name) AS batchname, f.id AS batchid, f.enrolled_users AS enrolled,f.active AS batchstatus
+			FROM  {local_userdata} AS ud
+			JOIN {local_batch_users} AS bu ON bu.userid = ud.userid
+			JOIN {facetoface} AS f ON f.id = bu.f2fid
+			WHERE ud.supervisorid = '.$USER->id;
+	$records = $DB->get_records_sql($sql);
+	$output = '';
+	if(!empty($records)){
+		$row = array();
+		foreach($records as $record){
+			$list = array();
+			if($record->batchstatus==1){
+				$stat='<img class="pull-left batch_status" src="'.$CFG->wwwroot.'/mod/facetoface/pix/Active.png" title="'.get_string('active_batch', 'facetoface').'" alt="'.get_string('active_batch', 'facetoface').'">';
+			}
+			if($record->batchstatus==2){
+			   $stat='<img class="pull-left batch_status" src="'.$CFG->wwwroot.'/mod/facetoface/pix/cancel.png" title="'.get_string('cancelled_batch', 'facetoface').'" alt="'.get_string('cancelled_batch', 'facetoface').'">';
+			}
+			if($record->batchstatus==8){
+				$stat='<img class="pull-left batch_status" src="'.$CFG->wwwroot.'/mod/facetoface/pix/Completed.png" title="'.get_string('completed_batch', 'facetoface').'" alt="'.get_string('completed_batch', 'facetoface').'">';
+			}
+			if($record->batchstatus==0){
+			   $stat='<img class="pull-left batch_status" src="'.$CFG->wwwroot.'/mod/facetoface/pix/new.png" title="'.get_string('new_batch', 'facetoface').'" alt="'.get_string('new_batch', 'facetoface').'">';
+			}
+			if($record->batchstatus==3){
+				$stat='<img class="pull-left batch_status" src="'.$CFG->wwwroot.'/mod/facetoface/pix/Hold.png" title="'.get_string('hold_batch', 'facetoface').'" alt="'.get_string('hold_batch', 'facetoface').'">';
+			}
+			$completedcount = $DB->get_record_sql("SELECT count(userid) as completioncount from {local_batch_users} where f2fid=$record->batchid and confirmation=1");
+			
+			$list['batchname'.$record->batchid] = $stat.$record->batchname;
+			$list['enroll'.$record->batchid] = $record->enrolled;
+			$list['completion'.$record->batchid] = $completedcount->completioncount;
+			$row[] = $list;
+		}
+		$table = new html_table();
+		$table->id = 'employee_batch_status';
+		$table->head = array(get_string('batchname', 'block_users_team'),
+							 get_string('enrolled', 'block_users_team'),
+							 get_string('completed', 'block_users_team'));
+		$table->align = array('left', 'center', 'center');
+		//$table->size = array('80%', '10%','10%');
+		$table->data = $row;
+		$output .= html_writer::table($table);
+	}else{
+		$output .= html_writer::tag('span',get_string('noemployees', 'block_users_team'),array('class' => 'empty_data_message'));
+	}
+	return $output;
+}
+EXAMPLE #160  
+ 
+File: renderer.php  Project: rtsfc/moodle-report_cpd
+ public function disclaimer()
+ {
+     $name = new html_table_cell(get_string('confirmstatement', 'report_cpd'));
+     $name->attributes['class'] = 'name';
+     $fill1 = new html_table_cell('');
+     $fill1->attributes['class'] = 'fillbox';
+     $date = new html_table_cell(get_string('date'));
+     $date->attributes['class'] = 'date';
+     $fill2 = new html_table_cell('');
+     $fill2->attributes['class'] = 'fillbox date';
+     $row = new html_table_row(array($name, $fill1, $date, $fill2));
+     $table = new html_table();
+     $table->attributes = array('class' => 'disclaimer', 'border' => 0, 'cellspacing' => 5, 'cellpadding' => 0);
+     $table->data[] = $row;
+     return html_writer::table($table);
+ }
+EXAMPLE #170  
+ 
+File: statstable.php  Project: eduagdo/emarking
+/**
+ *
+ * This functions creates the stats table for gradereport.php y markingreport.php
+ *
+ * @param array $emarkingid        	
+ * @param int $totalemarkings        	
+ * @return table
+ */
+function get_stats_table($emarkingid, $totalemarkings)
+{
+    global $DB;
+    // Set the correct syntaxis for the query in $sqlcats
+    $emarkingids = '';
+    foreach ($emarkingid as $id) {
+        $emarkingids = $id . ',';
+    }
+    // counts the total of disticts categories
+    $sqlcats = "SELECT\n                COUNT(DISTINCT(c.category)) as categories\n                FROM {emarking} AS a\n                INNER JOIN {course} AS c ON (a.course = c.id)\n                WHERE a.id IN (?)";
+    $totalcategories = $DB->count_records_sql($sqlcats, array($emarkingids));
+    // This generates a link with the ids and generates a IN sql, so the sql stays secure.
+    list($emarking_ids, $param) = $DB->get_in_or_equal($emarkingid, SQL_PARAMS_NAMED);
+    // Search for stats regardig the exames (eg: max, min, number of students,etc)
+    $sql = "SELECT  *,\n\tCASE\n\tWHEN categoryid is null THEN 'TOTAL'\n\tWHEN emarkingid is null THEN concat('SUBTOTAL ', categoryname)\n\tELSE coursename\n\tEND AS seriesname\n\tFROM (\n\tSELECT \tcategoryid AS categoryid,\n\tcategoryname,\n\temarkingid AS emarkingid,\n\tmodulename,\n\tcoursename,\n\tCOUNT(*) AS students,\n\tSUM(pass) AS pass,\n\tROUND((SUM(pass) / count(*)) * 100,2) AS pass_ratio,\n\tSUBSTRING_INDEX(\n\tSUBSTRING_INDEX(\n\tgroup_concat(grade order by grade separator ',')\n\t, ','\n\t, 25/100 * COUNT(*) + 1)\n\t, ','\n\t, -1\n\t) AS percentile_25,\n\tSUBSTRING_INDEX(\n\tSUBSTRING_INDEX(\n\tgroup_concat(grade order by grade separator ',')\n\t, ','\n\t, 50/100 * COUNT(*) + 1)\n\t, ','\n\t, -1\n\t) AS percentile_50,\n\tSUBSTRING_INDEX(\n\tSUBSTRING_INDEX(\n\tgroup_concat(grade order by grade separator ',')\n\t, ','\n\t, 75/100 * COUNT(*) + 1)\n\t, ','\n\t, -1\n\t) AS percentile_75,\n\tMIN(grade) AS minimum,\n\tMAX(grade) AS maximum,\n\tROUND(avg(grade),2) AS average,\n\tROUND(stddev(grade),2) AS stdev,\n\tSUM(histogram_01) AS histogram_1,\n\tSUM(histogram_02) AS histogram_2,\n\tSUM(histogram_03) AS histogram_3,\n\tSUM(histogram_04) AS histogram_4,\n\tSUM(histogram_05) AS histogram_5,\n\tSUM(histogram_06) AS histogram_6,\n\tSUM(histogram_07) AS histogram_7,\n\tSUM(histogram_08) AS histogram_8,\n\tSUM(histogram_09) AS histogram_9,\n\tSUM(histogram_10) AS histogram_10,\n\tSUM(histogram_11) AS histogram_11,\n\tSUM(histogram_12) AS histogram_12,\n\tROUND(SUM(rank_1)/count(*),3) AS rank_1,\n\tROUND(SUM(rank_2)/count(*),3) AS rank_2,\n\tROUND(SUM(rank_3)/count(*),3) AS rank_3,\n\tMIN(mingrade) AS mingradeemarking,\n\tMIN(maxgrade) AS maxgradeemarking\n\tFROM (\n\tSELECT\n\tROUND(dr.grade,2) AS grade, -- Nota final (calculada o manual via calificador)\n\ta.grade AS maxgrade, -- Nota máxima del emarking\n\ta.grademin AS mingrade, -- Nota mínima del emarking\n\tCASE WHEN dr.grade is null THEN 0 -- Indicador de si la nota es null\n\tELSE 1\n\tEND AS attended,\n\tCASE WHEN dr.grade >= 4 THEN 1 -- TODO: REPLACE\n\tELSE 0\n\tEND AS pass,\n\tCASE WHEN dr.grade >= 0 AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 1 THEN 1 ELSE 0 END AS histogram_01,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 1  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 2 THEN 1 ELSE 0 END AS histogram_02,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 2  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 3 THEN 1 ELSE 0 END AS histogram_03,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 3  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 4 THEN 1 ELSE 0 END AS histogram_04,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 4  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 5 THEN 1 ELSE 0 END AS histogram_05,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 5  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 6 THEN 1 ELSE 0 END AS histogram_06,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 6  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 7 THEN 1 ELSE 0 END AS histogram_07,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 7  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 8 THEN 1 ELSE 0 END AS histogram_08,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 8  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 9 THEN 1 ELSE 0 END AS histogram_09,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 9  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 10 THEN 1 ELSE 0 END AS histogram_10,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 10  AND dr.grade < a.grademin + (a.grade - a.grademin) / 12 * 11 THEN 1 ELSE 0 END AS histogram_11,\n\tCASE WHEN dr.grade >= a.grademin + (a.grade - a.grademin) / 12 * 11 THEN 1 ELSE 0 END AS histogram_12,\n\tCASE WHEN dr.grade - a.grademin < (a.grade - a.grademin) / 3 THEN 1 ELSE 0 END AS rank_1,\n\tCASE WHEN dr.grade - a.grademin >= (a.grade - a.grademin) / 3 AND dr.grade - a.grademin  < (a.grade - a.grademin) / 2 THEN 1 ELSE 0 END AS rank_2,\n\tCASE WHEN dr.grade - a.grademin >= (a.grade - a.grademin) / 2  THEN 1 ELSE 0 END AS rank_3,\n\tc.category AS categoryid,\n\tcc.name AS categoryname,\n\ta.id AS emarkingid,\n\ta.name AS modulename,\n\tc.fullname AS coursename\n\tFROM {emarking} AS a\n\tINNER JOIN {emarking_submission} AS ss ON (a.id = ss.emarking AND a.id {$emarking_ids})\n\tINNER JOIN {emarking_draft} AS dr ON (dr.submissionid = ss.id AND dr.qualitycontrol=0)\n\tINNER JOIN {course} AS c ON (a.course = c.id)\n\tINNER JOIN {course_categories} AS cc ON (c.category = cc.id)\n\tWHERE dr.grade is not null AND dr.status >= 20\n\tORDER BY emarkingid asc, dr.grade asc) AS G\n\tGROUP BY categoryid, emarkingid\n\tWITH ROLLUP) AS T";
+    $emarkingstats = $DB->get_recordset_sql($sql, $param);
+    // Initialization of the variable data.
+    $data = array();
+    foreach ($emarkingstats as $stats) {
+        // if to count the categories so the table doesn't give us a subtotal for each category
+        if ($totalcategories == 1 && !strncmp($stats->seriesname, 'SUBTOTAL', 8)) {
+            continue;
+        }
+        // if to count the diferent emarkings so the table doesn't give us a total for each emarking
+        if ($totalemarkings == 1 && !strncmp($stats->seriesname, 'TOTAL', 5)) {
+            continue;
+        }
+        // Format the ranks by percentages.
+        $rank_1 = number_format($stats->rank_1 * 100, 1) . '%';
+        $rank_2 = number_format($stats->rank_2 * 100, 1) . '%';
+        $rank_3 = number_format($stats->rank_3 * 100, 1) . '%';
+        // Data for the table
+        $data[] = array($stats->seriesname, $stats->students, $stats->average, $stats->stdev, $stats->minimum, $stats->percentile_25, $stats->percentile_50, $stats->percentile_75, $stats->maximum, $rank_1, $rank_2, $rank_3);
+    }
+    // Create the obj table
+    $table = new html_table();
+    // Style of the table
+    $table->attributes['style'] = "width: 100%; text-align:center;";
+    // Table headers.
+    $table->head = array(strtoupper(get_string('course')), strtoupper(get_string('students')), strtoupper(get_string('average', 'mod_emarking')), strtoupper(get_string('stdev', 'mod_emarking')), strtoupper(get_string('min', 'mod_emarking')), strtoupper(get_string('quartile1', 'mod_emarking')), strtoupper(get_string('median', 'mod_emarking')), strtoupper(get_string('quartile3', 'mod_emarking')), strtoupper(get_string('max', 'mod_emarking')), strtoupper(get_string('lessthan', 'mod_emarking', 3)), strtoupper(get_string('between', 'mod_emarking', array('min' => 3, 'max' => 4))), strtoupper(get_string('greaterthan', 'mod_emarking', 4)));
+    // Alignment of the table
+    $table->align = array('left', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'center');
+    // Fill the table with the data from the variable $data.
+    $table->data = $data;
+    $statstable = html_writer::table($table);
+    return $statstable;
+}
+EXAMPLE #180  
+ 
+File: url.php  Project: central-queensland-uni/moodle-local_linkchecker_robot
+function print_table($data)
+{
+    $table = new html_table();
+    $table->head = array(get_string('lastcrawledtime', 'local_linkchecker_robot'), get_string('linktext', 'local_linkchecker_robot'), get_string('idattr', 'local_linkchecker_robot'), get_string('response', 'local_linkchecker_robot'), get_string('size', 'local_linkchecker_robot'), get_string('url', 'local_linkchecker_robot'), get_string('mimetype', 'local_linkchecker_robot'));
+    $table->data = array();
+    foreach ($data as $row) {
+        $text = trim($row->title);
+        if (!$text || $text == "") {
+            $text = get_string('unknown', 'local_linkchecker_robot');
+        }
+        $code = local_linkchecker_robot_http_code($row);
+        $size = $row->filesize * 1;
+        $data = array(userdate($row->lastcrawled, '%h %e,&nbsp;%H:%M:%S'), $row->text, str_replace(' #', '<br>#', $row->idattr), $code, display_size($size), local_linkchecker_robot_link($row->target, $text, $row->redirect), $row->mimetype);
+        $table->data[] = $data;
+    }
+    echo html_writer::table($table);
+}
+EXAMPLE #190  
+ 
+File: renderer.php  Project: jorgecabane93/uai
+ public function index_page($data)
+ {
+     global $CFG;
+     $tabla = new html_table();
+     $tabla->head = array("Período Académico", "Categoría Webcursos", "Sede", "Fecha inicio Período Académico", "Fecha término Período Académico", "Sincronización está activa", "");
+     $tabla->data = $data;
+     $url = $CFG->wwwroot . '/local/uai/agregar.php';
+     $output = '';
+     $output .= $this->header();
+     $output .= $this->heading(get_string('pluginname', 'local_uai'));
+     $output .= html_writer::table($tabla);
+     $output .= html_writer::start_tag('div', array('style' => 'float:right;'));
+     $output .= $this->single_button($url, 'Agregar Sincronización', 'get');
+     $output .= html_writer::end_tag('div');
+     $output .= $this->footer();
+     return $output;
+ }
+EXAMPLE #200  
+ 
+File: select_form.php  Project: advancingdesign/moodle-tool_mergeusers
+ /**
+  * Form definition
+  *
+  * @uses $CFG
+  */
+ public function definition()
+ {
+     $mform =& $this->_form;
+     // header
+     $mform->addElement('header', 'selectusers', get_string('userselecttable_legend', 'tool_mergeusers'));
+     // table content
+     $mform->addElement('static', 'selectuserslist', '', html_writer::table($this->ust));
+     // hidden elements
+     $mform->addElement('hidden', 'option', 'saveselection');
+     $mform->setType('option', PARAM_RAW);
+     $mform->addElement('hidden', 'selectedolduser', '');
+     $mform->setType('selectedolduser', PARAM_RAW);
+     $mform->addElement('hidden', 'selectednewuser', '');
+     $mform->setType('selectednewuser', PARAM_RAW);
+     // buttons
+     $this->add_action_buttons(false, get_string('saveselection_submit', 'tool_mergeusers'));
+ }
+EXAMPLE #210  
+ 
+File: renderer.php  Project: sunilwebaccess/moodle-question-matrix
+ /**
+  * Generate the display of the formulation part of the question. This is the
+  * area that contains the quetsion text, and the controls for students to
+  * input their answers. Some question types also embed bits of feedback, for
+  * example ticks and crosses, in this area.
+  *
+  * @param question_attempt $qa the question attempt to display.
+  * @param question_display_options $options controls what should and should not be displayed.
+  * @return string HTML fragment.
+  */
+ public function formulation_and_controls(question_attempt $qa, question_display_options $options)
+ {
+     $question = $qa->get_question();
+     $response = $qa->get_last_qt_data();
+     $table = new html_table();
+     $table->attributes['class'] = 'matrix';
+     $table->head = array();
+     $table->head[] = '';
+     foreach ($question->cols as $col) {
+         $table->head[] = self::matrix_header($col);
+     }
+     if ($options->correctness) {
+         $table->head[] = '';
+     }
+     foreach ($question->rows as $row) {
+         $row_data = array();
+         $row_data[] = self::matrix_header($row);
+         foreach ($question->cols as $col) {
+             $key = $question->key($row, $col);
+             $cell_name = $qa->get_field_prefix() . $key;
+             $is_readonly = $options->readonly;
+             $is_checked = $question->is_answered($response, $row, $col);
+             if ($question->multiple) {
+                 $cell = self::checkbox($cell_name, $is_checked, $is_readonly);
+             } else {
+                 $cell = self::radio($cell_name, $col->id, $is_checked, $is_readonly);
+             }
+             if ($options->correctness) {
+                 $weight = $question->weight($row, $col);
+                 $cell .= $this->feedback_image($weight);
+             }
+             $row_data[] = $cell;
+         }
+         if ($options->correctness) {
+             $row_grade = $question->grading()->grade_row($question, $row, $response);
+             $feedback = $row->feedback;
+             $feedback = strip_tags($feedback) ? $feedback : '';
+             $row_data[] = $this->feedback_image($row_grade) . $feedback;
+         }
+         $table->data[] = $row_data;
+         //$row_index++;
+     }
+     $result = $question->questiontext;
+     $result .= html_writer::table($table, true);
+     return $result;
+ }
+EXAMPLE #220  
+ 
+File: renderer.php  Project: Gavinthisisit/Moodle
+ /**
+  * Display the table of all current allocations and widgets to modify them
+  *
+  * @param teamworkallocation_manual_allocations $data to be displayed
+  * @return string html code
+  */
+ protected function render_teamworkallocation_manual_allocations(teamworkallocation_manual_allocations $data)
+ {
+     $this->teamwork = $data->teamwork;
+     $allocations = $data->allocations;
+     // array prepared array of all allocations data
+     $userinfo = $data->userinfo;
+     // names and pictures of all required users
+     $authors = $data->authors;
+     // array potential reviewees
+     $reviewers = $data->reviewers;
+     // array potential submission reviewers
+     $hlauthorid = $data->hlauthorid;
+     // int id of the author to highlight
+     $hlreviewerid = $data->hlreviewerid;
+     // int id of the reviewer to highlight
+     $selfassessment = $data->selfassessment;
+     // bool is the self-assessment allowed in this teamwork?
+     if (empty($allocations)) {
+         return '';
+     }
+     // convert user collections into drop down menus
+     $authors = array_map('fullname', $authors);
+     $reviewers = array_map('fullname', $reviewers);
+     $table = new html_table();
+     $table->attributes['class'] = 'allocations';
+     $table->head = array(get_string('participantreviewedby', 'teamwork'), get_string('participant', 'teamwork'), get_string('participantrevierof', 'teamwork'));
+     $table->rowclasses = array();
+     $table->colclasses = array('reviewedby', 'peer', 'reviewerof');
+     $table->data = array();
+     foreach ($allocations as $allocation) {
+         $row = array();
+         $row[] = $this->helper_reviewers_of_participant($allocation, $userinfo, $reviewers, $selfassessment);
+         $row[] = $this->helper_participant($allocation, $userinfo);
+         $row[] = $this->helper_reviewees_of_participant($allocation, $userinfo, $authors, $selfassessment);
+         $thisrowclasses = array();
+         if ($allocation->userid == $hlauthorid) {
+             $thisrowclasses[] = 'highlightreviewedby';
+         }
+         if ($allocation->userid == $hlreviewerid) {
+             $thisrowclasses[] = 'highlightreviewerof';
+         }
+         $table->rowclasses[] = implode(' ', $thisrowclasses);
+         $table->data[] = $row;
+     }
+     return $this->output->container(html_writer::table($table), 'manual-allocator');
+ }
+EXAMPLE #230  
+ 
+File: renderer.php  Project: evltuma/moodle
+ /**
+  * Render a table listing all of the Inbound Message handlers.
+  *
+  * @param array $handlers - list of all messageinbound handlers.
+  * @return string HTML to output.
+  */
+ public function messageinbound_handlers_table(array $handlers)
+ {
+     global $CFG;
+     $table = new html_table();
+     $handlername = new html_table_cell(get_string('name', 'tool_messageinbound') . "\n" . html_writer::tag('span', get_string('classname', 'tool_messageinbound'), array('class' => 'handler-function')));
+     // Prepare some of the rows with additional styling.
+     $enabled = new html_table_cell(get_string('enabled', 'tool_messageinbound'));
+     $enabled->attributes['class'] = 'state';
+     $edit = new html_table_cell(get_string('edit', 'tool_messageinbound'));
+     $edit->attributes['class'] = 'edit';
+     $table->head = array($handlername, get_string('description', 'tool_messageinbound'), $enabled, $edit);
+     $table->attributes['class'] = 'admintable generaltable messageinboundhandlers';
+     $yes = get_string('yes');
+     $no = get_string('no');
+     $data = array();
+     // Options for description formatting.
+     $descriptionoptions = new stdClass();
+     $descriptionoptions->trusted = false;
+     $descriptionoptions->noclean = false;
+     $descriptionoptions->smiley = false;
+     $descriptionoptions->filter = false;
+     $descriptionoptions->para = true;
+     $descriptionoptions->newlines = false;
+     $descriptionoptions->overflowdiv = true;
+     $editurlbase = new moodle_url('/admin/tool/messageinbound/index.php');
+     foreach ($handlers as $handler) {
+         $handlername = new html_table_cell($handler->name . "\n" . html_writer::tag('span', $handler->classname, array('class' => 'handler-function')));
+         $handlername->header = true;
+         $editurl = new moodle_url($editurlbase, array('classname' => $handler->classname));
+         $editlink = $this->action_icon($editurl, new pix_icon('t/edit', get_string('edithandler', 'tool_messageinbound', $handler->classname)));
+         // Prepare some of the rows with additional styling.
+         $enabled = new html_table_cell($handler->enabled ? $yes : $no);
+         $enabled->attributes['class'] = 'state';
+         $edit = new html_table_cell($editlink);
+         $edit->attributes['class'] = 'edit';
+         // Add the row.
+         $row = new html_table_row(array($handlername, format_text($handler->description, FORMAT_MARKDOWN, $descriptionoptions), $enabled, $edit));
+         if (!$handler->enabled) {
+             $row->attributes['class'] = 'disabled';
+         }
+         $data[] = $row;
+     }
+     $table->data = $data;
+     return html_writer::table($table);
+ }
+EXAMPLE #240  
+ 
+File: renderer.php  Project: nfreear/moodle
+ /**
+  * Renders a course enrolment table
+  *
+  * @param course_enrolment_table $table
+  * @return string
+  */
+ protected function render_course_enrolment_other_users_table(course_enrolment_other_users_table $table)
+ {
+     $table->initialise_javascript();
+     $content = '';
+     $searchbutton = $table->get_user_search_button();
+     if ($searchbutton) {
+         $content .= $this->output->render($searchbutton);
+     }
+     $content .= html_writer::tag('div', get_string('otheruserdesc', 'enrol'), array('class' => 'otherusersdesc'));
+     $content .= $this->output->render($table->get_paging_bar());
+     $content .= html_writer::table($table);
+     $content .= $this->output->render($table->get_paging_bar());
+     $searchbutton = $table->get_user_search_button();
+     if ($searchbutton) {
+         $content .= $this->output->render($searchbutton);
+     }
+     return $content;
+ }
+EXAMPLE #250  
+ 
+File: renderer.php  Project: anilch/Personel
+    function program_viewer($list) {
+        global $myprogram;
+        $table = new html_table();
+        $table->align = array('left', 'left', 'left', 'left');
+        $table->size = array('15%', '35%', '15%', '35%');
+        $table->width = '100%';
+
+        $cell = new html_table_cell();
+        $cell->text = $list->description;
+        $cell->colspan = 3;
+
+        $name = $myprogram->name($list);
+        $table->data[] = array('<b>Short Name</b>', $list->shortname, '<b>Full Name</b>', $list->fullname);
+        $table->data[] = array('<b>Organization</b>', $name->school, '<b>Duration</b>', $list->duration . ' months');
+        $table->data[] = array('<b>Type</b>', $name->type, '<b>Level</b>', $name->level);
+        $table->data[] = array('<b>Description</b>', $cell);
+        return html_writer::table($table);
+    }
+EXAMPLE #260  
+ 
+File: renderer.php  Project: nigeldaley/moodle
+ public function search_result($records, $subwiki) {
+     global $CFG, $PAGE;
+     $table = new html_table();
+     $context = get_context_instance(CONTEXT_MODULE, $PAGE->cm->id);
+     $strsearchresults = get_string('searchresult', 'wiki');
+     $totalcount = count($records);
+     $html = $this->output->heading("$strsearchresults $totalcount");
+     foreach ($records as $page) {
+         $table->head = array('title' => format_string($page->title) . ' (' . html_writer::link($CFG->wwwroot . '/mod/wiki/view.php?pageid=' . $page->id, get_string('view', 'wiki')) . ')');
+         $table->align = array('title' => 'left');
+         $table->width = '100%';
+         $table->data = array(array(file_rewrite_pluginfile_urls(format_text($page->cachedcontent, FORMAT_HTML), 'pluginfile.php', $context->id, 'mod_wiki', 'attachments', $subwiki->id)));
+         $table->colclasses = array('wikisearchresults');
+         $html .= html_writer::table($table);
+     }
+     $html = html_writer::tag('div', $html, array('class'=>'no-overflow'));
+     return $this->output->container($html);
+ }
+EXAMPLE #270  
+ 
+File: renderer.php  Project: narasimhaeabyas/tataaiapro
+    public function render_files_tree_viewer(files_tree_viewer $tree) {
+        $html = $this->output->heading_with_help(get_string('coursefiles'), 'courselegacyfiles', 'moodle');
+
+        $html .= $this->output->container_start('coursefilesbreadcrumb');
+        foreach($tree->path as $path) {
+            $html .= $path;
+            $html .= ' / ';
+        }
+        $html .= $this->output->container_end();
+
+        $html .= $this->output->box_start();
+        $table = new html_table();
+        $table->head = array(get_string('name'), get_string('lastmodified'), get_string('size', 'repository'), get_string('type', 'repository'));
+        $table->align = array('left', 'left', 'left', 'left');
+        $table->width = '100%';
+        $table->data = array();
+
+        foreach ($tree->tree as $file) {
+            $filedate = $filesize = $filetype = '';
+            if ($file['filedate']) {
+                $filedate = userdate($file['filedate'], get_string('strftimedatetimeshort', 'langconfig'));
+            }
+            if (empty($file['isdir'])) {
+                if ($file['filesize']) {
+                    $filesize = display_size($file['filesize']);
+                }
+                $fileicon = file_file_icon($file, 24);
+                $filetype = get_mimetype_description($file);
+            } else {
+                $fileicon = file_folder_icon(24);
+            }
+            $table->data[] = array(
+                html_writer::link($file['url'], $this->output->pix_icon($fileicon, get_string('icon')) . ' ' . $file['filename']),
+                $filedate,
+                $filesize,
+                $filetype
+                );
+        }
+
+        $html .= html_writer::table($table);
+        $html .= $this->output->single_button(new moodle_url('/files/coursefilesedit.php', array('contextid'=>$tree->context->id)), get_string('coursefilesedit'), 'get');
+        $html .= $this->output->box_end();
+        return $html;
+    }
+EXAMPLE #280  
+ 
+File: forms.php  Project: edmiranda/attendance
+ function definition()
+ {
+     global $DB, $sessionid, $courseid, $OUTPUT, $action, $userid;
+     $mform =& $this->_form;
+     $actionOptions = array('mark_as_attended' => get_string('markattended', 'local_attendance'), 'mark_as_absent' => get_string('markabsent', 'local_attendance'));
+     $actionGroup = array();
+     $actionGroup[] =& $mform->createElement('select', 'action_for_checked', '', $actionOptions);
+     $actionGroup[] =& $mform->createElement('submit', 'submitbutton', get_string('apply', 'local_attendance'));
+     $actionGroup[] =& $mform->createElement('html', '<div id="filter">' . get_string('filter', 'local_attendance') . ': <input type="text"></div>');
+     $mform->addGroup($actionGroup, 'actionGroup', get_string('chooseoption', 'local_attendance'), array(' '), false);
+     $sessionsTable = tables::getAssistDateDetail($courseid, $sessionid);
+     $mform->addElement('html', html_writer::table($sessionsTable));
+     $mform->addElement('hidden', 'sessionid', $sessionid);
+     $mform->setType('sessionid', PARAM_INT);
+     $mform->addElement('hidden', 'courseid', $courseid);
+     $mform->setType('courseid', PARAM_INT);
+     $mform->addElement('hidden', 'action', 'modify_session_attendance');
+     $mform->setType('action', PARAM_TEXT);
+ }
+EXAMPLE #29-1  
+ 
+File: lib.php  Project: anilch/Personel
+function blockqueries_tablecontent($sql){
+     global $CFG, $USER, $PAGE, $DB;
+     $blockqueries_displaycontent = array();
+          $querieslists=$DB->get_records_sql($sql); 
+          $data = array();
+            foreach($querieslists as $querieslist){
+              $row = array();
+              $adminqueryid = $querieslist->id;
+              $row[] = html_writer:: tag('p',$querieslist->subject,array());
+              $comment_image = html_writer:: empty_tag('img',array('src'=>$CFG->wwwroot.'/pix/t/message.svg',"id"=>"showDialog$adminqueryid",'title'=>get_string('addacomment','block_queries'),'onclick'=>"mycommentpopupform($adminqueryid)",'class'=>'queries_iconclass'));
+              $comment_popup = commenthtmlform($adminqueryid);
+              $row[] = $comment_image.$comment_popup;
+              $data[] = $row;
+            }
+          
+          $table = new html_table();
+          $table->head  = array(get_string('subjectt','block_queries'),get_string('comment','block_queries'));
+          $table->width = '100%';
+          $table->size = array('95%','5%');
+          $table->align = array('left','center');
+          $table->data  = $data;
+         
+          $blockqueries_displaycontent[] = html_writer::table($table);
+          $blockqueries_displaycontent[] = html_writer:: tag('a',get_string('mypreviewqueries','block_queries'),array('href'=>$CFG->wwwroot.'/blocks/queries/display_queries.php'));
+          $blockqueries_displaycontent = implode('',$blockqueries_displaycontent);
+         
+  return    $blockqueries_displaycontent;
+}
+EXAMPLE #30-2  
+ 
+File: renderer.php  Project: narasimhaeabyas/tataaiapro
+ function attendance_alerts($userid)
+ {
+     global $DB;
+     $sessions_sql = "SELECT ff.*, fsd.*, ffs.id AS sessid\n                           FROM {facetoface} as ff\n                           JOIN {facetoface_sessions} as ffs\n                             ON ffs.facetoface = ff.id\n                           JOIN {facetoface_sessions_dates} as fsd\n                             ON fsd.sessionid = ffs.id\n                          WHERE ff.trainerid = :traineeid\n                            AND ffs.attendence_status = :status\n                          LIMIT 5\n                        ";
+     $sessions = $DB->get_records_sql($sessions_sql, array('traineeid' => $userid, 'status' => 0));
+     if (empty($sessions)) {
+         return get_string('nosessions', 'block_attendance');
+     } else {
+         $table = new html_table();
+         $table->id = 'trainerfeedbak_batches';
+         $table->width = '100%';
+         $table->head = array(get_string('sessiondetails', 'block_attendance'), '');
+         foreach ($sessions as $session) {
+             $row = array();
+             $sess_data = html_writer::start_tag('ul');
+             $sess_data .= html_writer::tag('li', $session->name);
+             $session_date = date('d/m/y', $session->timestart) . ' - ' . date('d/m/y', $session->timefinish);
+             $sess_data .= html_writer::tag('li', $session_date);
+             $sess_data .= html_writer::end_tag('ul');
+             $row[] = $sess_data;
+             $session_url = new moodle_url('/mod/facetoface/attendence.php', array('s' => $session->sessid));
+             $row[] = html_writer::link($session_url, get_string('view'));
+             $table->data[] = $row;
+         }
+         return html_writer::table($table);
+     }
+ }
+
+ 
+Top Functions | Top Classes | Documentation
+PHP | C# (CSharp) | Java | Golang | C++ (Cpp) | Python
+EN | RU | DE

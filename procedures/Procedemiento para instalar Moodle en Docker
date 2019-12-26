@@ -1,0 +1,34 @@
+Procedemiento para instalar Moodle en Docker
+
+Instalacion Moodle con la base de datos MySQL y carpeta compartida,
+ambiente para desarrollo local
+
+
+
+https://hub.docker.com/r/moodlehq/moodle-php-apache
+Apache/PHP Configured for using with Moodle and all supported DB drivers 
+Se instalaran dos HOSTS (contenedores Docker), el HOST A contendra un servidor de base de datos MySQL y el HOST B tendra un servidor web Apache2 con todas las librerias instaladas para instalar el software Moodle 3.7
+ambas imagenes Docker utilizan el sistema operativo 
+
+ 
+El procedimiento incluye los elementos siguientes:
+a) La intranet Docker
+b) El contenedor de base de datos
+c) El contenedor de servidor web
+
+Las etapas son las 
+
+Antes que nada se debe crear una intranet docker con el objetivo de separar los servidores (base de datos y web), es decir que al tener un contenedor de base de datos individual sera posible utilizarla para conectar otras aplicaciones web, por ejemplo WordPress, Drupal, Prestashop, etc.
+
+
+Requisitos: computadora con sistema operativo Mac osX High Sierra y Docker Engine - Community version 18.09.0
+
+Enseguida se instalara el servidor MySQL
+
+Se debe instalar el servidor MySQL dentro de la intranet-docker,  MySQL opera con el puerto 3306 dentro del contenedor pero que no interfiera con una instalacion en la computadora local es necesario establecer otro numero de puerto en este caso utilizaremos el numero 3307  
+
+$ docker run -ti --name mysql --network intranet-docker -e MYSQL_ROOT_PASSWORD=root -p 3307:3306 -v /Users/edgardoromero-masis/Dropbox/docker/mysql/downloadMysql:/root/downloadMysql -d mysql:5.7
+
+
+Indica que es opcional, en este caso permite hacer un directorio compartido entre la computadora y el contenedor Docker
+Es la ruta del directorio local

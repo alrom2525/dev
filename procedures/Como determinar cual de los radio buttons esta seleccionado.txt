@@ -1,0 +1,51 @@
+
+Como determinar cual de los radio buttons esta seleccionado
+https://stackoverflow.com/questions/14800954/how-to-check-if-all-checkboxes-are-unchecked/14801145
+
+Usar document.querySelector
+
+var examen= document.querySelector('input[name="examen"]:checked'); // aqui ya se sabe que esta seleccionado
+
+	
+	if(examen.checked==true) {
+
+
+
+	function refreshTypeCourse(){
+	//  Typecourse= Examen
+	var examen= document.querySelector('input[name="examen"]:checked');
+	var complement=document.getElementById("courseprice");
+	
+	if(examen.checked==true) {
+		var x = examen.value;
+		var code_complement = x.split("|", 2);
+ 		complement.value=code_complement[1];	
+    }
+	else
+	alert(); 
+	// sumFields();
+} // function refreshTypeCourse()
+
+//var myCollection = document.querySelectorAll("#examen");	
+ 	//alert(myCollection.length);	
+
+
+
+Final:
+function refreshTypeCourse(){
+
+var examen = document.querySelectorAll("#examen");	
+var courseprice=document.getElementById("courseprice");
+var code_complement = [0, 0];
+
+for (var i = 0; i < examen.length; i++) {
+  if (examen[i].checked==true) code_complement = examen[i].value.split("|", 2);
+} //for
+
+courseprice.value=code_complement[1];
+
+	// sumFields();
+} // function refreshTypeCourse()
+
+
+

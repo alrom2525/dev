@@ -1,0 +1,11 @@
+Guardar caracteres especiales en Mysql desde PHP guardar caracteres frances
+
+https://www.php.net/manual/es/mysqli.real-escape-string.php
+PHP5, PHP7
+$ciudad = mysqli_real_escape_string($conexion, $ciudad);
+
+PHP4
+La función mysql_real_escape_string() hace exactamente eso más otras cosas que no has tenido en cuenta.
+
+http://foros.cristalab.com/guardar-caracteres-especiales-en-mysql-desde-php-t105993/
+

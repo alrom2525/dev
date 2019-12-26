@@ -1,0 +1,351 @@
+Apuntes de Docker
+https://docker-hy.github.io/part1/
+
+1. buscar una imagen en dockerhub:
+	docker search <nombre de la imagen>
+ejemplo: docker search hello-world
+
+2. ver las imagenes instaladas en la computadora:
+	docker images
+
+		REPOSITORY                          TAG                 IMAGE ID            CREATED             SIZE
+		nginx                               latest              f68d6e55e065        40 hours ago        109MB
+		ubuntu                              16.04               13c9f1285025        2 weeks ago         119MB
+		ubuntu                              latest              4c108a37151f        2 weeks ago         64.2MB
+		devopsdockeruh/exec_bash_exercise   latest              489b6d8f2ab8        4 months ago        897MB
+
+2.1 Borrar una imagen, puedes usar el nombre de la imagen o el id
+
+	docker rmi <image-id>
+
+3. ver los contenedores (los que se estan ejecutando):
+
+	a) docker container ls
+CONTAINER ID        IMAGE                               COMMAND             CREATED             STATUS              PORTS               NAMES
+0d29fb96902b        devopsdockeruh/exec_bash_exercise   "node index"        5 minutes ago       Up 5 minutes                            exercise14
+
+	b) docker container ps
+CONTAINER ID        IMAGE                               COMMAND             CREATED             STATUS              PORTS               NAMES
+0d29fb96902b        devopsdockeruh/exec_bash_exercise   "node index"        5 minutes ago       Up 5 minutes                            exercise14
+
+	c) docker container ps -a
+CONTAINER ID        IMAGE                               COMMAND             CREATED             STATUS                      PORTS               NAMES
+0d29fb96902b        devopsdockeruh/exec_bash_exercise   "node index"        5 minutes ago       Up 5 minutes                                    exercise14
+282b4313d8aa        devopsdockeruh/exec_bash_exercise   "node index"        18 minutes ago      Exited (0) 17 minutes ago                       romantic_rubin
+
+
+4. Iniciar una imagen o ejecutar un contenedor:
+docker run -d --rm -it --name exercise14  devopsdockeruh/exec_bash_exercise
+
+donde: 
+-d: 	se ejecutara en background
+--rm: 	se borrara al finalizar el contenedor (stop / kill)
+-it: 	establece el modo interactivo, es decir que se pueden ejecutar por ejemplo en un bash como: ls, top, who
+--name: establece un nombre corto para identificarlo facilmente
+
+5. Ingresar al contenedor de forma interactiva:
+docker exec -it exercise14 bash
+
+5.1 Ingresar a la aplicacion desde la Intranet (Navegador web)
+If you'd like to be able to access the instance from the host without the container's IP, standard port mappings can be used:
+
+$ docker run --name drupal -p 8080:80 -d drupal
+
+
+6. Finalizar un contenedor:
+	docker kill <id container / name container>
+	docker kill 0d29fb96902b
+	docker kill exercise14
+
+6.1 Borrar un contenedor
+	docker rm <container-id>
+
+7. Instalar un paquetes con apt-get install dentro de contenedores basados en Debian como Ubuntu:
+es necesario primero actualizar los repositorios del contenedor, 
+ejemplo dentro del Dockerfile:
+FROM ubuntu:16.04
+RUN apt-get update
+RUN apt-get install -y wget
+
+
+o es mejor poner esta linea asi:
+
+
+8. Ejemplo de contenedor usando el Dockerfile:
+
+FROM ubuntu:16.04 
+WORKDIR /mydir 
+RUN touch hello.txt 
+RUN touch local.txt
+RUN apt-get update && apt-get install -y wget 
+RUN wget http://example.com/index.html 
+CMD ["/bin/bash"]
+
+la ultima linea establece que se ejecute el bash
+
+9. Ya teniendo el archivo Dockerfile, establecer un nombre a la imagen e ingresar en forma interactiva:
+$ docker build -t myfirst .
+
+$ docker run -it myfirst 
+  root@accf99660aeb:/mydir# ls 
+  hello.txt  index.html  local.txt
+
+
+10. crear una nueva imagen con los cambios que se han realizado:
+$ docker commit <id container / name container> <nuevo nombre de imagen>
+$ docker commit accf99660aeb myfirst-pluschanges
+
+
+11. Copiar un archivo desde el contenedor hacia la computadora local:
+Revisar la imagen con docker ps -a
+
+ejemplo:
+$ docker ps -a --last 3 
+  CONTAINER ID        IMAGE               COMMAND                   CREATED                  STATUS                          PORTS               NAMES 
+be9fdbcafb23        youtube-dl          "/usr/local/bin/yout…"    Less than a second ago   Exited (0) About a minute ago                       determined_elion
+
+We’ll see that the last container was be9fdbcafb23 or determined_elion for us humans.
+
+docker diff determined_elion 
+
+  C /mydir 
+  A /mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4 
+
+copiar el archivo:
+$ docker cp "determined_elion://mydir/Short introduction to Docker (Scribe)-UFLCdmfGs7E.mp4" . 
+
+con eso copiamos el archivo hacia la computadora local.
+
+
+
+12. Montar un directorio de nuestra computadora y establecerlo como volumen o disco en un directorio dentro del contenedor.
+https://docker-hy.github.io/part1/
+
+Seccion: Volumes: bind mount
+$ docker run -v $(pwd):/mydir youtube-dl https://www.youtube.com/watch?v=420UIn01VVc
+
+$ docker run -v $(pwd)/logs.txt:/usr/app/logs.txt devopsdockeruh/first_volume_exercise
+
+docker run devopsdockeruh/first_volume_exercise --name first
+
+
+Exercise 1.9 (https://docker-hy.github.io/part1/)
+In this exercise we won’t create a new Dockerfile. Image devopsdockeruh/ports_exercise will start a web service in port 80. Use -p flag to access the contents with your browser.
+
+Submit your used commands for this exercise.
+
+$ touch logs.txt
+$ docker run -v $(pwd)/logs.txt:/usr/app/logs.txt devopsdockeruh/first_volume_exercise
+
+Me quede aqui: Allowing external connections into containers
+
+
+13. Observar la ip del contenedor  (una vez hayamos ingresado al bash en forma interactiva) à
+https://runnable.com/docker/basic-docker-networking
+
+cat /etc/hosts 
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+172.17.0.2	70271c04368f
+
+
+$ docker network inspect bridge
+
+14. Instalar ping, ifconfig, y otros dentro de un contenedor Ubuntu.
+	apt-get update;
+	apt-get install -y vim;
+	apt-get install -y iputils-ping;
+	apt-get install -y inetutils-ping;
+	apt-get install -y net-tools;
+	apt-get install -y nmap;
+	apt-get install -y zip unzip;
+	apt-get install -y less;
+
+
+
+docker run -v $(pwd)
+
+16. Instalar drupal
+https://hub.docker.com/_/drupal
+	docker run --name localdrupal -p 8080:80 -d drupal
+
+	docker run --name drupal -p 8081:80 -v /Users/edgardoromero-masis/Dropbox/docker/drupal/modules:/var/www/html/modules -v /Users/edgardoromero-masis/Dropbox/docker/drupal/profiles:/var/www/html/profiles -v /Users/edgardoromero-masis/Dropbox/docker/drupal/sites:/var/www/html/sites -v /Users/edgardoromero-masis/Dropbox/docker/drupal:/var/www/html/themes -d drupal
+
+https://stackoverrun.com/es/q/7771741
+		$ docker ps -a 
+		CONTAINER ID  IMAGE     COMMAND     CREATED    STATUS       PORTS    NAMES 
+    	5a8f89adeead  ubuntu:14.04   "/bin/bash"    About a minute ago Exited (0) About a minute ago      agitated_newton 
+
+		$ docker commit 5a8f89adeead newimagename 
+
+		$ docker run -ti -v "$PWD/dir1":/dir1 -v "$PWD/dir2":/dir2 newimagename /bin/bash
+
+
+docker run --name Vdrupal -p 8083:80 -v /Users/edgardoromero-masis/Dropbox/docker/drupal/modules:/var/www/html/modules -v /Users/edgardoromero-masis/Dropbox/docker/drupal/profiles:/var/www/html/profiles -v /Users/edgardoromero-masis/Dropbox/docker/drupal:/var/www/html/themes -d voldrupal 
+
+docker run --name vrupal -p 8081:80 -v /Users/edgardoromero-masis/Dropbox/docker/drupal/modules:/var/www/html/modules -d volumedrupal
+
+
+docker run --name somedrupal -p 8081:80 -d \ -v /Users/edgardoromero-masis/Dropbox/docker/drupal/modules:/var/www/html/modules \ drupal
+    -v drupal-profiles:/var/www/html/profiles \
+    -v drupal-sites:/var/www/html/sites \
+    -v drupal-themes:/var/www/html/themes \
+    drupal
+
+	 
+
+
+	docker run -ti -p 8080:80 -v /Users/edgardoromero-masis/Dropbox/docker/drupal/modules:/var/www/html/modules -v /Users/edgardoromero-masis/Dropbox/docker/drupal/profiles:/var/www/html/profiles -v /Users/edgardoromero-masis/Dropbox/docker/drupal/sites:/var/www/html/sites -v /Users/edgardoromero-masis/Dropbox/docker/drupal:/var/www/html/themes drupallocal /bin/bash
+
+
+
+
+
+	docker run --name drupal -p 8080:80 --link mysql:mysql -v /Users/edgardoromero-masis/Dropbox/docker/drupal/modules:/var/www/html/modules -v /Users/edgardoromero-masis/Dropbox/docker/drupal/profiles:/var/www/html/profiles -v /Users/edgardoromero-masis/Dropbox/docker/drupal/sites:/var/www/html/sites -v /Users/edgardoromero-masis/Dropbox/docker/drupal:/var/www/html/themes -d drupal
+
+
+
+	docker exec -it drupal bash
+
+
+docker run --name drupal -p 8080:80 --link mysql:mysql -d drupal
+https://www.youtube.com/watch?v=HNfckx1mLCs
+
+16.1 Iniciar drupal
+	docker ps -a
+	docker start 04e5b6ef4c08
+	docker exec -it drupal bash
+
+17. Instalar mysql
+# create a network for containers to communicate
+$ docker network create intranet-docker
+# launch mysql 5.7 container
+
+docker run -ti --name mysql --network intranet-docker -e MYSQL_ROOT_PASSWORD=Administrator -p 3307:3306 -v /home/administrator/docker/mysql:/root/ -d mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+3d7aef8a1475
+
+
+
+$ docker run -ti --name mysql --network intranet-docker -e MYSQL_ROOT_PASSWORD=root -p 3307:3306 -v /Users/edgardoromero-masis/Dropbox/docker/mysql/downloadMysql:/root/downloadMysql -d mysql:5.7
+
+
+docker run -d --name DB -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_ROOT_PASSWORD=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle mysql:5
+
+docker run -d -P --name moodle --link DB:DB -e MOODLE_URL=http://localhost:8080 -p 8080:80 jhardison/moodle
+
+
+
+docker run --name moodletmp -p 8080:80  lthub/moodle
+-v /Users/edgardoromero-masis/Dropbox/docker/moodle/mod:/var/www/html/mod
+
+18. Instalar Moodle
+https://hub.docker.com/r/moodlehq/moodle-php-apache
+
+# launch Moodle container
+$ docker run -ti --name moodle --network intranet-docker -e DB_SERVER=mysql --link mysql:mysql -e MOODLE_URL=http://localhost:8080 -p 8080:80 -v /Users/edgardoromero-masis/docker/moodle:/var/www/html -d moodlehq/moodle-php-apache:7.1
+
+$ docker run -ti --name moodle --network intranet-docker -e DB_SERVER=mysql --link mysql:mysql -e MOODLE_URL=http://localhost:8080 -p 8080:80 -v /Users/edgardoromero-masis/docker/moodle:/var/www/html -d moodlehq/moodle-php-apache:7.1
+
+docker pull moodlehq/moodle-php-apache
+
+$ docker run --name web0 -p 8080:80  -v $PWD:/var/www/html moodlehq/moodle-php-apache:7.1
+
+	
+	docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+	docker exec -it mysql bash
+
+	https://www.drupaldump.com/docker-simple-drupal-8-and-mysql-installation-without-docker-compose
+	docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=drupal -e MYSQL_USER=drupal -e MYSQL_PASSWORD=drupal -d mysql
+
+
+
+$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest -p 3306:3306 
+docker run -p 3306:3306 --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
+
+
+$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+
+18. Copiar archivos desde la maquina local hacia el contenedor
+https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container
+
+The cp command can be used to copy files. One specific file can be copied like:
+
+docker cp foo.txt mycontainer:/foo.txt
+docker cp mycontainer:/foo.txt foo.txt
+For emphasis, mycontainer is a container ID, not an image ID.
+
+Multiple files contained by the folder src can be copied into the target folder using:
+
+docker cp src/. mycontainer:/target
+docker cp mycontainer:/src/. target
+
+
+
+19. Instalar prestashop
+https://hub.docker.com/r/prestashop/prestashop
+
+$ docker run -ti --name prestashop --network intranet-docker -e PS_DEV_MODE=false -e PS_INSTALL_AUTO=0 -e DB_SERVER=mysql --link mysql:mysql -p 8081:80 -v /Users/edgardoromero-masis/docker/prestashop:/var/www/html -d prestashop/prestashop:1.7-7.0
+
+
+$ docker run -ti --name some-prestashop --network prestashop-net -e DB_SERVER=some-mysql -p 8080:80 -d prestashop/prestashop
+
+docker run -ti --name prestashop --network intranet-docker -e PS_DEV_MODE=false -e PS_INSTALL_AUTO=0 -e DB_SERVER=mysql --link mysql:mysql -p 8081:80 -v /home/administrator/docker/prestashop:/var/www/html -d prestashop/prestashop:1.7-7.0
+
+
+Production Deployment
+
+For a production deployment of moodle, use of a FQDN is advised. This FQDN should be created in DNS for resolution to your host. For example, if your internal DNS is company.com, you could leverage moodle.company.com and have that record resolve to the host running your moodle container. The moodle url would then be, MOODLE_URL=http://moodle.company.com In the following steps, replace MOODLE_URL with your appropriate FQDN.
+
+In some cases when you are using an external SSL reverse proxy, you should enable SSL_PROXY=true variable.
+
+Deploy With Docker
+
+docker run -d --name DB -p 3306:3306 -e MYSQL_DATABASE=moodle -e MYSQL_ROOT_PASSWORD=moodle -e MYSQL_USER=moodle -e MYSQL_PASSWORD=moodle mysql:5
+docker run -d -P --name moodle --link DB:DB -e MOODLE_URL=http://moodle.company.com -p 80:80 jhardison/moodle
+
+desde la terminal del sistema, se debe ingresar a cada contenedor, actualizarlo, instalar las herramientas de red y probar la comunicacion entre ellos.
+
+
+Instalar extension php pd_mysql
+
+docker-php-ext-install pdo_mysql
+
+20. Instalar OpenLdap
+Se usara la imagen https://hub.docker.com/r/mattrayner/lamp
+
+docker run -ti --name openldap --network intranet-docker --link mysql:mysql -p 8082:80 -v /Users/edgardoromero-masis/docker/openldap:/var/www/html -d mattrayner/lamp:latest-1804
+
+
+
+RUN echo exit 0 > /usr/sbin/policy-rc.d
+https://forums.docker.com/t/error-in-docker-image-creation-invoke-rc-d-policy-rc-d-denied-execution-of-restart-start/880/2
+
+/etc/init.d/slapd status
+/etc/init.d/slapd start
+nmap localhost
+	Starting Nmap 7.70 ( https://nmap.org ) at 2019-09-23 13:36 EDT
+	Nmap scan report for localhost (127.0.0.1)
+	Host is up (0.000054s latency).
+	Other addresses for localhost (not scanned): ::1
+	Not shown: 998 closed ports
+	PORT    STATE SERVICE
+	80/tcp  open  http
+	389/tcp open  ldap
+
+Nmap done: 1 IP address (1 host up) scanned in 1.84 seconds
+
+	ldapwhoami -H ldap:// -x    (para probar que si esta ejectuandose)
+			anonymous (respuesta del server)
+
+docker-php-ext-install gettext (necesario para instalar phpLDAPAdmin)
+
+http://localhost:8082/phpldapadmin/
+Login DN:   cn=admin,dc=sofadtest,dc=qc
+Password:	root
+
+

@@ -1,0 +1,12 @@
+cambiar la letra del simple certificate
+
+/var/www/dev.portailsofad.com/www/lib/pdflib.php
+
+modificar esta linea: define('PDF_DEFAULT_FONT', 'Helvetica');
+
+La ruta de cada fuente es:
+$defaultfonts = $CFG->dirroot.'/lib/tcpdf/fonts/';
+
+
+Mirar el ejemplo 55 de la libreria tcpdf, ahi muestra los estilos de las letras. 
+file:///Users/edgardoromero-masis/Downloads/example_055.pdf

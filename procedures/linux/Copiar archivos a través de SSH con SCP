@@ -1,0 +1,52 @@
+Copiar archivos a través de SSH con SCP
+https://geekytheory.com/copiar-archivos-a-traves-de-ssh-con-scp
+
+Usuario: el nombre de usuario que utilicemos en el servidor.
+Host: dirección IP o dominio del servidor remoto.
+Archivo origen: ruta del archivo que queremos copiar.
+Directorio origen: ruta del directorio completo que queremos copiar.
+Directorio destino: ruta donde queremos copiar el archivo.
+
+a) COPIAR ARCHIVOS DE LOCAL A SERVIDOR
+Si queremos subir el archivo archivo.txt de nuestro ordenador a la carpeta /home/usuario del servidor, hacemos lo siguiente:
+
+$ scp archivo.txt usuario@dominio.com:/home/usuario
+
+
+scp -r galera archivo.txt administrator@10.0.8.13:/var/www/dev.cslaval.sofad.qc.ca/backup_original
+
+
+b) COPIAR ARCHIVOS DESDE El SERVIDOR A LOCAL
+Si queremos copiar el fichero archivo.txt del servidor a nuestro ordenador en la carpeta Documentos, hacemos lo siguiente:
+
+$ scp usuario@dominio.com:/home/usuario/archivo.txt Documentos
+$ scp sofad@132.219.142.77:/transfert/gfs/simplesaml.tar.gz .
+
+c) COPIAR ARCHIVOS DE SERVIDOR A SERVIDOR
+Para copiar un archivo de un servidor a otro, hacemos lo siguiente:
+
+$ scp usuario1@dominio1.com:/home/usuario1/archivo.txt usuario2@dominio2.com:/home/usuario2/
+
+
+d) COPIAR UN DIRECTORIO COMPLETO
+Para copiar un directorio completo de mi ordenador al servidor, por ejemplo /home/mario/carpeta a /home/usuario, añadimos un -r en el comando:
+
+$ scp -r /home/mario/carpeta usuario@dominio.com:/home/usuario
+
+e) LIMITAR EL ANCHO DE BANDA
+Para no sobrecargar demasiado el servidor, es posible limitar el ancho de banda de la transferencia. Con el parámetro -l podemos indicar la velocidad (en Kbps).
+
+$ scp -l limite usuario@dominio.com:/home/usuario/archivo.txt Documentos 
+
+En Nunavik, el termómetro marca el descenso de las temperaturas entre −20 °C durante el día y -55 °C por la noche.2​
+
+Hoy intente ingresar a la banca en linea, observe que han cambiado el sitio, y para hacer login me pide una confirmacion a un celular.
+
+El problema es que me encuentro en el exterior y ya no poseo el celular que registre.
+
+Pueden ayudarme por favor?
+
+
+
+
+

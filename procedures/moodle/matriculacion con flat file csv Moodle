@@ -1,0 +1,657 @@
+matriculacion con flat file csv Moodle
+
+https://moodle.org/mod/forum/discuss.php?d=144569
+
+Saltar a contenido principal
+Moodle.org
+HOME
+DOCUMENTATION
+DOWNLOADS
+DEMO
+TRACKER
+DEVELOPMENT
+TRANSLATION
+MOODLE.NET
+SEARCH
+Página Principal
+Mis comunidades
+ Moodle en Español
+Tema 1
+ Cosas de Administradores
+ matriculacion con flat file csv
+Escriba su búsqueda
+Edgardo Romero Masis 
+Buscar
+Cosas de Administradores
+matriculacion con flat file csv
+Suscribir
+  
+Perdí las calificaciones de un examen (control)comunicacion a nuevos usuarios
+Mostrar modo 
+Este tema ha sido bloqueado así que no podrás responder en el.
+Imagen de Carlos Timossi
+matriculacion con flat file csv
+de Carlos Timossi - miércoles, 24 de febrero de 2010, 21:36
+Number of replies: 23
+Hola, he buscado en todo el foro, y logré hacer una matriculación flat file fácilmente gracias a los contribuyentes del mismo.
+
+Tengo varios cursos divididos en categorias, Secundaria y dentro de secundaria primero, segundo y tercer año. Cada año tiene un par de cursos. El curso lo pongo n "curso abierto" = no para impedir que otros no matriculados ingresen
+
+Como hay varios grupos de alumnos distintos, llamé a distintos roles 1A, 1B, 2A, 2B etc.
+
+Hago mi flat file así
+
+username, password, firstname, lastname, email, course1, course2, course3, role1, role2, role3
+alumno1, alumno1, Alumno, Uno, uno@aulavirtual.com, 1SECMATXX, 1SECMATXX, 1SECESPJA, 1b, 1b, 1b
+
+alumno6, alumno6, Alumno, Seis, Seis@aulavirtual.com, 1SECMATXX,1SECMATXX, 1SECESPJA, 1a, 1a, 1a
+
+y así sucesivamente
+
+lo subo y me meto a cada curso y perfecto, allí están todos los participantes en cada uno de los cursos.
+
+Ingreso con mi clave de admin y todo bien, veo todos los cursos y me puedo meter sin problema, checo quienes son los participantes y los roles que tienen y están tal cual lo puse en el flat file.
+
+Ahora bien, el problema comienza cuando ingreso con el nombre del alumno y su password. No puedo entrar a ningún curso. Me sale el mensaje "este curso no admite matriculaciones por el momento" o algo parecido. Creo que ha consecuencia que puse curso abierto=no.
+
+No se que estoy haciendo mal, si tengo que asignar roles manualmente en algún lado, no se... en las categorias o algo así. Lo he intentado casi todo, pero evidentemente algo está mal.
+
+Alguna pista?
+
+gracias anticipadas
+
+Carlos
+
+Promedio de calificaciones: - 
+Imagen de Carlos Timossi
+In reply to Carlos Timossi
+Re: matriculacion con flat file csv
+de Carlos Timossi - jueves, 25 de febrero de 2010, 00:05
+Si saco el asunto de los roles funciona perfecto. Quería ponerlos para tener divididos a los alumnos en sus grados, ya que algunos profesores imparten la misma materia en 2 grados distintos, pero la otra opción es formar los grupos una vez que se matriculen todos los alumnos dentro de cada curso. Es una opción más larga, manual y complicada en cuanto a tiempo. Si alguien tiene una solución mejor se lo agradezco.
+
+Saludos
+
+Carlos
+
+Promedio de calificaciones: - 
+Imagen de Wenceslao Fernández
+In reply to Carlos Timossi
+Re: matriculacion con flat file csv
+de Wenceslao Fernández - jueves, 25 de febrero de 2010, 16:42
+Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+Hola Carlos sonrisa
+
+No me queda del todo claro si lo que quieres hacer son grupos o asignar roles. De cualquier forma, no me extraña que no entren los alumnos porque 1b ó 1a no son roles válidos, por lo que nos te los va a matricular en los cursos. El rol es sólo un número, no un número con un letra y si no especificas nada, por defecto agrega a los usuarios como alumnos. Si lo que quieres es que te los asigne en grupos has de poner group1, group2... 
+
+username, password, firstname, lastname, email, course1, course2, course3, group1, group2, group3
+alumno1, alumno1, Alumno, Uno, uno@aulavirtual.com, 1SECMATXX, 1SECMATXX, 1SECESPJA, 1b, 1b, 1b
+
+Previamente has de haber creado antes los grupos en los cursos con idéntico nombre (1a, 1b...) al que uses en el archivo de matriculación.
+
+Salu2
+
+W
+Promedio de calificaciones: - 
+Imagen de Carlos Timossi
+In reply to Wenceslao Fernández
+Re: matriculacion con flat file csv
+de Carlos Timossi - jueves, 25 de febrero de 2010, 18:26
+Muchisimas gracias Wenceslao,
+
+voy a intentar lo que dices. Una pregunta. Si quiero usar mentees, hay que crear el rol padre o mentor o algo así. Lo creo, le pongo 2 o 3 cosas como que puede ver calificaciones y eso. Hago mi flat file con los padres, lo subo y no los encuentro como participantes del curso donde los inscribo.
+
+Ahora bien para comprobar que no sea el flat file le pongo
+
+username, password, firstname, lastname, email, course1, type1
+
+padre1, padre1, Padre, Uno, unopadre@aulavirtual.com, 1SECMATXX, 3
+
+Cuando subo los usuarios, si al type=3 le asigno teacher (non-editing teacher) los carga en el curso perfectamente, pero si asigno type=3 como parent (el nombre corto de mi rol padre) no los veo como participantes del curso, pero si los veo como usuarios del sitio en general cuando en administración pongo hojear usuarios.
+
+En suma, con roles predefinidos funciona perfecto, cuando creo mis roles a la medida, evidentemente algo estoy haciendo mal, pero no se que.
+
+Promedio de calificaciones: - 
+Imagen de Wenceslao Fernández
+In reply to Carlos Timossi
+Re: matriculacion con flat file csv
+de Wenceslao Fernández - jueves, 25 de febrero de 2010, 19:04
+Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+Hola Carlos sonrisa
+
+Me temo que no es tan fácil, el type = 3 es siempre non editing teacher, no puedes hacer una asignación de rol a los roles modificados (al menos yo no se como hacerlo). Tampoco he manejado el bloque mentees, tan solo puedo enlazarte esta página relacionada con lo que quieres hacer:
+
+http://mylescarrick.com/articles/automatically_adding_parents_to_your_moodle
+
+Salu2
+
+W
+Promedio de calificaciones: - 
+Imagen de Servio RODRÍGUEZ BLANCO
+In reply to Carlos Timossi
+Re: matriculacion con flat file csv
+de Servio RODRÍGUEZ BLANCO - viernes, 26 de febrero de 2010, 08:49
+creo q tambíen pueded agregar una columna que se llama "autosuscribe" o algo asi, y el alumno se inscribe automaticamente, de cualquier manera si creaste un rol de "estudiante" y lo modificaste con otro nombre, norlmante en la fila de role1 role2, role3...puedes poner ese nombre y el debe asumirte ese rol.
+Yo subí a mis usuarios asi, pero lueog tuve que modificarlos pq el Apellido me lo cortaba a veces, no se pq pasa eso, ls pongo Pepe Pérez y me pone Pepe Per no se que pueda ser eso, alguien sabe??
+Saludos y espero haber podido ayudarte...
+Promedio de calificaciones: - 
+Imagen de Fernando Navarro Páez
+In reply to Servio RODRÍGUEZ BLANCO
+Re: matriculacion con flat file csv
+de Fernando Navarro Páez - viernes, 26 de febrero de 2010, 14:14
+Imagen de Moodlers de gran ayuda  Imagen de Testers
+Hola, Servio.
+
+Si te lo ha cortado en una palabra acentuada es un problema de codificación. En la importación has de indicar la codificación que tiene el archivo que vas a subir. Deberías probar con ISO-8859-1 o UTF-8,
+
+Salu2
+Fernando
+Promedio de calificaciones: - 
+Imagen de Ana Chillida
+In reply to Servio RODRÍGUEZ BLANCO
+Re: matriculacion con flat file csv
+de Ana Chillida - jueves, 11 de noviembre de 2010, 17:15
+Hola, he intentado subir el fichero con en UTF-8, y en ISO 8859-1 y no reconoce España, por la ñ, supongo. También he intentado sustituir la palabra España por ES pero tampoco lo coge, ¿sabéis cómo tengo que ponerlo para que me acepte "España" como país?
+
+Mil gracias
+
+Promedio de calificaciones: - 
+Imagen de Iñaki Arenaza
+In reply to Ana Chillida
+Re: matriculacion con flat file csv
+de Iñaki Arenaza - sábado, 20 de noviembre de 2010, 10:46
+Imagen de Desarrolladores  Imagen de Desarrolladores de plugins  Imagen de Documentadores  Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+La forma de indicarlo es usando el código de 2 letras que representa el páis. En este caso ES.
+
+De hecho acabo de probar a crear un par de usuarios con el método de subir un fichero CSV, indicando el país con ES, y me ha funcionado sin problemas en una instalación con Moodle 1.9.10
+
+Saludos.
+Iñaki.
+Promedio de calificaciones: - 
+Imagen de Juan Silva
+In reply to Iñaki Arenaza
+Consulta
+de Juan Silva - sábado, 18 de abril de 2015, 18:47
+Estimado Iñaki Arenaza
+
+Quisier hacer una consulta.
+
+Moodle se puede manejar desde una consola de linux?
+
+Te comento que tengo registros en el log que dicen acceso desde consola, quisera saber sobre el terminos consola y que se refiere, o lo estoy entendiendo mal.
+
+
+
+gracias por tu respuesta.
+
+atte
+
+Ing Juan Silva
+
+Promedio de calificaciones: - 
+Imagen de Miguel Ángel Yerpes Ramírez
+In reply to Servio RODRÍGUEZ BLANCO
+Re: matriculacion con flat file csv
+de Miguel Ángel Yerpes Ramírez - miércoles, 16 de mayo de 2012, 12:35
+imagino que habrás descubierto por qué después del tiempo de este POST, pero fíjate que se corta con las tildes y las Ñ por ejemplo, letras que no reconoce.....
+
+Promedio de calificaciones: - 
+Imagen de David Hernández
+In reply to Carlos Timossi
+Re: matriculacion con flat file csv
+de David Hernández - viernes, 26 de febrero de 2010, 12:12
+Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+Hola a tod@s,
+
+Mi impresión es que la documentación oficial sobre este asunto 
+es un poco "críptica" (pero qúe palabra tan sangrona!!!).
+
+Es decir, sí está bien y trae todo lo necesario para construir un CSV,
+pero hay que echarle "feeling" a la interpretación.
+
+Bien, aprovechando este post, anexo mi interpretación personal como
+una especie de "mini-guía".
+
+Espero que les resulte de utilidad y, si encuentran algún error, por favor
+indíquenlo para que no haya fallas en la construcción del archivo.
+
+Saludos
+
+***************************************************
+"Tips para armar un archivo CSV"
+
+1) Armar el archivo CSV con los campos obligatorios:
+
+username,password,firstname,lastname,email,city,country
+
+Claro, sé que "city" y "country" no son propiamente obligatorios, pero
+como cuando uno da de alta a un alumno éstos aparecen como
+obligatorios, por eso los incluyo.
+
+Además, si se creó un campo extra de tipo obligatorio, también me
+gusta incluirlo.
+
+Cabe recordar que los campos se crean en:
+
+Administración del sitio -> Usuarios -> Campos de perfil del usuario -> Cuando
+se da de alta el campo, en "Categoría", elegir "Obligatorio".
+
+De esta manera, el CSV quedaría:
+
+username,password,firstname,lastname,email,city,country,profile_field_name
+
+Donde "name" es el nombre corto del campo obligatorio.
+
+Más información aquí.
+
+2) Para agregar estudiantes a los cursos hay dos posibilidades:
+
+a) Usar el modo "antiguo", basado en que antes Moodle no trabajaba por roles,
+sino con algo que podemos llamar "tipos de usuario". Entre estos "tipos de
+usuario" estaba el de profesor y estudiante.
+
+Si usamos esta opción, la asignación de un usuario al "Curso 1" se haría con 
+"type1", para el "Curso 2" se usaría "type2" y así.
+
+Los valores que se pueden colocar en "type1", "type2", etc. son:
+
+1 -> Estudiante
+2 -> Profesor editor
+3 -> Profesor NO editor
+
+Bajo esta lógica, un usuario asignado como profesor al curso "Moodle básico", quedaría como:
+
+username,password,firstname,lastname,email,city,country,course1,type1,profile_field_expediente
+usuario,clave,Nombre,Apellido,profesor@yo.com,Ciudad,País,Moodle básico,2,Expediente A 
+
+Si el usuario fuera un estudiante del curso "Moodle avanzado", en vez de "2", debe colocarse "1":
+
+username,password,firstname,lastname,email,city,country,course1,type1,profile_field_expediente
+usuario,clave,Nombre,Apellido,estudiante@yo.com,Ciudad,País,Moodle avanzado,1,Expediente B 
+
+b) La otra forma es utilizando el mecanismo actual a base de Roles.
+
+Al respecto, cabe recordar que desde hace tiempo Moodle no trabaja con "tipos de 
+perfiles", sino con "Roles", mismos que pueden ser los predefinidos en el sistema,
+o bien, otros que uno genere en función de necesidades propias.
+
+Para agregar usuarios con los roles de "teacher" (profesor editor) y "student"
+(estudiante), el CSV quedaría:
+
+username,password,firstname,lastname,email,city,country,course1,role1,profile_field_expediente
+usuario,clave,Nombre,Apellido,profesor@yo.com,Ciudad,País,Moodle básico,editingteacher,Expediente A 
+
+username,password,firstname,lastname,email,city,country,course1,role1,profile_field_expediente
+usuario,clave,Nombre,Apellido,estudiante@yo.com,Ciudad,País,Moodle avanzado,student,Expediente B
+
+El archivo "combinado" sería:
+
+username,password,firstname,lastname,email,city,country,course1,course2,role1,role2,profile_field_expediente
+
+Los campos que no apliquen a un usuario se deben dejar en blanco.
+
+Bien, si quiero asignar usuarios a un grupo, se requiere usar algo como:
+
+username,password,firstname,lastname,email,city,country,course1,course2,role1,role2,group1,group2,profile_field_expediente
+
+Donde "group1" es el nombre del grupo en el que se dara de alta al usuario en
+el Curso 1 (course1), "group2" corresponde al Curso 2 (course2), etc.
+
+MINI-FAQ's
+
+1) ¿Qué nombres colocar en Curso, Rol, Grupo, Campos personalizados, etc.?
+
+Se deben colocar los NOMBRES CORTOS.
+
+Es decir, el nombre del rol para el profesor editor es "TEACHER", pero como su
+nombre corto es "editingteacher", entonces uso éste último.
+
+En este sentido, debo recordar (Ej. anotar) los nombres cortos de los roles
+nuevos que se generen, además de los correspondientes a los cursos, grupos,
+campos personalizados, etc.
+
+2) ¿Si se crea un rol nuevo, cómo se asigna vía CSV en un curso?
+
+Se asigna usando el nombre corto, siguiendo la lógica descrita.
+
+Pero es muy importante tener en cuenta lo siguiente:
+
+Si el nuevo rol tiene privilegios que no corresponden a lo que normalmente 
+haría un alumno o profesor en un curso, entonces Moodle no lo asignará al curso.
+
+Es decir, si estructuramos un rol basado en, por ejemplo, el usuario autentificado,
+con un par de privilegios extra e intentamos asignarlo al curso, Moodle no lo
+reconocerá.
+
+Si duplicamos el rol "student" y le quitamos ciertos privilegios de importancia
+"menor", entonces Moodlé sí lo reconocerá y asignará al usuario al curso con
+dicho rol.
+
+Bien, esto último me falta documentarlo un poco, pero creo que este es el
+comportamiento general.
+
+3) ¿Si en algún campo se utilizan comas (Ej. la dirección),que hacer para que
+Moodle acepte el archivo CSV?
+
+Deben sustituirse las comas por: &#44
+
+Usando el ejemplo del campo "dirección" (address), y teniendo el siguiente
+domicilio:
+
+Calle Libertad No.1, Barrio conocido, Zona postal 5, Ciudad Capital, País conocido
+
+El campo quedaría:
+
+Calle Libertad No.1&#44 Barrio conocido&#44 Zona postal 5&#44 Ciudad Capital&#44 País conocido
+
+4) ¿Cómo se hace para que los usuarios cambien su password (es decir, no se
+desea crear el password)?
+
+En el campo password, colocar "changeme" (sin las comillas).
+
+Cuando la persona ingrese a la plataforma debe teclear su nombre de usuario
+(campo "username") y, en el lugar asignado para la contraseña (campo 
+"password"), debe colocar la palabra "changeme" (sin las comillas).
+
+Ejemplo de CSV:
+
+username,password,firstname,lastname,email,
+usuario,changeme,Nombre,Apellido,profesor@yo.com
+
+5) ¿Cómo hacer que la plataforma le envíe a las personas su nombre de 
+usuario y contraseña por medio de un correo electrónico?
+
+Hacer lo indicado aquí.
+
+6) ¿Cómo asignar países a los usuarios?
+
+Deben utilizarse las "abreviaturas" reconocidas por Moodle para tal fin.
+
+El listado oficial de "abreviaturas" se encuentra aquí.
+
+Es decir, en vez de indicar que el usuario pertenece a "Australia", debe
+indicarse que su país es "AU".
+
+NOTA IMPORTANTE:
+
+El archivo CSV debe construirse utilizando el cotejamiento UTF-8, de preferencia
+separando los campos por comas.
+Promedio de calificaciones:Útil (1) 
+Imagen de Veronica Martinez
+In reply to David Hernández
+Re: matriculacion con flat file csv
+de Veronica Martinez - viernes, 26 de febrero de 2010, 13:19
+Buenisima la explicacion David!.. justo en lo que me estoy enfocando ahora... ahora la pregunta que me surje es si hay alguna manera de con los usuarios ya creados, incluir un grupo de ellos a un curso, sin tener que estar buscandolos uno a uno y asignarles su aula.
+
+Saludos!
+Vero
+Promedio de calificaciones: - 
+Imagen de Carlos Timossi
+In reply to David Hernández
+Re: matriculacion con flat file csv
+de Carlos Timossi - viernes, 26 de febrero de 2010, 15:49
+Muchas gracias por la detallada explicación. Yo creo que mi problema es justamente que al crear el rol de padreo mentos le asigno privilegios que no corresponden porque si al padre le doy el rol de student todo funciona perfecto, pero si le doy el rol de parent que cree yo no aparece como participante del curso a pesar de poner en el csv course1 y asignarle a cada uno un curso.
+
+Les aseguro que hago exactamente lo que dice el tutorial de parent, incluso copié el rol student y le puse de nombre parent y tampoco funciona. Tiene UTF-8, así que eso no es. De hecho como les digo si le asigno el rol de estudiantes a los padres funciona correctamente.
+
+Alguna idea?
+
+Promedio de calificaciones: - 
+Imagen de Servio RODRÍGUEZ BLANCO
+In reply to David Hernández
+Re: matriculacion con flat file csv
+de Servio RODRÍGUEZ BLANCO - martes, 30 de noviembre de 2010, 17:11
+Sin palbras amigo, lo mejor de lo mejor, despues de esta explicacion tuya quedan pocas preguntas por hacer sobre este tema, recién ahora me salvó la vida para lo q estoy haciendo q es subiendo a mis usuarios mediante el CVS.
+
+Solo tengo una pequeña duda y es q no se donde veo el nombre corto del grupo, como quiera en el campo "group1" le pondre el nombre del grupo que tengo creado y ya vere si funciona, de ser asi tengo el 100% de mi problema resuelto
+
+Saludos y gracias de nuevo
+
+Promedio de calificaciones: - 
+Imagen de Ramiro Martínez D'Elía
+In reply to David Hernández
+Re: matriculacion con flat file csv
+de Ramiro Martínez D'Elía - viernes, 15 de abril de 2011, 14:25
+David muy bueno el tip. Pero me surgen algunas dudas.
+
+Con respecto a la matriculación de alumnos, si un alumno esta en varios cursos, como lo especifico dentro del CSV. Y por otro lado, desde donde lo cargo, moodle o desde la bd ?.
+
+Saludos.
+
+Promedio de calificaciones: - 
+Imagen de Wenceslao Fernández
+In reply to Ramiro Martínez D'Elía
+Re: matriculacion con flat file csv
+de Wenceslao Fernández - viernes, 15 de abril de 2011, 17:20
+Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+Hola sonrisa
+
+Sólo has de añadir course1,course2,course3... tantos como necesites. Si el resto de usuarios están matriculados en un número menor de cursos, basta con que dejes en blanco los que no necesites.
+
+http://docs.moodle.org/en/Upload_users
+
+En general no es buena idea escribir directamente la base de datos, es mejor usar la herramienta que tiene Moodle para subir a los usuarios.
+
+Salu2
+
+Promedio de calificaciones: - 
+Imagen de Rebe Lu
+In reply to David Hernández
+Re: matriculacion con flat file csv
+de Rebe Lu - miércoles, 8 de mayo de 2013, 15:00
+Buenas tardes
+
+David Hernández
+
+Excelente explicación sobre la elaboración de un archivo .csv
+
+Gracias de verdad, por tu tiempo en elaborar esta excelente respuesta.
+
+Una pregunta, hay algún elemento que yo pueda agregar a este archivo, para desmatricular a estudiantes de un curso.
+
+Yo he utilizado la columna delet, en la última columna desocupada (con ceros y uno) para borrar usuarios de la plataforma. Pero para desmatricularlos que puedo ussar????
+
+Gracias
+
+Promedio de calificaciones: - 
+Imagen de Wenceslao Fernández
+In reply to Rebe Lu
+Re: matriculacion con flat file csv
+de Wenceslao Fernández - lunes, 13 de mayo de 2013, 17:27
+Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+Hola sonrisa
+
+Actualmente no hay posibilidad de desmatricular alumnos por CSV, tendrás que usar las opciones de usuario masivas. En la serie 1.9.x sí que se podía mediante un archivo que se sincronizaba con el CRON, pero en Moodle 2 no está claro que funcione correctamente indeciso, esta parte de la documentación ha quedado bastante confusa:
+
+http://docs.moodle.org/24/en/Flat_file
+
+Salu2
+
+Promedio de calificaciones: - 
+Imagen de Juan Carlos Jimenez
+In reply to Carlos Timossi
+Re: matriculacion con flat file csv
+de Juan Carlos Jimenez - sábado, 1 de junio de 2013, 05:33
+Hola.
+
+He estado siguiendo toda la info que habéis publicado aquí para subir y matricular usuarios mediante un archivo CSV y ha funcionado a las mil maravillas, os doy las gracias a todos por vuestros aportes.
+
+Sin embargo tengo 2 problemas:
+
+tengo creado un campo de perfil de usuario con formato fecha y lo quiero actualizar una vez que realice la subida por CSV. El valor que introduzco es el siguiente: 11/11/1980     11/11/80 o también este otro 11-11-1980     11-11-80. Y cuando subo el CSV se actualiza todo pero en dicho campo me marca el 1 de enero de 1970.
+Se puede hacer desde el CSV que cuando se matricule un alumno por este medio, le de la bienvenida al curso? Porque actualmente lo único que he conseguido es que cuando es un nuevo usuario, le de la bienvenida al campus y le diga su usuario y contraseña pero no le dice en que curso/s está matriculado.
+Muchas gracias por todo
+
+Promedio de calificaciones: - 
+Imagen de Wenceslao Fernández
+In reply to Juan Carlos Jimenez
+Re: matriculacion con flat file csv
+de Wenceslao Fernández - sábado, 1 de junio de 2013, 18:17
+Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+Hola sonrisa
+
+En Moodle 2 el formato de fecha es Unix timestamp, si usas un campo en formato fecha, tendrás que referenciarla  en +/- segundos desde el 1 de enero de 1970. Hay varias páginas que te facilitan una conversión rápida de fechas, por ejemplo esta. Una opción más simple sería poner ese campo personalizado como texto, con lo que lo podrías poner de cualquier forma.
+
+Un saludo
+
+Promedio de calificaciones: - 
+Imagen de Juan Carlos Jimenez
+In reply to Wenceslao Fernández
+Re: matriculacion con flat file csv
+de Juan Carlos Jimenez - domingo, 2 de junio de 2013, 12:51
+Hola Wenceslao.
+
+Gracias por responder a mi pregunta, pero con respecto al punto número 2, sabrías decirme algo?.
+
+Un saludo
+
+Promedio de calificaciones: - 
+Imagen de Wenceslao Fernández
+In reply to Juan Carlos Jimenez
+Re: matriculacion con flat file csv
+de Wenceslao Fernández - domingo, 2 de junio de 2013, 14:23
+Imagen de Moderadores  Imagen de Moodlers de gran ayuda
+Hola sonrisa
+
+Me temo que no, no conozco forma de que mande el mensaje de bienvenida a los cursos cuando se suben pos CSV. Normalmente sugiero a los docentes que publiquen la bienvenida en el foro de novedades, para que se mande por correo, pero claro si es un curso con matriculaciones continuas no sirve.
+
+La única opción que veo es que tras la subida y/o matriculación mediante CSV uses la opción de seleccionar a los usuarios subidos para mandarles un mensaje, este sistema es manual y no serviría si en el mismo CSV matriculas a diferentes usuarios en diferentes cursos, pero también los puedes agrupar por lotes.
+
+Salu2
+
+Promedio de calificaciones: - 
+Imagen de Juan Carlos Jimenez
+In reply to Wenceslao Fernández
+Re: matriculacion con flat file csv
+de Juan Carlos Jimenez - lunes, 3 de junio de 2013, 01:57
+Hola de nuevo.
+
+Eso es lo que estaba haciendo hasta ahora.
+
+Muchas gracias por contestar.
+
+ 
+
+Promedio de calificaciones: - 
+Perdí las calificaciones de un examen (control)comunicacion a nuevos usuarios
+Ir a... 
+Saltar Navegación
+NAVEGACIÓN
+Página Principal
+
+Área personal
+
+Páginas del sitio
+
+Mis comunidades
+
+Moodle en Español
+
+Participantes
+
+Insignias
+
+General
+
+Tema 1
+
+ForoInstalación y Actualización
+
+ForoProblemas Generales
+
+ForoCosas de Administradores
+
+matriculacion con flat file csv
+
+ForoCosas de Profesores
+
+ForoNuevos Módulos, Apariencia y Personalización
+
+ForoCosas de Desarrolladores
+
+ForoOtros Temas
+
+ForoForo Social
+
+GlosarioGlosario de Preguntas Frecuentes
+
+GlosarioGlosario de conceptos básicos de Moodle
+
+Tema 2
+
+Tema 3
+
+Tema 4
+
+Tema 5
+
+Moodle Certified Services Provider:
+open2know (CA)
+Saltar Administración
+ADMINISTRACIÓN
+Administración del foro
+
+Suscripción opcional
+
+Suscribirse a este foro
+
+Suscribirse a este tema
+
+No rastrear mensajes no leídos
+
+Canal RSS de debates
+
+Administración de la comunidad
+
+ 
+Búsqueda
+ Contactos
+THE MOODLE PROJECT
+About
+Announcements
+Community forums
+Get involved
+Moodle Partners
+MoodleMoot
+Moodle Users Association
+Learn Moodle
+MoodleCloud
+Donate
+Moodle store
+DOCUMENTATION
+Moodle 3.7
+Browse by language
+DOWNLOADS
+Latest release
+Plugins
+Moodle app
+Moodle Desktop
+DEMO
+School
+Sandbox
+TRACKER
+Browse issues
+Report issue
+DEVELOPMENT
+Dev documentation
+Roadmap
+General developer forum
+Developer credits
+TRANSLATION
+Help translate Moodle
+Translation forums
+Translation credits
+MOODLE.NET
+Browse courses
+Moodle
+ 
+ 
+ 
+Usted se ha identificado como Edgardo Romero Masis (Salir)
+Moodle Docs para esta página
+
+Moodle™ is a registered trademark
+
+Site policy | Contact
+
+Descargar la app para dispositivos móviles
+Políticas

@@ -1,0 +1,6 @@
+349  brew install httrack
+  350  man httrack
+  360  man httrack
+  362  httrack http://localhost:8085
+  394  httrack http://localhost:8084
+  545  history | grep track

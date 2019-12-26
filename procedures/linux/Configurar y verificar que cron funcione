@@ -1,0 +1,19 @@
+Configurar y verificar que cron funcione
+
+a) Agregar un crontab -e
+
+* * * * * bash /home/administrator/tmp/testCron.sh
+# Esta configurado para que se ejecute cada minuto
+
+b) Crear un script bash "timeTmp.txt"
+
+1 clear
+2 date >> /home/administrator/tmp/timeTmp.txt
+3 cat /home/administrator/tmp/timeTmp.txt
+4 
+5 echo " "
+6
+
+c) Verificar que este ejecutandose el servicio CRON
+
+tail /var/log/syslog | grep CRON

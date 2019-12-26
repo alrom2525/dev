@@ -1,0 +1,14 @@
+Consulta para encontrar los tipos de preguntas en moodle:
+
+SELECT c.course, d.fullname AS course_name, 
+	d.shortname AS course_shortname,
+    c.id AS quizid, c.name as quiz_name,  
+    e.firstname AS teacher_first_name, e.lastname AS teacher_last_name, 
+    a.* 
+    FROM mdl_question AS a 
+INNER JOIN mdl_quiz_slots AS b ON a.id = b.questionid
+INNER JOIN mdl_quiz AS c ON c.id = b.quizid
+INNER JOIN mdl_course AS d ON d.id = c.course
+INNER JOIN mdl_user AS e ON e.id = a.createdby
+WHERE a.qtype IN ('musickeysignature','musicinterval','musicscale') 
+ORDER BY c.course

@@ -1,0 +1,7 @@
+https://www.ochobitshacenunbyte.com/2018/09/25/configurar-la-zona-horaria-en-gnu-linux/
+Configurar la zona horaria en GNU Linux
+
+Para las distribuciones basadas en Debian, como Ubuntu, Linux Mint y derivadas, podemos utilizar:
+
+1
+dpkg-reconfigure tzdata

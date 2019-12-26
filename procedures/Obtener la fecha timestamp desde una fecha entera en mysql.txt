@@ -1,0 +1,4 @@
+
+Obtener la fecha timestamp desde una fecha entera en mysql
+
+SELECT FROM_UNIXTIME(firstaccess), FROM_UNIXTIME(lastaccess), FROM_UNIXTIME(lastlogin) FROM mdl_user where username='admin';

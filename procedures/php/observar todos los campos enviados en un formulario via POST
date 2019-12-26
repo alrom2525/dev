@@ -1,0 +1,5 @@
+observar todos los campos enviados en un formulario por el metodo post php
+
+
+foreach($_POST as $campo => $valor)  
+echo "$campo -> $valor <br>"; 

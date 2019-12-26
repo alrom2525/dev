@@ -1,0 +1,9 @@
+
+Activar fontawsome en Moodle:
+Descargar el filtro:
+https://github.com/ffhs/moodle-filter_fontawesome/tree/MOODLE_33_STABLE
+https://moodle.org/plugins/pluginversion.php?id=20317
+https://docs.moodle.org/37/en/FontAwesome_filter
+
+ <span class="fa fa-user fa-3x"></span> 
+ 

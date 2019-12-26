@@ -1,0 +1,9 @@
+Converting from antelope to barracuda
+
+https://moodle.org/mod/forum/discuss.php?d=312136
+
+Your database has tables using Antelope as file format. You are recommended to convert the tables to Barracuda file format.
+
+run this script
+
+ php admin/cli/mysql_compressed_rows.php

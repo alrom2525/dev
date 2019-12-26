@@ -1,0 +1,7 @@
+intl.default_locale = en_utf8
+intl.default_locale = en_utf8
+intl.default_locale = utf8mb4
+
+
+
+intl.default_locale = en_utf8mb4

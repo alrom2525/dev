@@ -1,0 +1,53 @@
+ocultar campos en datatables:
+https://datatables.net/examples/basic_init/hidden_columns.html
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "columnDefs": [
+            {
+                "targets": [ 2 ],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [ 3 ],
+                "visible": false
+            }
+        ]
+    } );
+} );
+
+
+
+
+
+$dataTable="
+<script>  
+ $(document).ready(function(){  
+  $('#tbl-inscription').DataTable( {
+    'columnDefs': [
+      { 'targets': [ 6 ],
+        'visible': false,
+        'searchable': false
+      } ],
+    select: true,
+    'lengthMenu': [25, 50, 100, 150 ],
+    'order': [[ 6, 'asc' ], [ 1, 'desc' ]],";
+if ($_SESSION["language"]=='fr') $dataTable=$dataTable." 'language': {'url': '//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json'}, ";
+
+$dataTable=$dataTable."
+
+  } );  
+ });  
+</script> "; 
+echo $dataTable;
+
+
+
+echo "<th>Status</th>";
+echo "<th>Status</th>";
+ echo " <td>";
+      echo "<a class='text-white' style='text-decoration:none; color:black'  
+      href='#'  onclick='goToForm(\"$idc\",\"$destiny\",$idlen)' 
+      onmouseenter='contextmenuOFF()' onmouseleave='contextmenuON()'>"
+      .$row['status']."  </a>";
+      echo "</td>";

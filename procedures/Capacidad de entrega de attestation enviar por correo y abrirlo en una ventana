@@ -1,0 +1,18 @@
+Capacidad de entrega de attestation enviar por correo y abrir attestation en una ventana:
+
+1. Diferencia de los archivos
+2. Actualizacion y prueba en dev
+3. Actualizacion y prueba en prod
+
+Los archivos a modificar son:
+moodle/mod/simplecertificate/mod_form.php 	differ
+moodle/mod/simplecertificate/locallib.php 	differ
+moodle/mod/simplecertificate/wmsendfile.php differ
+
+moodle/mod/simplecertificate/version.php 	differ
+
+
+1. Editar la fila 208 del archivo: ../moodle33/mod/simplecertificate/mod_form.php
+
+207         //Delivery Options (Email, Download,...)
+208         $deliveryoptions = array( 0 => get_string('openbrowser', 'simplecertificate'), 1 => get_string('download', 'simplecertificate'), 2 => get_string('emailcertificate', 'simplecertificate'), 3 => get_string('nodelivering','    simplecertificate'),4 => get_string('emailcertificate', 'simplecertificate'). " & ".get_string('openbrowser', 'simplecertificate'));

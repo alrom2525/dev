@@ -1,0 +1,6 @@
+Agregar datables a Moodle:
+Instalar el plugin: https://moodle.org/plugins/tool_datatables
+
+
+En la ruta: /Library/WebServer/Documents/moodle33github/admin/tool/datatables/test.php
+se encuentra el ejemplo

@@ -1,0 +1,88 @@
+https://blog.desdelinux.net/tips-mas-de-40berias-conocer/
+
+A) Si tengo un directorio local y quiero subirlo a Bitbucket,
+se debe hacer un repositorio en Internet, siguiendo los pasos:
+1. Entrar a la cuenta de bitbucket y crear un nuevo repositorio.
+2. Hacer la carpeta local, abrir un terminal y desplazarnos a esa ruta con el comando $cd /path/to/your/project
+3. $ git init
+Aparecera el mensaje: Initialized empty Git repository in  /path/to/your/project
+4. $ git remote add origin [URL del repo] 
+Ejemplo:
+git remote add origin https://edgardoalberto@bitbucket.org/SOFAD/checklist.git
+5. $ git add *
+6. $ git status 
+es un comando opcional
+7. $ git commit -m "Message"
+Aparecera un mensaje por cada archivo/directorio:  create mode 100644 /path/to/your/project
+8. $ git push -u origin master
+Solicitara el password
+Apareceran varios mensajes, las utlimas lineas son:
+* [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+
+
+
+Validation total of Group registration form
+git help
+
+git config --global user.name "Edgardo"
+git config --global user.email "romero-masise@sofad.qc.ca"
+
+B) Clonar un repositorio (descargar un proyecto que se encuentre en Bitbucket y descargarlo a la computadora)
+git clone  <URL Web>
+git clone <URL Web>  <DestinationDirectory>
+git status
+
+git add filename or .
+git commit -m "Message"
+
+// determinar el nombre del repositorio remoto
+git remote 
+// copiar el archivo al repositorio de Internet
+git push name_repository  master
+
+
+
+Para agregar o modificar un archivo y subirlo al repositorio de Internet:
+1. Entrar al directorio local con el comando $cd /path/to/your/project
+2. $ git status  [es un comando opcional]
+3. $ git add <archivoModificado/Nuevo>
+3. $ git commit -m "Message"
+4. git push -u origin master
+Solicitara el password
+Apareceran varios mensajes, las utlimas lineas son:
+To https://bitbucket.org/SOFAD/checklist.git
+   d7aa7ff..90ddf1b  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+
+Para poner un mensaje grande:
+git commit -m "Changements dans cette version: 
+a) Design graphique égal au thème de mocn.ca
+b) Rapport du journal au format PDF, disponible pour l'enseignant et les administrateurs du site"
+
+Para ver los cambios de version: git log
+https://git-scm.com/book/es/v1/Fundamentos-de-Git-Viendo-el-hist%C3%B3rico-de-confirmaciones
+
+
+Para actualizar tu repositorio local al commit más nuevo, ejecuta 
+git pull
+en tu directorio de trabajo para bajar y fusionar los cambios remotos.
+
+
+
+Ramas de git:
+
+sudo git branch -a (Muestra la lista de ramas)
+Tell git which branch to track or use
+
+sudo git branch --track MOODLE_36_STABLE origin/MOODLE_36_STABLE
+Finally, Check out the Moodle version specified
+
+sudo git checkout MOODLE_36_STABLE
+
+
+
+Visualiza la diferencia entre el archivo de producción y la última versión del mismo.
+git diff customers/search.php

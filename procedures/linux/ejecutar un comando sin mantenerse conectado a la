@@ -1,0 +1,6 @@
+ejecutar un comando sin mantenerse conectado a la consola esperando a que el comando termine su ejecución
+comando Nohup
+
+http://deckerix.com/blog/entendiendo-el-comando-nohup/
+
+$> nohup command-with-options &

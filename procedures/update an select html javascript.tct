@@ -1,0 +1,134 @@
+
+
+
+/**
+ * Update a field SELECT (HTML5)
+ * @param id is the It is the id of html element, field 1:course 2: exam
+ * @return N/A
+ */
+function updateSelect(id,field) {
+var x = id.value;
+var code_complement = x.split("|", 2);
+var complement;
+var xmlhttp = new XMLHttpRequest();
+
+
+if(code_complement[0] != 0) {
+
+	switch(field) {
+  	case 1: //course
+
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + id.id +"&value=" + code_complement[0], true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice" +"&value=" + code_complement[1] , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse').style.display = "none";
+		break;
+
+	case 2: //examen
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=coursecode" +"&value=" + code_complement[0], true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice" +"&value=" + code_complement[1] , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse').style.display = "none";
+		break;
+
+	case 3: //course2
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + id.id +"&value=" + code_complement[0] , true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice2" +"&value=" + code_complement[1] , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice2');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse2').style.display = "none";
+		break;
+
+	case 4: //examen4
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=coursecode2" +"&value=" + code_complement[0] , true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice2" +"&value=" + code_complement[1] , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice2');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse2').style.display = "none";
+		break;
+
+	case 5: // province
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=province" +"&value=" + code_complement[1] , true);
+		xmlhttp.send();
+		break;
+
+	case 6: // First exam
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=firstexam" +"&value=" + code_complement[0] , true);
+		xmlhttp.send();
+		break;
+
+	} //switch(field)	
+}
+else {
+	
+	switch(field) {
+  	case 1: //course
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + id.id +"&value=", true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice" +"&value=" + 0 , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse').style.display = "inline";
+		break;
+
+  	case 2: //examen
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=coursecode" + "&value=" , true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice" +"&value=" + 0 , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse').style.display = "inline";
+		break;
+
+	case 3: //course2
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + id.id +"&value=" , true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice2" +"&value=" + 0 , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice2');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse2').style.display = "inline";
+		break;
+
+  	case 4: //examen
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=coursecode2" + "&value=", true);
+		xmlhttp.send();
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=" + "courseprice2" +"&value=" + 0 , true);
+		xmlhttp.send();
+
+		complement=document.getElementById('courseprice2');
+		complement.value=code_complement[1];
+		document.getElementById('sfd-msg-typecourse2').style.display = "inline";
+		break;
+
+	case 6: // First exam
+		xmlhttp.open("GET", "../lib/inscription.lib.php?elementid=firstexam" + "&value=" , true);
+		xmlhttp.send();
+		break;
+
+	} //switch(field)
+} //if(code_complement[0] != 0) {
+
+sumFields();
+
+} // function updateSelect
+		

@@ -1,0 +1,2 @@
+Modelo de campo requerido con vineta span verde o roja, icono de validacion css cheque
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel

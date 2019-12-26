@@ -1,0 +1,7 @@
+Extraer archivos tar a un directorio específico en Linux
+https://blog.desdelinux.net/extraer-archivos-tar-un-directorio-especifico-en-linux/
+
+# tar -xf nombre_archivo.tar -C /ruta_del_archivo/carpeta
+# tar -xf nombre_archivo.tar.gz --directory /ruta_del_archivo/carpeta
+
+

@@ -1,0 +1,348 @@
+https://uniwebsidad.com/foro/pregunta/128/como-solucionar-el-problema-headers-already-sent-de-php/
+
+a)
+// antes de cualquier línea de código html o php:
+ 
+<?php
+ob_start();
+?>
+// al final del documento:
+ 
+<?php
+ob_end_flush();
+?>
+
+
+b)
+lib/testreview.lib.php:        if (!headers_sent()) header("location: $nav_customers_rr");
+
+
+
+Cómo solucionar el problema "Headers already sent" de PHP
+6 de noviembre de 2011
+Cuando ejecuto mis scripts de PHP suelo encontrarme con errores de este tipo:
+
+Warning:
+Cannot modify header information - headers already sent
+by /some/file.php:12 in /some/file.php on line 23
+Las líneas de código a las que se refiere el error contienen llamadas a las funciones header() y setcookie() de PHP.
+
+¿Cuál es la razón por la que se produce este error? ¿Cómo se puede solucionar?
+
+error
+php
+Estás leyendo una traducción autorizada de la pregunta How to fix “Headers already sent” error in PHP planteada por Moses89 en StackOverflow.
+Respuestas
+#1
+Las funciones PHP que envían o modifican las cabeceras HTTP se deben ejecutar antes de que se haya empezado a enviar la página solicitada al usuario. Si no, se producirá el siguiente error:
+
+Warning: Cannot modify header information - headers already sent
+(output started at file:line)
+Las funciones PHP que modifican las cabeceras HTTP son las siguientes:
+
+header() / header_remove()
+session_start() / session_regenerate_id()
+setcookie() / setrawcookie()
+
+ 
+Y las formas de empezar a enviar contenidos al usuario antes de que se ejecuten esas funciones pueden ser a su vez intencionadas o no intencionadas:
+
+Intencionadas:
+Mostrar información con print o echo
+Volcar el contenido de variables con var_dump()
+Utilizar alguna de estas funciones: printf(), trigger_error(), vprintf(), ob_flush(), readfile() o passthru().
+Añadir código HTML antes de la etiqueta <?php de apertura
+No intencionadas:
+Añadir algún espacio en blanco antes de <?php o después de ?>
+El BOM (Byte Order Mark) de UTF-8 (tal y como se explica más adelante)
+Mensajes de error o notices producidos con anterioridad
+¿Por qué se produce este error?
+Observa el siguiente contenido que muestra una respuesta HTTP típica:
+
+HTTP/1.1 200 OK
+Powered-By: PHP/5.5.7
+Vary: Accept-Encoding
+Content-Type: text/html; charset=utf-8
+ 
+<html>
+    <head><title>Contenido de la página HTML</title>
+</head>
+<body>
+    <h1>Contenido</h1>
+    <p>Lorem ipsum dolor sit amet...</p>
+    ...
+
+ 
+Las respuestas HTTP siempre envían primero las cabeceras y después el propio contenido de la página. Si en tus scripts utilizas print o echo, PHP comienza a enviar la información al usuario y para ello obtiene todas las cabeceras HTTP establecidas hasta ese momento por el script.
+
+De esta manera, si después se vuelve a llamar a alguna función que añade o modifica las cabeceras HTTP, se producirá un error. El motivo es que las cabeceras HTTP ya se enviaron y por tanto, no es posible ni modificarlas ni enviar más cabeceras HTTP.
+
+Las principales causas de este error
+1. Código HTML antes del código PHP
+
+<!DOCTYPE html>
+<?php
+    // Aquí ya no puedes modificar las cabeceras
+2. Espacios en blanco normales
+
+<?php
+// ERROR: ¡hay 1 espacio en blanco por delante de la etiqueta de apertura!
+3. Espacios en blanco invisibles
+
+Uno de los errores típicos más difíciles de descubrir se produce por el denominado BOM de UTF-8. Básicamente, si al guardas tus scripts de PHP los codificas en formato UTF-8, es posible que tu editor añada una secuencia de caracteres invisibles llamada Byte-Order-Mark (la secuencia en hexadecimal es EF BB BF).
+
+El problema es que algunos editores no muestran esta secuencia de caracteres. Por eso muchas veces no se muestra al abrir el archivo y es muy difícil darse cuenta del error. La solución consiste en configurar bien tu editor para que no añada el BOM al guardar los archivos en formato UTF-8.
+
+4. Espacios en blanco después de la etiqueta de cierre
+
+Si añades un espacio en blanco después de la etiqueta de cierre ?>, también se puede producir este error. La solución más sencilla consiste en no añadir nunca la última etiqueta de cierre ?> en los archivos PHP. Si ves el código fuente de cualquier aplicación PHP profesional, verás que nunca añaden esta última etiqueta.
+
+5. Errores producidos con anterioridad
+
+Si se produce algún mensaje de error o aviso durante la ejecución del script, también se puede producir este problema. Para evitarlo, puedes hacer uso de la función isset() y también puedes silenciar los errores añadiendo el operador @ por delante del nombre de la función.
+
+Soluciones alternativas
+Activando el output buffering
+
+PHP permite guardar todos los contenidos a medida que se genera la página para enviarlos después todos a la vez al usuario. Esta técnica se llama output buffering y deberías utilizarla siempre porque además mejora el rendimiento de la aplicación. Para ello, configura la opción output_buffering en tu archivo de configuración php.ini.
+
+Comprobando si se han enviado las cabeceras HTTP
+
+Si no puedes aplicar ninguna de las soluciones anteriores, tendrás que modificar el código de tus scripts para comprobar si las cabeceras HTTP ya se han enviado antes de intentar añadir una nueva cabecera. Para ello, utiliza la función headers_sent():
+
+if (headers_sent()) {
+    // las cabeceras ya se han enviado, no intentar añadir una nueva
+}
+else {
+    // es posible añadir nuevas cabeceras HTTP
+}
+Estás leyendo una traducción autorizada de la respuesta proporcionada en StackOverflow.
+
+@librosweb
+
+28 abril 2014 15:36
+#2
+Gracias, muchas gracias. Me ha servido bastante. Llevaba todo el día buscando el error en mis códigos. Todo estaba bien, pero por detalles como el espaciado antes de la apertura <?php había suprimido mi desempeño.
+
+Descansé un poco y volví a retomar la idea. Como estaba más calmado encontré tu ayuda en este página en serio GRACIAS y suerte.
+
+
+@tyson_2808
+
+16 octubre 2015 05:06
+#3
+Hola, si el fallo siguiera dando, podéis hacer uso de esto:
+
+// antes de cualquier línea de código html o php:
+ 
+<?php
+ob_start();
+?>
+// al final del documento:
+ 
+<?php
+ob_end_flush();
+?>
+Con esto, se pueden enviar los headers en cualquier lugar del documento.
+
+
+@follanuncios
+
+28 noviembre 2015 16:45
+#4
+Estaba mil preocupada por ese error y con su ayuda lo pude solucionar!!! mil gracias :D
+
+
+@Melissa_urzua
+
+13 febrero 2016 14:47
+#5
+Muchas gracias por sus respuestas a mi también me ayudo mucho fue simple la causa fue algo no intencionado, pues tenía espacios en blanco antes o después del <?php o ?> y los eliminé.
+
+
+@adrianeso1977
+
+21 febrero 2016 18:39
+#6
+Gracias por la Info
+
+
+@zenenperaza
+
+18 abril 2016 07:38
+#7
+Buenas, expongo mi problema aquí a ver si alguien me puede ayudar. Yo estoy trabajando en prestashop en vivo ( http://pruebas.ganeshgrow.es/index.php?live_configurator_token=2fe053c762f45594ba3cea8a7b27a0d9&id_employee=1&id_shop=1 ) y me ha saltado este error.
+
+Pero de los archivos en los cuales me esta dando el error: /homepages/1/d535128747/htdocs/GGSP/classes/Validate.php:1 /homepages/1/d535128747/htdocs/GGSP/classes/controller/AdminController.php /homepages/1/d535128747/htdocs/GGSP/classes/controller/FrontController.php 
+
+Yo no he modificado ninguno de ellos, como para por ejemplo poner un espacio en la etiqueta <?php o demás posibles soluciones que vienen aquí.
+
+En todo los fallos pone "headers already sent by (output started at /homepages/1/d535128747/htdocs/GGSP/classes/Validate.php:1)" digo yo que el fallo estará en ese fichero no? pero, donde? porque el fichero tiene 1100 lineas y no tengo ni idea de lo que puede ser.
+
+He buscado la palabra header con Control+F y solo hay 1 palabra header, en el siguiente trozo de codigo:
+
+public static function isModuleUrl($url, &$errors)
+    {
+        if (!$url || $url == 'http://') {
+            $errors[] = Tools::displayError('Please specify module URL');
+        } elseif (substr($url, -4) != '.tar' && substr($url, -4) != '.zip' && substr($url, -4) != '.tgz' && substr($url, -7) != '.tar.gz') {
+            $errors[] = Tools::displayError('Unknown archive type');
+        } else {
+            if ((strpos($url, 'http')) === false) {
+                $url = 'http://'.$url;
+            }
+            if (!is_array(@get_headers($url))) {
+                $errors[] = Tools::displayError('Invalid URL');
+            }
+        }
+        if (!count($errors)) {
+            return true;
+        }
+        return false;
+    }
+
+Esta ahí el error? o en que fichero me tengo que meter para buscarle? Por favor que alguien me ayude.
+
+
+@RaulSuances
+
+9 mayo 2016 13:12
+#8
+@RaulSuances seguramente lo que te está pasando es que se produce un error en la aplicación, ese error se muestra por pantalla (alguien hace un echo o print o lo que sea) y entonces se produce el segundo error de tipo "headers already sent".
+
+El problema muy resumido es: si alguien escribe por pantalla, entonces ya nadie puede tocar las cabeceras HTTP de esa petición. El mensaje de error que ves es "ya no puedes modificar las cabeceras" ... pero la causa real del error es que alguien ha escrito antes (seguramente porque se ha producido un error y se quiere mostrar ese mensaje de error por pantalla). Prueba a desactivar que los mensajes de error se vean en pantalla.
+
+Por cierto, es mejor que copies y pegues tu comentario en una nueva pregunta del foro porque esta discusión es muy vieja y ya nadie va a ver tus comentarios. Saludos.
+
+
+@javiereguiluz
+
+9 mayo 2016 13:30
+#9
+@javiereguiluz gracias por tu respuesta.
+
+http://librosweb.es/foro/pregunta/1157/error-warning-cannot-modify-header-information-headers-already-sent-by-output-started-at-homepages-1-d535128747-htdocs-ggsp-classes-validatephp/
+
+ya he puesto mi problema en otro tema a ver si alguien me ayuda.
+
+He visto por Internet que puede ser problema de espacios en blanco o caracteres invisibles, pero yo no he visto nada de eso en el fichero.
+
+No entiendo porque me salta este error es el fichero si yo no había modificado nada de el antes de que saltase el error:(
+
+Espero poder solucionarlo y compartir mi solución, porque me esta volviendo loco.
+
+
+@RaulSuances
+
+9 mayo 2016 17:04
+#10
+Gracias @javiereguiluz ,te comparto como lo he solucionado.
+
+SOLUCIONADO Igual llevo mas de 5 horas con este problema pero lo acabo de solucionar y os dejo por aquí mi solución por si le vale a alguien. Que gracias a este problema que me ha vuelto loco he comprendido que importante es compartir la información en Internet para todos. 
+
+A mi me daba error en el fichero Validate.php en la linea 1, y por lo que leí en Internet todos decían que podía se problema de un espacio en blanco o un carácter invisible. Pero yo no veía nada de eso en mi fichero. 
+
+Lo que hice fue gracias a una persona que lo puso por Internet, coger ese fichero y guardarlo con codificación ANSI y BOOM!! se solucionó el problema
+
+
+@RaulSuances
+
+9 mayo 2016 17:30
+#11
+Gracias, @follanuncios!
+
+Tu solución ha dado cierto para mí!
+
+
+@patriciadaibes
+
+11 junio 2016 23:55
+#12
+Muy buen post me sirvió para reparar el error!
+
+Muchas gracias! :-D
+
+
+@carrillop91
+
+15 junio 2016 21:23
+#13
+Gracias mil! Mi problema fue al pasar de local a servidor. Modifiqué el archivo config.php con dreamweaver y simplemente lo guardé y lo subí. Lo he vuelto a abrir y, seleccionando 'guardar como', me ha dado la opción de desactivar la pestaña 'incluir firma Unicode (BOM)' Y todo arreglado! P.D.: Mi página funcionaba pero no me dejaba acceder a administrar y me daba error en una línea del pluggable.php
+
+
+@en_piezas
+
+29 junio 2016 11:34
+#14
+Muchas Gracias por la información me fue muy util. Agradecido
+
+
+@MAlejandroA19
+
+6 agosto 2016 21:23
+#15
+Otro metodo que hice fue en el htaccess agregar esto: php_value display_errors Off php_flag output_buffering On
+
+luego el archivo php desactivar/quitar la firma unicode(BOOM) lo hice gracias a dreamweaver Propiedades de la pagina - titulo/codificación.
+
+
+@Joel_Dante
+
+28 septiembre 2016 19:35
+#16
+Ami me sirvio esto: !
+
+// antes de cualquier línea de código html o php:
+ 
+<?php
+ob_start();
+?>
+// al final del documento:
+ 
+<?php
+ob_end_flush();
+?>
+
+@ZonaLeRoS
+
+23 octubre 2016 06:25
+#17
+A mi me funcionó abrir wp-config.php, eliminar los 2 espacios en blanco que estan hasta abajo de todo el código, guardé el archivo con codificación ANSI y se solucionó el problema Saludos!
+
+
+ 
+
+@earreguinflores
+
+15 junio 2017 04:06
+#18
+muchas gracias @follanuncios tu solucion ha sido un exito!!!
+
+
+@MIBcampus
+
+9 enero 2018 18:19
+#19
+gracias amigos me ayudaraon mucho con esta parte del codigo , muchas gracias
+
+
+@TomyMoD
+
+20 febrero 2018 16:39
+
+@librosweb
+
+© 2006-2019 uniwebsidad 
+Contacto Aviso legal
+Recursos sobre:
+css
+diseño
+drupal
+JavaScript
+PHP
+programación
+Python
+ruby
+Symfony
+4.544 días online
+Este sitio utiliza cookies propias y de terceros. Sigue navegando para aceptar nuestra Política de Cookies o ajusta tu configuración. ACEPTAR

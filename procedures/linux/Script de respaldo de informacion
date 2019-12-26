@@ -1,0 +1,35 @@
+Script de respaldo de informacion.
+
+
+1) Lista de directorios a respaldar de forma manual (una sola vez):
+1.1) /Users/edgardoromero-masis/SOFAD Dropbox/Edgardo Romero Masis/2018
+1.2) /Users/edgardoromero-masis/SOFAD Dropbox/Edgardo Romero Masis/2019
+
+
+2) Lista de directorios a respaldar de forma automatizada (con script diario):
+2.1) /Users/edgardoromero-masis/SOFAD Dropbox/Edgardo Romero Masis/2019
+cd /Users/edgardoromero-masis/SOFAD\ Dropbox/Edgardo\ Romero\ Masis/2019/
+
+2.2) /Users/edgardoromero-masis/SOFAD Dropbox/Edgardo Romero Masis/Procedures
+cd /Users/edgardoromero-masis/SOFAD\ Dropbox/Edgardo\ Romero\ Masis/Procedures/
+
+2.3) /Users/edgardoromero-masis/SOFAD Dropbox/Edgardo Romero Masis/dev/dev.projetm.ca
+cd /Users/edgardoromero-masis/SOFAD\ Dropbox/Edgardo\ Romero\ Masis/dev/dev.projetm.ca/
+
+
+3) Ubicacion y scripts que hacen los respaldos:
+3.1) /Users/edgardoromero-masis/SOFAD Dropbox/Edgardo Romero Masis/dev/scripts
+cd /Users/edgardoromero-masis/SOFAD\ Dropbox/Edgardo\ Romero\ Masis/dev/scripts
+
+3.2) dailybackup.sh 
+
+
+TinyMCE 5
+
+4) Directorio destino de scripts que hacen los respaldos:
+/Users/edgardoromero-masis/OneDrive/backup/automatic/dev/dev.projetm.ca/
+
+
+W3Schools Online Code Editor
+
+

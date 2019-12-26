@@ -1,0 +1,6 @@
+Descargar un sitio web o hacer una copia local de un sitio web (formato html)
+http://www.httrack.com/
+
+brew install httrack
+comando via consola para copiar un sitio:
+httrack http://localhost:8085

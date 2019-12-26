@@ -1,0 +1,3 @@
+
+# https://programacion.net/articulo/como_exportar_datos_a_un_fichero_csv_mediante_php_y_mysql_1887
+# pero este funciono mejor http://www.forosdelweb.com/f4/como-abrir-ventana-nueva-pequena-pinchar-enlace-1035579/

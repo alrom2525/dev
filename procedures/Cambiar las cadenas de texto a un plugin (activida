@@ -1,0 +1,54 @@
+Cambiar las cadenas de texto a un plugin (actividad o recurso) en Moodle:
+
+En este ejemplo se traduciran al Frances todas las cadenas de texto del modulo simplecertificate que por defecto se encuentran en Inglés 
+
+Ruta del modulo:  ../moodle/mod/simplecertificate/
+
+Vista del directorio lang del modulo simple certificate:
+lang
+├── en
+│   └── simplecertificate.php
+└── pt_br
+    └── simplecertificate.php
+
+1. Dentro del Modulo hacer el directorio del lenguaje que necesitamos, colocar prefijo segun idioma; en este caso "fr"
+
+2. Hacer una copia del archivo ../moodle/mod/simplecertificate/lang/en/simplecertificate.php y copiarlo dentro de la carpeta recien creada /mod/simplecertificate/lang/fr
+quedara asi:
+├── lang
+│   ├── en
+│   │   └── simplecertificate.php
+│   ├── fr
+│   │   └── simplecertificate.php
+│   └── pt_br
+│       └── simplecertificate.php
+
+3. Editar el archivo ../moodle/mod/simplecertificate/lang/fr/simplecertificate.php con la traduccion deseada en todas las variables tipo $string['X']
+
+defined('MOODLE_INTERNAL') || die();
+
+$string['modulename'] = 'Attestation';
+$string['modulenameplural'] = 'Attestations';
+$string['pluginname'] = 'Attestation';
+$string['viewcertificateviews'] = 'Voir les {$a} attestations délivrés';
+$string['summaryofattempts'] = 'Résumé des attestations reçues précédemment';
+
+
+4. Instalar el modulo con la nueva traduccion
+
+5. En la carpeta ../moodledata/lang/fr (conocida como moodledata) editar el archivo del modulo con el que estamos trabajando (simplecertificate.php) y luego reemplazar su contenido con el archivo que traduciomos es decir todas las variables tipo $string['X']
+
+Origen:		../moodle/mod/simplecertificate/lang/fr/simplecertificate.php
+Destino: 	../moodledata/lang/fr/simplecertificate.php
+
+├── lang
+│   ├── en
+│   │   └── simplecertificate.php
+│   ├── fr
+│   │   └── simplecertificate.php
+
+
+6. Ahora necesitamos que Moodle actualize todas las cadenas de texto que acabamos de modificar, para ello 
+Ingresar a Moodle (web), luego ir a la opcion: Administración del sitio / Desarrollo / Purgar todas las cachés
+presionar el boton que dice "Purgar todas las cachés"
+y con esto ya veremos los cambios en nuestro modulo.

@@ -1,0 +1,6 @@
+Moodle Lento
+http://www.vis-hosting.com/?p=b&a=moodle-lento
+
+Causas en Moodle
+La causa más común es dejar activo el checkbox de "Modo de diseño de temas" (Administración del sitio / ► Apariencia / ► Temas / ► Ajustes de temas). Este checkbox hace que cada vez que se carga Moodle, se vuelvan a generar los archivos que controlan su aspecto (CSS). Aunque esto está bien para pruebas durante la personalización de la apariencia, dejarlo activo causará una gran lentitud en Moodle.
+

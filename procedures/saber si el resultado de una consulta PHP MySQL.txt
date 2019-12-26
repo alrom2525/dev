@@ -1,0 +1,6 @@
+saber si el resultado de una consulta PHP MySQL tiene registros
+
+$query= mysqli_query($__connexion,$sql);
+if (mysqli_num_rows($query)>=1) {
+
+} // if (mysqli_num_rows($query)>=1) {

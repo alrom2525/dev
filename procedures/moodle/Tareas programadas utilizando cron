@@ -1,0 +1,30 @@
+Tareas programadas utilizando cron
+https://www.youtube.com/watch?v=OlUxM83n-4s
+
+Ejecutar un archivo PHP desde la terminal
+/usr/bin/php archivo.php
+
+
+tambien es posible usar solo la palabra php: (ya que la variable de entorno debe estar configurada)
+php admin/cli/mysql_collation.php --collation=utf8mb4_unicode_ci
+
+
+
+
+/usr/bin/php7.1 /var/www/dev.ldap-moodle.sofad.qc.ca/www/admin/cli/cron.php
+
+
+
+Example:
+\$sudo -u www-data /usr/bin/php admin/cli/cron.php
+";
+
+    echo $help;
+    die;
+}
+
+
+
+/usr/bin/php7.1 /var/www/dev.ldap-moodle.sofad.qc.ca/www/auth/ldap/cli/sync_users.php 
+
+/usr/bin/php7.1 /var/www/dev.ldap-moodle.sofad.qc.ca/www/admin/cli/cron.php

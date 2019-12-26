@@ -1,0 +1,23 @@
+
+
+Saber cual de los botones html ha presionado en un formulario utilizando POST
+
+https://www.lawebdelprogramador.com/foros/PHP/1402132-Saber-que-boton-submit-se-ha-pulsado-desde-un-formulario.html
+
+<?php
+if(isset($_POST["btnLogA"]))
+    die("Boton log A");
+else if(isset($_POST["btnLogC"]))
+    die("Boton log C");
+else
+    $msg = "Sin Boton";
+ 
+?>
+
+<?php
+     if (isset($_POST['btnLogA'])) {
+          Echo "Se ha pulsado el botón aceptar";
+     } else if (isset($_POST['btnLogC'])) {
+          Echo "Se ha pulsado el botón cancelar";
+     }
+?>
