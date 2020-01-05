@@ -1,0 +1,9 @@
+Pasos para crear una aplicacion en Laravel:
+1. Crear el proyecto
+2. Configurar permisos
+3. Agregar bootstrap
+4. Agregar authenticacion
+	php artisan ui:auth 
+
+1:00
+https://laravel.com/docs/6.x/frontend

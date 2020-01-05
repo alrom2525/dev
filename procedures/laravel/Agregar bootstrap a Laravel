@@ -1,0 +1,20 @@
+Agregar bootstrap a Laravel
+https://laravel.com/docs/6.x/frontend
+
+1. The Bootstrap and Vue scaffolding provided by Laravel is located in the laravel/ui Composer package, which may be installed using Composer:
+
+$ composer require laravel/ui --dev
+$ npm install && npm run dev
+
+2. Once the laravel/ui package has been installed, you may install the frontend scaffolding using the ui Artisan command:
+
+// Generate basic scaffolding...
+$ php artisan ui bootstrap
+$ npm install && npm run dev
+
+
+
+All of the JavaScript dependencies required by your application can be found in the package.json file in the project's root directory. 
+
+
+This file is similar to a composer.json file except it specifies JavaScript dependencies instead of PHP dependencies. 

@@ -1,0 +1,46 @@
+<?php
+
+CODE: Complete Code For This Series
+https://github.com/bradtraversy/lsapp
+
+How to?
+
+-> Create a login system:
+	-->Laravel 5
+	$ php artisan make:auth 
+
+	-->Laravel 6
+	$ composer require laravel/ui
+	$ php artisan ui:auth
+
+->When we create a post we want to insert the user ID as a field
+	$ php artisan make:migration add_user_id_to_post
+
+	file database\migrations\2020_01_01_010118_add_user_id_to_post.php
+	
+	$ php artisan migrate
+
+->Rollback migration
+	$php artisan migrate rollbak
+
+->Add a relationship in the model
+	Example: the user can have more than one post
+	write this at the User model:
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
+    write this at the Post model:
+	public function user()
+    { return $this->belongsTo('App\User'); }
+
+->Add a relationship
+
+->Create a link to the storage through public folder
+  in order to upload the images
+ $php artisan storage:link
+ 
+ Result: The [public/storage] directory has been linked.
+
+->Delete all tables and recreates all tables:
+$php artisan migrate:fresh
