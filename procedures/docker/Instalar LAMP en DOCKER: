@@ -1,0 +1,50 @@
+Instalar LAMP en DOCKER basado en la imagen:
+https://hub.docker.com/r/mattrayner/lamp
+
+sudo docker run -d -p "8081:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1604
+sudo docker run -p "8081:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1604
+
+sudo docker exec -it  <containerName>
+apt-get update
+apt-get install net-tools
+apt-get install nmap
+
+Cambiar el password de MySQL (dafosdafos)
+mysql_secure_installation
+
+Crear el archivo  vi /var/www/html/info.php
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Php info</title>
+</head>
+<body>
+<?php 
+	echo phpinfo();
+?>
+</body>
+
+
+Comprobar que esta ejecutandose Apache2 en el navegador web: http://10.0.8.5:8081/  http://10.0.8.5:8081/info.php
+
+sudo apt install php libapache2-mod-php
+
+apt install graphviz aspell ghostscript clamav php7.3-pspell php7.3-curl php7.3-gd php7.3-intl php7.3-mysql php7.3-xml php7.3-xmlrpc php7.3-ldap php7.3-zip php7.3-soap php7.3-mbstring
+
+service apache2 restart
+apt install git
+
+Docker moodle 3.6
+moreauf
+moreauf@sofad.qc.ca
+yescarrier carriers@sofad.qc.ca
+mot de passe: Dafosdafos-1
+
+sudo docker run -d -p "8081:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1604
+
+
+
+
+
+
+

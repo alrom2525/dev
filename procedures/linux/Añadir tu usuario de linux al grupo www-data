@@ -12,4 +12,3 @@ sudo usermod -a -G www-data edgardo
 sudo find /var/www/dev.freecodegram.com/freeCodeGram/storage
  -type d -exec chmod 2777 {} \;
 sudo find /var/www/dev.freecodegram.com/freeCodeGram/storage -type f -exec chmod ug+rw {} \;
-

@@ -1,0 +1,12 @@
+CFDISK: PARTICIONANDO EL DISCO POR LÍNEA DE COMANDOS
+
+https://juncotic.com/cfdisk-particionando-el-disco-por-cli/
+
+sudo cfdisk
+  df -h
+sudo cfdisk
+sudo resize2fs /dev/sda1
+sudo shutdown -r now
+
+sudo resize2fs /dev/sda1
+ df -h

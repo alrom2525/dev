@@ -1,0 +1,14 @@
+How do I adjust maximum file size for uploads?
+
+Newer versions of PHP
+adam_ commented 3 years ago
+I ran into this same problem with Drupal 8 and the solution was different for my version of PHP. For newer versions of PHP, editing the php.ini may not work (I'm using PHP7).
+
+These steps worked for me:
+1. Look at the output of phpinfo(), towards the top there is a section called 'Scan this dir for additional .ini'. PHP will automatically look in this folder and use all the files in it with a .ini extension.
+2. Add a .ini file with any name, I used site-name.ini
+3. Add the new rules (in my case) ..
+
+upload_max_filesize = 256M
+post_max_size = 256M
+4. Restart the webserver and recheck phpinfo() to see if your changes took.
