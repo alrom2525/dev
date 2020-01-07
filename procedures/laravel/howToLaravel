@@ -23,6 +23,9 @@ How to?
 ->Rollback migration
 	$php artisan migrate rollbak
 
+->Obtaing help to make a model
+	$ php artisan help make:model
+
 ->Add a relationship in the model
 	Example: the user can have more than one post
 	write this at the User model:
@@ -44,3 +47,84 @@ How to?
 
 ->Delete all tables and recreates all tables:
 $php artisan migrate:fresh
+
+
+->Naming convention
+Singular: Model (1 row in our table)
+	is going to be the singular Example: Service (UPPER CASE)
+Singular: Controller name MUST start with a noun (in singular form) followed by the word “Controller”.
+	Ex: ArticleController
+
+Plural: Table (all rows in our table)
+	is going to be be the plural Example: services (lower case)
+
+->Create a migration file 
+$php artisan make:migration creates_services_table --create services  
+
+->Run the database migrations
+$php artisan migrate
+
+-> Echoing: dd() vs var_dump() vs print_r()
+dd($variable);
+
+->To use the model
+in this case Service is the model
+$services = \App\Service::all();
+
+->Create a controller
+$ php artisan make:controller <name'sController>
+Example 1.1: $ php artisan make:controller ServiceController
+
+Example 1.2: to create a model including his controller and his migration:
+	$ php artisan make:model Customer -c -m  
+or:
+	$ php artisan make:model Customer -cm 
+	
+	Model created successfully.
+	Created Migration: 2020_01_07_093505_create_customers_table
+	Controller created successfully.
+
+
+->Inside a form made by Laravel allways needs to add the sentence: @csrf
+in order to be secure our application
+else laravel generates the following error:  419 | Page Expired
+
+->Obtaing the value after a form submit
+	with the command: request('<name of html element>')
+
+->Go to back
+	return redirect()->back();
+
+->To allow mass assignment on one table
+1.1) in the model, we need to declare which column will be fillable 
+with the vartype protected.
+Example:
+	class Service extends Model
+	{
+	    // To allow mass assignment on [App\Service]
+	    // we need to declare which column will be fillable
+	    protected $fillable = ['name'];
+	}
+
+2.2) other option is to specifies in the model, the type protected $guarded,
+that set to off the mass assignment protection.
+Example: 
+	class Service extends Model
+	{    
+	    // Second method: guarded by default saves every single field
+	    protected $guarded = [];
+	}
+
+2.1) in the controller we need to write the method \App\Service::create($data);
+Example:
+		$data = request()->validate([ 
+			'name' => 'required|min:5|max:10'
+		]);
+
+		// Allow mass assignment on [App\Service]
+		\App\Service::create($data);
+
+->persist the value data after post method validation in a form element as input text
+		<input type="text" name="name" autocomplete="off" value="{{ old('name') }}">
+
+
