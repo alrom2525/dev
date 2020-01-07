@@ -44,3 +44,15 @@ How to?
 
 ->Delete all tables and recreates all tables:
 $php artisan migrate:fresh
+
+
+->Echoing: dd() vs var_dump() vs print_r()
+
+One of the most popular way of debugging in PHP still remains the same – showing variables in the browser, with hope to find what the error is. Laravel has a specific short helper function for showing variables – dd() – stands for “Dump and Die”, but it’s not always convenient. What are other options?
+
+First, what is the problem with dd()? Well, let’s say we want to get all rows from DB table and dump them:
+
+$methods = PaymentMethod::all();
+dd($methods);
+
+We would see something like this:

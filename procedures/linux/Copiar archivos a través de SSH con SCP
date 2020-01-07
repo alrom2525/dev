@@ -37,16 +37,3 @@ e) LIMITAR EL ANCHO DE BANDA
 Para no sobrecargar demasiado el servidor, es posible limitar el ancho de banda de la transferencia. Con el parámetro -l podemos indicar la velocidad (en Kbps).
 
 $ scp -l limite usuario@dominio.com:/home/usuario/archivo.txt Documentos 
-
-En Nunavik, el termómetro marca el descenso de las temperaturas entre −20 °C durante el día y -55 °C por la noche.2​
-
-Hoy intente ingresar a la banca en linea, observe que han cambiado el sitio, y para hacer login me pide una confirmacion a un celular.
-
-El problema es que me encuentro en el exterior y ya no poseo el celular que registre.
-
-Pueden ayudarme por favor?
-
-
-
-
-

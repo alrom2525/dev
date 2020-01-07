@@ -5,5 +5,5 @@ Pasos para crear una aplicacion en Laravel:
 4. Agregar authenticacion
 	php artisan ui:auth 
 
-1:00
+1:09:33
 https://laravel.com/docs/6.x/frontend
