@@ -56,3 +56,6 @@ $methods = PaymentMethod::all();
 dd($methods);
 
 We would see something like this:
+
+->Create a model
+$ php artisan make:model Profile -m

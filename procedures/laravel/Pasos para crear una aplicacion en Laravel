@@ -4,6 +4,7 @@ Pasos para crear una aplicacion en Laravel:
 3. Agregar bootstrap
 4. Agregar authenticacion
 	php artisan ui:auth 
-
-1:09:33
+  
+1:24:00 acaba de ingresar el registro de profile en tinker
+y probo algunos comandos para verificar las relaciones.
 https://laravel.com/docs/6.x/frontend
