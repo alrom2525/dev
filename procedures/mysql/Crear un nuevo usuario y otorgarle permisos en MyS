@@ -3,10 +3,10 @@ https://www.digitalocean.com/community/tutorials/crear-un-nuevo-usuario-y-otorga
 use dev_cslaval;
 
 a) CREATE USER 'nombre_usuario'@'localhost' IDENTIFIED BY 'tu_contrasena';
-CREATE USER 'dev_cslaval'@'localhost' IDENTIFIED BY 'C0mmi_L4v4l';
+CREATE USER 'administrator'@'localhost' IDENTIFIED BY '123456';
 
 b) GRANT ALL PRIVILEGES ON * . * TO 'nombre_usuario'@'localhost';
-GRANT ALL PRIVILEGES ON dev_cslaval.* TO 'dev_cslaval'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON administrator.* TO 'administrator'@'localhost' WITH GRANT OPTION;
 
 GRANT ALL PRIVILEGES ON vbox_mocn.* TO 'vbox_mocn'@'localhost' WITH GRANT OPTION;
 

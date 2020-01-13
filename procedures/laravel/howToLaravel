@@ -4,10 +4,17 @@ CODE: Complete Code For This Series
 https://github.com/bradtraversy/lsapp
 
 How to?
+Install laravel and a new project?
+https://laravel.com/docs/6.x/installation
+Via composer:
+composer create-project --prefer-dist laravel/laravel <My project>
+composer create-project --prefer-dist laravel/laravel dev.survey.com
+composer create-project --prefer-dist laravel/laravel dev.survey.com "5.8.*"
+
 
 -> Create a login system:
 	-->Laravel 5
-	$ php artisan make:auth 
+	$ php artisan make:auth
 
 	-->Laravel 6
 	$ composer require laravel/ui
@@ -19,13 +26,17 @@ How to?
 	file database\migrations\2020_01_01_010118_add_user_id_to_post.php
 	
 	$ php artisan migrate
+	
+->Truncate all the tables and migrate again
+	$ php artisan migrate:fresh
 
 ->Rollback migration
 	$php artisan migrate rollbak
 
 ->Obtaing help to make a model
 	$ php artisan help make:model
-
+	$ php artisan # To see all available commands
+	$ php artisan help preset # To see just the preset command
 ->Add a relationship in the model
 	Example: the user can have more than one post
 	write this at the User model:
@@ -38,7 +49,9 @@ How to?
     { return $this->belongsTo('App\User'); }
 
 ->Add a relationship
-
+	Example: https://www.youtube.com/watch?v=a5STZK4ZQz0&list=PLpzy7FIRqpGC8Jk6gyWdSVdxCVXZAsenQ&index=17
+	min 15:57
+		
 ->Create a link to the storage through public folder
   in order to upload the images
  $php artisan storage:link
@@ -127,4 +140,41 @@ Example:
 ->persist the value data after post method validation in a form element as input text
 		<input type="text" name="name" autocomplete="off" value="{{ old('name') }}">
 
+->Search a register and if doesn't exist that show the error 404 | Not found
+	Example: $customer = \App\Customer::findOrFail($customerid);
 
+->Find a record into the Controller
+
+    // Method 1: To avoid errors if the record doesn't exist 
+    // laravel going to show 404 | Not found
+    public function show(\App\Customer $customer) {
+    	return view('customer.show', compact('customer'));
+    }
+->Comandos tinker:
+	>>> $customers = \App\Customer::where('id',1)->get();
+	>>> $customers = \App\Customer::where('name','Iris Amanda')->get();
+	>>> $customers = \App\Customer::where('id',1)->first(); // Solo devuelve el primer registro
+
+	>>> $customer->active = 0		// Change a value
+	>>> $customer->save();			// Save
+
+->Sending emails
+	See the video: Laravel 6 Beginner - e14 - Sending Emails
+	https://www.youtube.com/watch?v=Ny-mloJuoAI&list=PLpzy7FIRqpGC8Jk6gyWdSVdxCVXZAsenQ&index=14
+
+$ php artisan help make:mail
+$ php artisan make:mail WelcomeMail -m emails.welcome
+
+Example:
+	use App\Mail\WelcomeMail;
+	use Illuminate\Support\Facades\Mail;
+
+	Route::get('/email', function () {
+		Mail::to('email@email.com')->send(new WelcomeMail());
+	    return new WelcomeMail();
+	});
+
+	Online tools:
+		a) https://mailtrap.io
+		b) https://www.mailgun.com/
+->In any controller, make the require login 
