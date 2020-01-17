@@ -177,4 +177,38 @@ Example:
 	Online tools:
 		a) https://mailtrap.io
 		b) https://www.mailgun.com/
-->In any controller, make the require login 
+->In any controller, make the require login
+
+->Validate a checkbox inside a form post method
+<input type="radio" name="responses[{{ $key }}][answer_id]" 
+                                        id="answer{{ $answer->id }}" class="mr-2" value="{{ $answer->id }}"
+                                        {{ (old('responses.' . $key . '.answer_id') == $answer->id) ? 'checked' : '' }}
+                                        >
+                                        {{ $answer->answer }}
+
+
+->Obtaing all records of one user?
+Example: get all the questionnaires of user
+	$questionnaires = aut()->user()->questionnaires;
+
+->Generate the easy full url to a particular resource as Model
+Example:
+a) into a view: 
+	<a href="{{ $questionnaire->path }}"> {{ $questionnaire->title }}</a>
+
+b) into the model:
+	class Questionnaire extends Model
+	{
+	    protected $guarded = [];
+
+	    public function path()
+	    {   
+	        return url('/questionnaires/' . $this->id);
+	    }
+	}
+ 
+c) adicional:
+ 	public function publicPath()
+    {   
+        return url('/surveys/' . $this->id . '-' . Str::slug($this->title));
+    }
