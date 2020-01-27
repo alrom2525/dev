@@ -36,4 +36,13 @@ Pasos para crear una aplicacion en Laravel:
 
 7. Ejecutar el comando migrate para crear las primeras tablas.
 
+<<<<<<< HEAD
 https://laravel.com/docs/6.x/frontend
+=======
+Laravel PHP Framework Tutorial - Full Course for Beginners (2019)
+https://www.youtube.com/watch?v=ImtZ5yENzgE&list=PLWKjhJtqVAbkoMsX4hgwxbJZW4aB0cbaB
+freeCodeCamp.org
+
+1:46:15 register.blade.php 
+https://laravel.com/docs/6.x/frontend 
+>>>>>>> 55d529e2fff38aeeb9902c586948471c53fee79d

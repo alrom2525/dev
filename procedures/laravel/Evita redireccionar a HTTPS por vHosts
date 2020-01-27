@@ -1,0 +1,4 @@
+Para que navegadores como Google Chrome y Firefox no redireccionen a HTTPS
+utilizar dominios .test ejemplo: compras.test
+
+No usar dominios como .app / .dev / .com etc.

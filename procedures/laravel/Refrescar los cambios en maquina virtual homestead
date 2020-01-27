@@ -1,0 +1,3 @@
+Refrescar los cambios en maquina virtual homestead
+
+vagrant up --provision

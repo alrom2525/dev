@@ -61,6 +61,29 @@ composer create-project --prefer-dist laravel/laravel dev.survey.com "5.8.*"
 ->Delete all tables and recreates all tables:
 $php artisan migrate:fresh
 
+<<<<<<< HEAD
+-> Save a field in a relationship
+In tinker:
+$user->push();  # save all my changes into the database
+
+->Echoing: dd() vs var_dump() vs print_r()
+
+One of the most popular way of debugging in PHP still remains the same – showing variables in the browser, with hope to find what the error is. Laravel has a specific short helper function for showing variables – dd() – stands for “Dump and Die”, but it’s not always convenient. What are other options?
+
+First, what is the problem with dd()? Well, let’s say we want to get all rows from DB table and dump them:
+
+$methods = PaymentMethod::all();
+dd($methods);
+
+We would see something like this:
+
+->Add a table in our database (create a model) 
+$ php artisan make:model Profile -m
+$ php artisan make:model Post -m
+
+-> If it can't to find brind the 404 error not found
+$user = User::findOrFail($user);
+=======
 
 ->Naming convention
 Singular: Model (1 row in our table)
@@ -212,3 +235,4 @@ c) adicional:
     {   
         return url('/surveys/' . $this->id . '-' . Str::slug($this->title));
     }
+>>>>>>> ee95eb1db21e03b223f8a3df89ac59bbbed2e9ef
