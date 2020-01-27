@@ -1,0 +1,44 @@
+Pasos para crear tablas en BBDD Laravel:
+	1. Crear un archivo migration
+	2. Configurar o editar ese archivo
+	3. Ejecutar el comando php artisan migrate
+
+1. Crear un archivo migration
+	Sintaxis:
+	$ php artisan make:migration <NamaFileMigrations create_tableNameInPlural_table> --create="tableNameInPlural" 
+	
+	Examples:
+	$ php artisan make:migration create_posts_table --create="posts"
+
+	$ php artisan make:migration add_user_id_to_post --table="posts"
+	
+2. Configurar o editar ese archivo
+	https://laravel.com/docs/6.x/migrations#columns (tipos de datos)
+	$table->bigIncrements('id');
+	$table->integer('user_id');
+    $table->decimal('amount', 8, 2);
+    $table->string('name');
+    $table->char('name', 100);
+    $table->string('email')->unique();
+    table->timestamp('email_verified_at')->nullable();
+    table->text('notes');
+    $table->string('email')->index();
+    $table->longText('payload');
+    $table->mediumText('body');
+	$table->boolean('confirmed');
+
+3. Ejecutar el comando php artisan migrate
+	$ php artisan migrate
+
+Comandos adicionales respecto a migrate:
+a) Vuelve un paso atras de una migracion (equivalente a un CTRL-Z deshacer)
+	$ php artisan migrate:rollback
+
+b) Hace un rollback de todo lo que se haya hecho y luego hace una nueva migracion, es decir elimina todas las tablas y las vuelve a crear.
+	$ php artisan migrate:refresh
+
+c) Verifica si un archivo migration se ha ejecutado o no, esto se usa en caso que nuestro poryecto sea muy grande y que ya no recordemos a exactitud si hemos ejecutado cierto archivo migration.
+	$ php artisan migrate:status
+
+d) Borra TODAS las tablas de la base de datos (equivalente drop table)
+	$ php artisan migrate:reset
