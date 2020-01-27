@@ -1,0 +1,27 @@
+<?php
+BDD RAW SQL insert edit delete
+
+
+-----------------------------------------------------------------------
+
+DB::insert("INSERT INTO table (fields) VALUES (parameters)",[values]);
+
+DB::insert("INSERT INTO articulos (articulo, precio, pais, seccion, observaciones) VALUES (?,?,?,?,?) ", ["Jarron", 15.2, "Ceramica", "Ganga"]);
+
+-----------------------------------------------------------------------
+
+$resultados = DB::select("SELECT * FROM articulos WHERE ID=?", [1]);
+
+foreach ($resultados as $articulo) {
+	return $articulo->articulo;
+}
+
+-----------------------------------------------------------------------
+
+DB::update("UPDATE articulos SET secccion='decoracion' WHERE id=?",[2]);
+
+-----------------------------------------------------------------------
+
+DB::delete("DELETE FROM articulos WHERE id=?",[2]);
+
+-----------------------------------------------------------------------
