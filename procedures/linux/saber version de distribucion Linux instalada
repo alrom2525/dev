@@ -1,0 +1,11 @@
+saber version de distribucion Linux instalada
+
+https://www.solvetic.com/tutoriales/article/5086-como-saber-version-de-distribucion-linux-instalada/
+
+$ hostnamectl 
+
+$ cat /proc/version
+
+$ cat /etc/issue
+
+$ lsb_release -a

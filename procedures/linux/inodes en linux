@@ -1,0 +1,12 @@
+inodes en linux
+
+$du -sh --inodes uploads/
+642K	uploads/
+
+$ find . | wc -l
+657,277
+
+/dev/sda1      
+	32,768,000 
+	 2,373,280 
+	30,394,720    8% /

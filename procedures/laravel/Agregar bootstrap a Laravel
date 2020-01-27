@@ -18,3 +18,7 @@ All of the JavaScript dependencies required by your application can be found in 
 
 
 This file is similar to a composer.json file except it specifies JavaScript dependencies instead of PHP dependencies. 
+
+hay que descargar bootstrap y guardar las carpetas css y js (de la version dist)
+bajo la carpeta public
+<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">

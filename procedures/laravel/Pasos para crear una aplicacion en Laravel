@@ -1,9 +1,39 @@
 Pasos para crear una aplicacion en Laravel:
 1. Crear el proyecto
-2. Configurar permisos
-3. Agregar bootstrap
-4. Agregar authenticacion
-	php artisan ui:auth 
+	composer create-project laravel/laravel myProject
+	
+	composer create-project laravel/laravel dev.stepform.com
 
-1:00
+2. Configurar permisos
+	https://laravel.com/docs/6.x/installation#configuration
+	Directories within the storage and the bootstrap/cache directories should be writable by your web server
+	Dev environment:
+	sudo chmod 777 -R storage/
+	sudo chmod 777 -R bootstrap/cache/
+	
+	Si es un proyecto para VBox, entonces en este punto hacer: 
+		2.1 Ingresar al directorio del proyecto
+			$ cd [proyectoLaravel] 
+		2.2 Mover el directorio vendor/ a un directorio de nivel superior
+			$ sudo mv vendor/ ../
+		2.3 Crear la conexion sftp en Sublime Text (1 min)
+		2.4 Mover nuevamente el directorio vendor a su posicion original
+			$ sudo mv ../vendor/ .
+
+3. Agregar bootstrap
+	$ composer require laravel/ui --dev
+
+	// Generate basic scaffolding...
+	$ php artisan ui bootstrap
+	$ npm install && npm run dev
+
+4. Agregar authenticacion
+	$ php artisan ui:auth 
+
+5. Configurar el archivo .env
+
+6. Crear la base de datos
+
+7. Ejecutar el comando migrate para crear las primeras tablas.
+
 https://laravel.com/docs/6.x/frontend

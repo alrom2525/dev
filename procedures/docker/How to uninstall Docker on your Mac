@@ -1,0 +1,56 @@
+How to uninstall Docker on your Mac
+
+https://nektony.com/how-to/uninstall-docker-mac
+
+Nektony
+Products
+Store
+Downloads
+Blog
+Support
+ 
+How to uninstall Docker on your Mac
+You are here:HomeHow toHow to uninstall Docker on your Mac
+Docker icon
+Some Mac users face a lack of free space on their computers and need to uninstall unused apps in order to free up disk space. The Docker for macOS occupies 1.2 GB. If you need to get rid of this app, follow this guide on how to fully and correctly uninstall Docker on Mac.
+
+Contents:
+Remove Docker manually.
+Uninstall Docker easily.
+Remove Docker Manually
+Open the Applications folder in Finder → scroll and select Docker → make a right click → in the context menu select Move to Trash.
+
+
+But this is not the complete removal of Docker from Mac. Actually, every application creates support files on a computer so that all functions work properly. Somehow these files penetrate deeply into the system folders. That’s why simple moving the Docker application into Trash is not enough for a total deletion from the computer.
+
+Application support files are usually stored in the Library folder. As this system Library folder keeps important data, by default it is hidden from users.
+
+To open the Library folder, you have to open the Finder window and in a Menu Bar click on Go Go to Folder.
+Mac Library folder
+In the search field that appears, type ~/Library and click Go.
+get library
+Now you have access to the Library folder. Find there the Application Scripts folder, scroll and select the “com.docker.helper” folder, make a right click and move it to Trash.
+
+Then check the Caches folder and delete the “com.docker.docker” folder from there.
+
+Finally, to clean up all remains, that were created by Docker, delete all containers as well. Open the Containers folder in the Library folder, find “com.docker.docker” as well as “com.docker.helper,” and delete them.
+
+Uninstall Docker Using App Cleaner & Uninstaller
+Fortunately, you can use an app, which removes applications with all its remains automatically. The program is called  App Cleaner & Uninstaller and you can download it using this link. Here is the second way to uninstall Docker for Mac:
+
+Launch App Cleaner.
+
+Select Docker from the list of applications. All system files and folders related to this app will also be selected. Click the Remove button.
+
+In the confirmation window, preview the files and confirm the removal by clicking the Remove button.
+
+Empty the Trash for complete removal of Docker from your Mac.
+What’s interesting is that App Cleaner & Uninstaller shows that Docker occupies 3.65 GB, while the executable file is only 1.20 GB. This means that you may have gigabytes of service files related to Docker. So, in fact, the remains of the app take up more space on your disk! It is therefore important to find and remove them when you need to uninstall Docker and clean up your Mac.
+
+App Cleaner & Uninstaller removes applications from Mac completely and safely in less than in a minute.
+Download Docker uninstaller, and you will forget about seeking out unnecessary files on your computer or wasting so much time uninstalling apps manually.
+
+app cleaner
+App Cleaner & Uninstaller
+Get Docker Uninstaller
+

@@ -5,3 +5,20 @@ Para las distribuciones basadas en Debian, como Ubuntu, Linux Mint y derivadas, 
 
 1
 dpkg-reconfigure tzdata
+
+cambiar timezone a servidor linux
+dpkg-reconfigure tzdata
+
+
+---------------------------- MySQL ----------------------------
+http://qbit.com.mx/blog/2015/02/09/modificando-la-zona-horaria-a-mysql-local-timezone/
+
+mysql> SELECT @@global.time_zone;
++--------------------+
+| @@global.time_zone |
++--------------------+
+| SYSTEM             |
++--------------------+
+1 row in set (0.00 sec)
+si MySQL ya está con SYSTEM, y luego reinicias mysql, lee la hora correcta.
+
