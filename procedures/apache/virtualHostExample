@@ -1,0 +1,21 @@
+<VirtualHost *:80>
+	ServerName dev.survey.com
+	ServerAdmin webmaster@dev.survey.com
+
+	DocumentRoot /var/www/dev.survey.com/www/
+        
+        ErrorLog /var/log/apache2/dev.survey.com_error.log
+        CustomLog /var/log/apache2/dev.survey.com_access.log full
+        AddDefaultCharset Off
+
+	Alias / "/var/www/dev.survey.com/www/" 
+
+	<Directory /var/www/dev.survey.com/www/*>
+		Options -Indexes +FollowSymLinks
+		AllowOverride All
+		Allow from all
+	</Directory>
+</VirtualHost>
+
+
+

@@ -4,10 +4,17 @@ CODE: Complete Code For This Series
 https://github.com/bradtraversy/lsapp
 
 How to?
+Install laravel and a new project?
+https://laravel.com/docs/6.x/installation
+Via composer:
+composer create-project --prefer-dist laravel/laravel <My project>
+composer create-project --prefer-dist laravel/laravel dev.survey.com
+composer create-project --prefer-dist laravel/laravel dev.survey.com "5.8.*"
+
 
 -> Create a login system:
 	-->Laravel 5
-	$ php artisan make:auth 
+	$ php artisan make:auth
 
 	-->Laravel 6
 	$ composer require laravel/ui
@@ -19,10 +26,17 @@ How to?
 	file database\migrations\2020_01_01_010118_add_user_id_to_post.php
 	
 	$ php artisan migrate
+	
+->Truncate all the tables and migrate again
+	$ php artisan migrate:fresh
 
 ->Rollback migration
 	$php artisan migrate rollbak
 
+->Obtaing help to make a model
+	$ php artisan help make:model
+	$ php artisan # To see all available commands
+	$ php artisan help preset # To see just the preset command
 ->Add a relationship in the model
 	Example: the user can have more than one post
 	write this at the User model:
@@ -35,7 +49,9 @@ How to?
     { return $this->belongsTo('App\User'); }
 
 ->Add a relationship
-
+	Example: https://www.youtube.com/watch?v=a5STZK4ZQz0&list=PLpzy7FIRqpGC8Jk6gyWdSVdxCVXZAsenQ&index=17
+	min 15:57
+		
 ->Create a link to the storage through public folder
   in order to upload the images
  $php artisan storage:link
@@ -45,6 +61,7 @@ How to?
 ->Delete all tables and recreates all tables:
 $php artisan migrate:fresh
 
+<<<<<<< HEAD
 -> Save a field in a relationship
 In tinker:
 $user->push();  # save all my changes into the database
@@ -66,3 +83,156 @@ $ php artisan make:model Post -m
 
 -> If it can't to find brind the 404 error not found
 $user = User::findOrFail($user);
+=======
+
+->Naming convention
+Singular: Model (1 row in our table)
+	is going to be the singular Example: Service (UPPER CASE)
+Singular: Controller name MUST start with a noun (in singular form) followed by the word “Controller”.
+	Ex: ArticleController
+
+Plural: Table (all rows in our table)
+	is going to be be the plural Example: services (lower case)
+
+->Create a migration file 
+$php artisan make:migration creates_services_table --create services  
+
+->Run the database migrations
+$php artisan migrate
+
+-> Echoing: dd() vs var_dump() vs print_r()
+dd($variable);
+
+->To use the model
+in this case Service is the model
+$services = \App\Service::all();
+
+->Create a controller
+$ php artisan make:controller <name'sController>
+Example 1.1: $ php artisan make:controller ServiceController
+
+Example 1.2: to create a model including his controller and his migration:
+	$ php artisan make:model Customer -c -m  
+or:
+	$ php artisan make:model Customer -cm 
+	
+	Model created successfully.
+	Created Migration: 2020_01_07_093505_create_customers_table
+	Controller created successfully.
+
+
+->Inside a form made by Laravel allways needs to add the sentence: @csrf
+in order to be secure our application
+else laravel generates the following error:  419 | Page Expired
+
+->Obtaing the value after a form submit
+	with the command: request('<name of html element>')
+
+->Go to back
+	return redirect()->back();
+
+->To allow mass assignment on one table
+1.1) in the model, we need to declare which column will be fillable 
+with the vartype protected.
+Example:
+	class Service extends Model
+	{
+	    // To allow mass assignment on [App\Service]
+	    // we need to declare which column will be fillable
+	    protected $fillable = ['name'];
+	}
+
+2.2) other option is to specifies in the model, the type protected $guarded,
+that set to off the mass assignment protection.
+Example: 
+	class Service extends Model
+	{    
+	    // Second method: guarded by default saves every single field
+	    protected $guarded = [];
+	}
+
+2.1) in the controller we need to write the method \App\Service::create($data);
+Example:
+		$data = request()->validate([ 
+			'name' => 'required|min:5|max:10'
+		]);
+
+		// Allow mass assignment on [App\Service]
+		\App\Service::create($data);
+
+->persist the value data after post method validation in a form element as input text
+		<input type="text" name="name" autocomplete="off" value="{{ old('name') }}">
+
+->Search a register and if doesn't exist that show the error 404 | Not found
+	Example: $customer = \App\Customer::findOrFail($customerid);
+
+->Find a record into the Controller
+
+    // Method 1: To avoid errors if the record doesn't exist 
+    // laravel going to show 404 | Not found
+    public function show(\App\Customer $customer) {
+    	return view('customer.show', compact('customer'));
+    }
+->Comandos tinker:
+	>>> $customers = \App\Customer::where('id',1)->get();
+	>>> $customers = \App\Customer::where('name','Iris Amanda')->get();
+	>>> $customers = \App\Customer::where('id',1)->first(); // Solo devuelve el primer registro
+
+	>>> $customer->active = 0		// Change a value
+	>>> $customer->save();			// Save
+
+->Sending emails
+	See the video: Laravel 6 Beginner - e14 - Sending Emails
+	https://www.youtube.com/watch?v=Ny-mloJuoAI&list=PLpzy7FIRqpGC8Jk6gyWdSVdxCVXZAsenQ&index=14
+
+$ php artisan help make:mail
+$ php artisan make:mail WelcomeMail -m emails.welcome
+
+Example:
+	use App\Mail\WelcomeMail;
+	use Illuminate\Support\Facades\Mail;
+
+	Route::get('/email', function () {
+		Mail::to('email@email.com')->send(new WelcomeMail());
+	    return new WelcomeMail();
+	});
+
+	Online tools:
+		a) https://mailtrap.io
+		b) https://www.mailgun.com/
+->In any controller, make the require login
+
+->Validate a checkbox inside a form post method
+<input type="radio" name="responses[{{ $key }}][answer_id]" 
+                                        id="answer{{ $answer->id }}" class="mr-2" value="{{ $answer->id }}"
+                                        {{ (old('responses.' . $key . '.answer_id') == $answer->id) ? 'checked' : '' }}
+                                        >
+                                        {{ $answer->answer }}
+
+
+->Obtaing all records of one user?
+Example: get all the questionnaires of user
+	$questionnaires = aut()->user()->questionnaires;
+
+->Generate the easy full url to a particular resource as Model
+Example:
+a) into a view: 
+	<a href="{{ $questionnaire->path }}"> {{ $questionnaire->title }}</a>
+
+b) into the model:
+	class Questionnaire extends Model
+	{
+	    protected $guarded = [];
+
+	    public function path()
+	    {   
+	        return url('/questionnaires/' . $this->id);
+	    }
+	}
+ 
+c) adicional:
+ 	public function publicPath()
+    {   
+        return url('/surveys/' . $this->id . '-' . Str::slug($this->title));
+    }
+>>>>>>> ee95eb1db21e03b223f8a3df89ac59bbbed2e9ef

@@ -1,0 +1,15 @@
+Resolver el problema de las rutas error 404 en apache
+https://askubuntu.com/questions/1154287/why-laravel-api-php-routes-give-a-404-error
+
+sudo a2enmod rewrite
+Changes in the file /etc/apache2/apache2.conf
+
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+Restart apache:
+
+sudo service apache2 restart
+

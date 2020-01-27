@@ -1,0 +1,7 @@
+Deshabilitar las notificaciones de actualización
+En algunas pocas circunstancias (como por ejemplo en servidores completamente gestionados, que pudieran tener muchas modificaciones locales) es deseable que no esté activa la revisión de actualizaciones. Esta característica puede deshabilitarse al añadir el código siguiente al archivo de configuración config.php:
+
+   $CFG->disableupdatenotifications = true;
+
+Es decir, evita la recepcion de correos a los administradores de sitio.s
+https://docs.moodle.org/all/es/Notificaciones_de_actualizaci%C3%B3n_disponible
