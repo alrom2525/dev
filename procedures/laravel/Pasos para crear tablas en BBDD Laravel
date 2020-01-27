@@ -1,0 +1,8 @@
+Pasos para crear tablas en BBDD Laravel
+1. Crear un archivo migration
+2. Configurar o editar ese archivo
+3. Ejecutar el comando php artisan migrate
+
+
+$ php artisan make:migration add_user_id_to_post
+

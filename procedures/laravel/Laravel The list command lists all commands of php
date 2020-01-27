@@ -1,0 +1,5 @@
+Laravel The list command lists all commands of php artisan 
+
+$ php artisan list
+
+$ php artisan -h

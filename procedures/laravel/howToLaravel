@@ -45,6 +45,9 @@ How to?
 ->Delete all tables and recreates all tables:
 $php artisan migrate:fresh
 
+-> Save a field in a relationship
+In tinker:
+$user->push();  # save all my changes into the database
 
 ->Echoing: dd() vs var_dump() vs print_r()
 
@@ -57,5 +60,9 @@ dd($methods);
 
 We would see something like this:
 
-->Create a model
+->Add a table in our database (create a model) 
 $ php artisan make:model Profile -m
+$ php artisan make:model Post -m
+
+-> If it can't to find brind the 404 error not found
+$user = User::findOrFail($user);

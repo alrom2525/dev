@@ -1,0 +1,24 @@
+bootstrap styling doesn't work in some views in Laravel 5.2
+
+https://stackoverflow.com/questions/36943032/bootstrap-styling-doesnt-work-in-some-views-in-laravel-5-2
+
+@ThomasKim Is absolutely right. The path to your bootstrap file is relative. So when you're on localhost:8000 it can correctly traverse to css/bootstrap.min.css.
+
+However when you're on /post/1 then the URL request for the css file changes to:
+
+localhost:8000/post/1/css/bootstrap.min.css
+And we know that's incorrect. To resolve this, use an absolute path by prepending a /.
+
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+This will ensure that it always attempts to traverse the file from public/css/bootstrap.min.css. public is omitted in the URL structure, but that is where all HTTP requests resolve to.
+
+UPDATE
+
+It would actually be best to use Laravel's asset or secure_asset functions to resolve these assets instead:
+
+<link href="{{ asset('css/bootstrap.min/css') }} rel="stylesheet"/>
+The asset helper will resolve directly from /public
+
+Note that asset will use the schema of the page request to resolve the dependency, whereas secure_asset will force the dependency over https no matter what the schema of the request is.
+
+share
