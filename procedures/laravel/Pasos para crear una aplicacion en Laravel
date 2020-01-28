@@ -1,3 +1,4 @@
+<?php
 Pasos para crear una aplicacion en Laravel:
 1. Crear el proyecto
 	composer create-project laravel/laravel myProject
@@ -35,14 +36,25 @@ Pasos para crear una aplicacion en Laravel:
 6. Crear la base de datos
 
 7. Ejecutar el comando migrate para crear las primeras tablas.
+	$ php artisan migrate
 
-<<<<<<< HEAD
-https://laravel.com/docs/6.x/frontend
-=======
-Laravel PHP Framework Tutorial - Full Course for Beginners (2019)
-https://www.youtube.com/watch?v=ImtZ5yENzgE&list=PLWKjhJtqVAbkoMsX4hgwxbJZW4aB0cbaB
-freeCodeCamp.org
+8. Agregar fontawesome
+	8.1 $ npm install --save @fortawesome/fontawesome-free
+	8.2 $ npm run watch &
+	8.3 Mediante SFTP actualizar el directorio ../resources/sass/
+	8.4 Edit the file ../resources/sass/app.scss 
+		$fa-font-path: "../webfonts";
+		// Bootstrap
+		@import '~bootstrap/scss/bootstrap';
 
-1:46:15 register.blade.php 
-https://laravel.com/docs/6.x/frontend 
->>>>>>> 55d529e2fff38aeeb9902c586948471c53fee79d
+		@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+		@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+		@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+	8.5 Edit the file ../resources/sass/_variables.scss 
+		$fa-font-path: "../webfonts";
+	8.6 Add the follow code to ../resources/views/auth/login.blade.php
+		<i class="fa fa-user"></i>
+	8.7 test
+
+
+

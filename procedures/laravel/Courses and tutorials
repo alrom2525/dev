@@ -1,3 +1,4 @@
+<?php
 Courses and tutorials:
 
 https://www.laravelbestpractices.com
@@ -8,7 +9,7 @@ Curso Laravel. Pildoras informaticas
 https://www.youtube.com/watch?v=0sHSrqyZCnM&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh
 
 
-<<<<<<< HEAD
+
 Laravel 6 Beginner
 https://www.youtube.com/watch?v=eD4yMI-IR8g&list=PLpzy7FIRqpGC8Jk6gyWdSVdxCVXZAsenQ
 
@@ -29,6 +30,13 @@ git commit -m "Laravel 6 Beginner - e19- Final Project Part 3 (Questionnaire/Sur
 Pendiente proceso de borrado en minuto 12:00 al 15:00
 
 https://www.youtube.com/watch?v=_SyG3HMv48k&list=PLpzy7FIRqpGC8Jk6gyWdSVdxCVXZAsenQ&index=23 " > README.md
+
+
+Laravel PHP Framework Tutorial - Full Course for Beginners (2019)
+https://www.youtube.com/watch?v=ImtZ5yENzgE&list=PLWKjhJtqVAbkoMsX4hgwxbJZW4aB0cbaB
+freeCodeCamp.org
+1:46:15 register.blade.php 
+https://laravel.com/docs/6.x/frontend 
 
 
 Plugins sublime text 3 to development in Laravel
