@@ -1,0 +1,96 @@
+<?php
+Sesiones en Laravel
+https://laravel.com/docs/6.x/session
+---------------------------------------------------------------------
+
+Curso Laravel. Sesiones I. Vídeo 53
+https://www.youtube.com/watch?v=kJLv0chFd5k&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=53
+
+Se puede hacer de dos formas:
+a) usando la funcion global session
+b) a traves de una instancia de request
+
+Ejemplo, escribir lo siguiente dentro del HomeController:
+
+	use Illuminate\Http\Request;
+
+	class HomeController extends Controller
+	{
+	    /**
+	     * Show the application dashboard.
+	     *
+	     * @return \Illuminate\Contracts\Support\Renderable
+	     */
+	    public function index(Request $request)
+	    {
+	    	# ingresa informacion adicional a la sesion, formato clave => valor
+	    	$request->session()->put(['miusario' => 'Administrador']); 
+
+	    	# Eliminar una clave de la sesion
+	    	$request->session()->forget('miusario'); 
+
+	    	# ingresa informacion adicional usando la funcion global session
+	    	session(['maria' => 'Estudiante']); 
+
+	    	# Eliminar toda la informacion de la sessio
+	    	$request->session()->flush();
+
+	    	return $request->session->all(); # Toda la informacion de la sesion
+
+	    }
+	}
+
+---------------------------------------------------------------------
+Curso Laravel. Sesiones II. Vídeo 54
+https://www.youtube.com/watch?v=IeU9b5ytQEE
+
+a) Seguimiento a borrado de informacion en sesiones
+b) Conservacion de informacion de una sesion a otra
+c) regenerar el Session ID
+
+Ejemplo, escribir lo siguiente dentro del HomeController:
+
+	use Illuminate\Http\Request;
+
+	class HomeController extends Controller
+	{
+	    /**
+	     * Show the application dashboard.
+	     *
+	     * @return \Illuminate\Contracts\Support\Renderable
+	     */
+	    public function index(Request $request)
+	    {
+	    	# Guardar elemento solo para la proxima peticion, despues se borra 
+	    	$request->session()->flash('status 1', 'Task was successful!');
+
+
+
+	    	# Guardar mas informacion a la sesion
+	    	$request->session()->flash('status 3', 'Task 3 was successful!');
+
+	    	# Mantiene guardada informacion de la session por siempre
+	    	$request->session()->keep(['username', 'email']);
+	    	return $request->session->all(); # Devuelve toda la informacion de la sesion
+	    }
+	}
+
+
+
+c) regenerar el Session ID
+
+	use Illuminate\Http\Request;
+
+	class HomeController extends Controller
+	{
+	    /**
+	     * Show the application dashboard.
+	     *
+	     * @return \Illuminate\Contracts\Support\Renderable
+	     */
+	    public function index(Request $request)
+	    {	
+	    	$request->session()->regenerate();
+	 		return $request->session->all(); # Devuelve toda la informacion de la sesion
+	    }
+	}
