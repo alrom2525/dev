@@ -1,4 +1,79 @@
-Insert update delete softdeleted Eloquent
+<?php
+BDD Eloquent insert edit delete
+---------------------------------------------------------------------
+Curso Laravel. BBDD VI. Eloquent I. Vídeo 21
+https://www.youtube.com/watch?v=LHJjFZsd5Iw&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=21
+
+Name convention, el modelo debe llamarse al igual que la tabla pero en singular,
+por ejemplo: 
+	tabla: articulos
+	modelo: Articulo
+
+Create the model 
+	$ php artisan make:model <ModelNamme>
+	Example:
+	$ php artisan make:model Customer	  
+
+    -c #create controller class 
+    -m or --migration #create migration file
+
+	$ php artisan make:model Customer -c -m
+	$ php artisan make:model Customer -c -m
+
+
+Dentro de un controller:   
+use App\Product;
+
+	public function show(Request $request)
+    {
+        
+        $products = Product::all();
+        foreach ($products as $product) {
+        	echo "Name: " . $product->name . " Price: " . $product->name . "<br>" ;
+        }
+
+        return view('products.index',compact('products',$products));
+    }
+
+
+Configuraciones adicionales si no se desea seguir la convencion de nombres:
+
+a) Si necesitamos cambiar el nombre de la tabla dentro del codigo
+es necesario definir la variable protected dentro del modelo: 
+
+	use Illuminate\Database\Eloquent\Model;
+
+	class Product extends Model
+	{
+	    protected $table = "MyArticles";
+	}
+Sinembargo es recomendable seguir la convencion de nombres.
+
+
+b) Si nuestro campo id por defecto, por otro nombre ejemplo: article_id
+hay que crear otra variable:
+	use Illuminate\Database\Eloquent\Model;
+
+	class Product extends Model
+	{
+	    protected $primaryKey = "article_id";
+	}
+
+
+
+Como hacer las consultas con filtros:
+
+Se usa el metodo where, sintaxis:
+	$products = Product::where('field','value');
+
+	a) $products = Product::where("pais","China");
+	b) $products = Product::where("seccion","Ceramica");
+	c) $products = Product::where("seccion","Ceramica")->take(1)->get(); #LIMIT 1
+	d) $products = Product::where("seccion","Ceramica")->orderBy("nombre", "desc")->get(); #ORDER BY
+	e) $products = Product::where("seccion","Ceramica")->max("precio"); #MAX 
+	return $products;
+
+---------------------------------------------------------------------
 
 Curso Laravel. BBDD VIII. Eloquent III. Vídeo 23
 https://www.youtube.com/watch?v=8hD_C5BMra0&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=23
