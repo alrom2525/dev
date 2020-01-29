@@ -1,0 +1,60 @@
+Como quitar filas duplicadas de una tabla 
+MySQL mediante una secuencia de comandos
+
+-- https://support.microsoft.com/es-es/help/70956/how-to-remove-duplicate-rows-from-a-sql-server-table-by-using-a-script
+
+Cuando se ejecuta esta secuencia de comandos, siga estos pasos:
+1) Mueve una instancia de cualquier fila duplicada en la tabla original a una tabla duplicada.
+
+ INSERT INTO  duplicate_table (
+  profileid,
+  salutation,
+  firstname,
+  lastname,
+  gender,
+  birthdate,
+  street,
+  apartment,
+  pobox,
+  municipality,
+  province,
+  postalcode,
+  telephone,
+  workphone,
+  email
+)
+
+SELECT * FROM ges_students
+GROUP BY profileid
+HAVING COUNT(profileid)>1;
+
+2) Elimina todas las filas de la tabla original que también residen en la tabla duplicada.
+  DELETE FROM ges_students
+    WHERE profileid
+    IN (SELECT profileid
+          FROM duplicate_table);
+
+3) Mueve las filas en la tabla duplicada en la tabla original.
+Elimina la tabla duplicada.
+
+INSERT ges_students
+(
+  profileid,
+  salutation,
+  firstname,
+  lastname,
+  gender,
+  birthdate,
+  street,
+  apartment,
+  pobox,
+  municipality,
+  province,
+  postalcode,
+  telephone,
+  workphone,
+  email
+)
+  SELECT * 
+    FROM duplicate_table
+

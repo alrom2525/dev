@@ -1,3 +1,14 @@
+<?php
+
+	->Naming convention
+	Singular: Model (1 row in our table)
+		is going to be the singular Example: Service (UPPER CASE)
+	Singular: Controller name MUST start with a noun (in singular form) followed by the word “Controller”.
+		Ex: ArticleController
+
+	Plural: Table (all rows in our table)
+		is going to be be the plural Example: services (lower case)
+
 Pasos para crear tablas en BBDD Laravel:
 	1. Crear un archivo migration
 	2. Configurar o editar ese archivo
@@ -11,7 +22,16 @@ Pasos para crear tablas en BBDD Laravel:
 	$ php artisan make:migration create_posts_table --create="posts"
 
 	$ php artisan make:migration add_user_id_to_post --table="posts"
-	
+
+		file database\migrations\2020_01_01_010118_add_user_id_to_post.php
+	  
+	1.1 Add a table in our database (create a model) 
+	$ php artisan make:model Profile -m
+	$ php artisan make:model Post -m
+
+	1.2 Create a model including his controller and his migration:
+	$ php artisan make:model Customer -c -m  
+
 2. Configurar o editar ese archivo
 	https://laravel.com/docs/6.x/migrations#columns (tipos de datos)
 	$table->bigIncrements('id');
@@ -20,8 +40,8 @@ Pasos para crear tablas en BBDD Laravel:
     $table->string('name');
     $table->char('name', 100);
     $table->string('email')->unique();
-    table->timestamp('email_verified_at')->nullable();
-    table->text('notes');
+    $table->timestamp('email_verified_at')->nullable();
+    $table->text('notes');
     $table->string('email')->index();
     $table->longText('payload');
     $table->mediumText('body');
@@ -35,7 +55,10 @@ a) Vuelve un paso atras de una migracion (equivalente a un CTRL-Z deshacer)
 	$ php artisan migrate:rollback
 
 b) Hace un rollback de todo lo que se haya hecho y luego hace una nueva migracion, es decir elimina todas las tablas y las vuelve a crear.
-	$ php artisan migrate:refresh
+	$ php artisan migrate:refresh 
+
+	->Delete all tables and recreates all tables:
+	$ php artisan migrate:fresh
 
 c) Verifica si un archivo migration se ha ejecutado o no, esto se usa en caso que nuestro poryecto sea muy grande y que ya no recordemos a exactitud si hemos ejecutado cierto archivo migration.
 	$ php artisan migrate:status

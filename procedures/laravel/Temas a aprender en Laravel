@@ -7,7 +7,9 @@ d) Multi step form
 e) Plantilla AdminLTE
 
 Inscription:
-a) multi idioma
-b) bootstrap
-c) fontawesome
-d) busqueda 
+a) multi locale OK 
+b) authentication OK
+c) bootstrap OK
+d) fontawesome OK 
+e) Student's table 
+d) Find form

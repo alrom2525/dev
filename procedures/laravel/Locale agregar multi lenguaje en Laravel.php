@@ -1,6 +1,22 @@
 <?php
 Locale agregar multi lenguaje en Laravel
 
+Multi-Language Routes and Locales with Auth
+February 5, 2019
+https://laraveldaily.com/multi-language-routes-and-locales-with-auth/
+https://www.youtube.com/watch?v=_BsHyHc9NqE&feature=emb_logo
+	email verify ?
+	customizing the function on VerifyEmail works ^^:
+
+	protected function verificationUrl($notifiable)
+	{
+	return URL::temporarySignedRoute(
+	‘verification.verify’,
+	Carbon::now()->addMinutes(Config::get(‘auth.verification.expire’, 60)),
+	[‘id’ => $notifiable->getKey(), ‘locale’ => app()->getLocale()]
+	);
+	}
+
 List of 73 languages for Laravel 5 and Laravel 6
 https://github.com/caouecs/Laravel-lang 
 
@@ -23,3 +39,41 @@ Every route we need to add the followin parameter: app()->getLocale()
 Example:
 original: <a href="{{ route('login'), app()->getLocale() }}">Login</a>
 with change: <a href="{{ route('login' }}">Login</a>
+
+
+Blog's questions:
+a) Oleg: I would like to ask you about your language switcher with possible parameters in routes?
+When I using some route like ” {locale}/company/{id}/edit “, languages switcher lost second parameter {id} from url address.
+	@oleg: you can pass array as second parameter like this:
+	route(‘company.edit’, [‘id’ => $company->id, ‘locale’ => app()->getLocale()]
+
+	Pablo July 23, 2019 at 8:59 pm
+	In the case of the language switcher, you can replace Povilas code for this one:
+	@foreach (config(‘app.all_langs’) as $locale)
+
+	parameters(),[‘locale’=> $locale])) }}”
+	@if (app()->getLocale() == $locale) style=”font-weight: bold; text-decoration: underline” @endif>{{ $locale }}
+
+	@endforeach
+
+	It will replace in the route the locale and leave the rest as it is in the current page.
+
+	Pablo July 23, 2019 at 9:00 pm
+	My previous comment got removed the html to it, I’ll be more clear. Just change the current href code inside the foreach loop of your language switcher for this:
+
+	route(\Illuminate\Support\Facades\Route::currentRouteName(),array_merge(Route::current()->parameters(),[‘locale’=> $locale]))
+
+
+	gagboi717 October 28, 2019 at 7:01 am
+	Everything works perfectly ok with the configuration…except for the route to / and logout….
+	the error says: Route[] not defined
+	when the route is clearly defined…. I must be missing something….
+	Any ideas what might be gone wrong?
+
+	I had the “Route[] not defined” error too in Laravel 6.0. Adding “->name(‘routename’)” to my route fixed it. Could be a bug.
+
+	Before:
+	Route::get(‘/myroute’, ‘MyController@index’); // not working
+
+	After:
+	Route::get(‘/myroute’, ‘MyController@index’)->name(‘myroute’); // works
