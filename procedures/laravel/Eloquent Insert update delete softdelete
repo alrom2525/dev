@@ -141,7 +141,7 @@ https://www.youtube.com/watch?v=reUaUQKP0bA&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpA
 
 https://laravel.com/docs/6.x/eloquent-relationships#one-to-many-inverse
 
-Que es una relacion inversaa y como crear este tipo de relaciones.
+Que es una relacion inversa y como crear este tipo de relaciones.
 
 Se cambia el sentido 
 Por cada cliente solo puede haber un articulo.
