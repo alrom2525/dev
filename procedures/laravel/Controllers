@@ -1,0 +1,21 @@
+<?php 
+Controllers
+https://laravel.com/docs/6.x/controllers
+---------------------------------------------------------------------
+
+Create a controller
+$ php artisan make:controller <name'sController>
+Example 1.1: $ php artisan make:controller ServiceController
+
+Example 1.2: to create a model including his controller and his migration:
+	$ php artisan make:model Customer -c -m  
+or:
+	$ php artisan make:model Customer -cm 
+	
+	Model created successfully.
+	Created Migration: 2020_01_07_093505_create_customers_table
+	Controller created successfully.
+
+Example 1.3: generate a will contain a method for each of the available resource operations. (methods create, edit, etc)
+	$ php artisan make:controller PhotoController --resource
+

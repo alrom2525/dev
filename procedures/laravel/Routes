@@ -1,0 +1,54 @@
+<?php
+Routes
+---------------------------------------------------------------------
+
+Curso Laravel. Routes (Las rutas). Vídeo 6
+https://www.youtube.com/watch?v=Yn23xVjaSQw&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=6
+
+
+Sintaxis:
+Route::get('/', funcion_anonima () {
+	    	return vista;
+		});
+
+	Route::get('/', function () {
+		    	return view('welcome');
+			});
+
+	Route::get('/start', function () {
+		    	return 'We are ready to start';
+			});
+
+		Route::get('/about', function () {
+		    	return 'About it';
+			});
+		
+		Route::get('/contact', function () {
+		    	return 'Contact us!';
+			});
+		
+		Route::get('/forum', function () {
+		    	return 'We are inside th forum!';
+			});
+		
+		# How to pass parametres?
+		Route::get('/post/{id}', function ($id) { 
+		    	return 'This is the post number '. $id ;
+			});
+
+		# How to pass two parametres?
+		Route::get('/post/{id}/{name}', function ($id, $name) { 
+		    	return 'This is the post number '. $id . " created by: ". $name;
+			});
+		
+		# How to pass two parametres?
+		# and add regular expressions
+		Route::get('/post/{id}/{name}', function ($id, $name) { 
+		    	return 'This is the post number '. $id . " created by: ". $name;
+			})->where('name','[a-zA-Z]+');
+		
+		# When locale is setting (multi language)
+		Route::get('/post/{id}', function ($locale, $id) { 
+		    	return 'This is the post number '. $id. " Languague is set: ". $locale; 
+			});
+		

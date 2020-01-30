@@ -1,0 +1,112 @@
+<?php
+---------------------------------------------------------------------
+Curso Laravel. BBDD XI. Eloquent VI. Vídeo 26
+https://www.youtube.com/watch?v=DkxHCVGkpwE&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=26
+
+https://laravel.com/docs/6.x/eloquent-relationships
+
+Cómo crear relaciones uno a uno entre dos tablas con eloquent.
+
+Suposicion: Cada cliente compra un unico articulo.
+	Tabla articulos: id, cliente_id(clave foranea), nombre_articulo, precio, observaciones, seccion.
+	
+	Tabla clientes: id, nombres, appelidos.
+
+Ir al modelo y crear la funcion articulo():
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cliente extends Model
+{
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function articulo()
+    {
+        return $this->hasOne('App\Articulo');
+    }
+}
+
+En una ruta hacer la prueba:
+use App\Articulo;
+use App\Cliente;
+
+Route::get('/cliente/{$id}/articulo', function($id) {
+	return Cliente::find($id)->articulo;
+});
+
+For example, a User model might bàe associated with one Phone.
+Ir al modelo y crear la funcion:
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function phone()
+    {
+        return $this->hasOne('App\Phone');
+    }
+}
+
+---------------------------------------------------------------------
+Curso Laravel. BBDD XII Eloquent VII. Vídeo 27
+https://www.youtube.com/watch?v=reUaUQKP0bA&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=27
+
+https://laravel.com/docs/6.x/eloquent-relationships#one-to-many-inverse
+
+Que es una relacion inversa y como crear este tipo de relaciones.
+
+Se cambia el sentido 
+Por cada cliente solo puede haber un articulo.
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Articulo extends Model
+{
+    /**
+     * The users that belong to the role.
+     */
+    public function cliente()
+    {
+        return $this->belongsTo('App\Cliente');
+    }
+}
+
+
+
+En una ruta hacer la prueba:
+use App\Articulo;
+use App\Cliente;
+
+Route::get('/articulo/{$id}/cliente', function($id) {
+	// return Articulo::find($id)->cliente;
+	return Articulo::find($id)->cliente->Nombre;
+});
+
+
+Defining The Inverse Of The Relationship
+So, we can access the Phone model from our User. Now, lets define a relationship on the Phone model that will let us access the User that owns the phone. We can define the inverse of a hasOne relationship using the belongsTo method:
+
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Phone extends Model
+{
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+}
