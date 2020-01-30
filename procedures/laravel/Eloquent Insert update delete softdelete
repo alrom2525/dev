@@ -1,0 +1,193 @@
+<?php
+Insert update delete softdeleted Eloquent
+
+Curso Laravel. BBDD VIII. Eloquent III. Vídeo 23
+https://www.youtube.com/watch?v=8hD_C5BMra0&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=23
+
+https://laravel.com/docs/6.x/eloquent#inserting-and-updating-models
+
+Proceso para insertar un registro con Eloquent:
+	$articulo = new Articulo();
+	$articulo->nombre_articulo = "Pantalones";
+	$articulo->precio = 60;
+	$articulo->pais = "El Salvador";
+	$articulo->observaciones = "Lavados en piedra";
+	$articulo->seccion = "Confeccion";
+	$articulo->save();
+
+Proceso para actualizar un registro con Eloquent:
+	$articulo = Articulo::find(7); #Busqueda por id
+	$articulo->precio = 85;
+	$articulo->save();
+
+---------------------------------------------------------------------
+Curso Laravel. BBDD IX. Eloquent IV. Vídeo 24
+https://www.youtube.com/watch?v=N8_FAnCQ5Cs&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=24
+
+Proceso para actualizar varios registros a la vez, en funcion de un criterio:
+	# Usar la clase del modelo, con el metodo estatico where
+	Model::where("field","Current value")->update(["field"=>"New value"]);
+	Articulo::where("seccion","Abarrotes")->update(["seccion"=>"Cereales"]);
+
+Proceso para actualizar varios registros a la vez, en funcion de varios criterios:
+	Articulo::where("seccion","Cereales")->where("pais","El Salvador")->update(["precio"=>5.99]);
+
+
+Proceso para borrar un registro en funcion de su id:
+	$articulo = Articulo::find(7); # Busqueda por id
+	$articulo->delete();
+
+Proceso para borrar un registros en funcion de otros criterios:
+	Articulo::where("seccion", "Cereales")->delete(); # Busqueda por seccion u otro criterio
+	
+Proceso para borrar registros en funcion de dos o mas criterios:
+	Articulo::where("seccion", "Cereales")->where("precio", 5.99)->delete();
+
+Como insertar varios registros de forma simultanea:
+	Se debe indicar cuales son los campos que se puedan actualizar 
+	Articulo::create(["articulo"=>"Impresora", "precio"=>50, "pais"=>"El Salvador", "observaciones"=>"nada que decir", "seccion"=>"Informatica"]);
+	#Esto indicara una Excepsion mass asigment exception
+	parfa desabilitarlo hay que agregar dentro del modelo:
+
+	class Articulo extends Model
+	{
+	    /**
+	     * The attributes that are mass assignable.
+	     *
+	     * @var array
+	     */
+	    protected $fillable = [
+	        'articulo', 'precio', 'pais', 'observaciones', 'seccion'
+	    ];
+    }
+
+---------------------------------------------------------------------
+Curso Laravel. BBDD X Eloquent V. Vídeo 25
+https://www.youtube.com/watch?v=Cn5fUt7l4mk&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=25
+
+Soft delete (enviar a la papelera)
+https://laravel.com/docs/6.x/eloquent#deleting-models
+
+Hay que agregar el campo deleted_at;
+
+	namespace App;
+	use Illuminate\Database\Eloquent\Model;
+	use Illuminate\Database\Eloquent\SoftDeletes;
+
+	class Post extends Model
+	{
+	    use SoftDeletes;
+	    protected $dates = ['deleted_at']; #only in Laravel 5.5
+	}
+
+---------------------------------------------------------------------
+Curso Laravel. BBDD XI. Eloquent VI. Vídeo 26
+https://www.youtube.com/watch?v=DkxHCVGkpwE&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=26
+
+https://laravel.com/docs/6.x/eloquent-relationships
+
+Cómo crear relaciones uno a uno entre dos tablas con eloquent.
+
+Suposicion: Cada cliente compra un unico articulo.
+	Tabla articulos: id, cliente_id(clave foranea), nombre_articulo, precio, observaciones, seccion.
+	
+	Tabla clientes: id, nombres, appelidos.
+
+Ir al modelo y crear la funcion articulo():
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cliente extends Model
+{
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function articulo()
+    {
+        return $this->hasOne('App\Articulo');
+    }
+}
+
+En una ruta hacer la prueba:
+use App\Articulo;
+use App\Cliente;
+
+Route::get('/cliente/{$id}/articulo', function($id) {
+	return Cliente::find($id)->articulo;
+});
+
+For example, a User model might be associated with one Phone.
+Ir al modelo y crear la funcion:
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function phone()
+    {
+        return $this->hasOne('App\Phone');
+    }
+}
+
+---------------------------------------------------------------------
+Curso Laravel. BBDD XII Eloquent VII. Vídeo 27
+https://www.youtube.com/watch?v=reUaUQKP0bA&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=27
+
+https://laravel.com/docs/6.x/eloquent-relationships#one-to-many-inverse
+
+Que es una relacion inversaa y como crear este tipo de relaciones.
+
+Se cambia el sentido 
+Por cada cliente solo puede haber un articulo.
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Articulo extends Model
+{
+    /**
+     * The users that belong to the role.
+     */
+    public function cliente()
+    {
+        return $this->belongsTo('App\Cliente');
+    }
+}
+
+
+
+En una ruta hacer la prueba:
+use App\Articulo;
+use App\Cliente;
+
+Route::get('/articulo/{$id}/cliente', function($id) {
+	// return Articulo::find($id)->cliente;
+	return Articulo::find($id)->cliente->Nombre;
+});
+
+
+Defining The Inverse Of The Relationship
+So, we can access the Phone model from our User. Now, lets define a relationship on the Phone model that will let us access the User that owns the phone. We can define the inverse of a hasOne relationship using the belongsTo method:
+
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Phone extends Model
+{
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+}
