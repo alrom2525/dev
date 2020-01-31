@@ -110,3 +110,93 @@ class Phone extends Model
         return $this->belongsTo('App\User');
     }
 }
+
+
+---------------------------------------------------------------------
+Curso Laravel. BBDD XIII. Eloquent VIII. Vídeo 28
+https://www.youtube.com/watch?v=w02iIRjyZ28&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=28
+
+https://laravel.com/docs/6.x/eloquent-relationships#one-to-many
+Consultas uno a varios.
+
+Suposicion: Cada cliente compra varios articulos.
+    Tabla articulos: id, cliente_id(clave foranea), nombre_articulo, precio, observaciones, seccion.
+    
+    Tabla clientes: id, nombres, appelidos.
+
+Ir al modelo y crear la funcion articulo():
+
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cliente extends Model
+{
+    /**
+     * Get the comments for the blog post.
+     */
+    public function articulos()
+    {
+        return $this->hasMany('App\Articulo');
+    }
+}
+
+
+Suponiendo que el cliente (id=3) ha comprado varios articulos,
+se usa el siguiente codigo para obtener los registros de esas tablas relacionadas:
+1)
+use App\Articulo;
+use App\Cliente;
+
+Route::get('/articulos/', function() {
+ 
+    $articulos = Cliente::find(3)->articulos;
+
+    foreach ($articulos as $articulo) {
+        echo $articulo->nombre_articulo . '<br>';
+    }
+
+});
+
+
+2) Usando la clausula where
+
+use App\Articulo;
+use App\Cliente;
+
+Route::get('/articulos/', function() {
+ 
+    $articulos = Cliente::find(3)->articulos->where('pais_origen', 'Suiza')->first();
+    $comment = App\Post::find(1)->comments()->where('title', 'foo')->first();
+    foreach ($articulos as $articulo) {
+        echo $articulo->nombre_articulo . '<br>';
+    }
+
+});
+
+
+
+
+For example, a blog post may have an infinite number of comments. Like all other Eloquent relationships, one-to-many relationships are defined by placing a function on your Eloquent model:
+
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    /**
+     * Get the comments for the blog post.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+}
+
+
+
