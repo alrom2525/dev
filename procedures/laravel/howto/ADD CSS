@@ -1,0 +1,7 @@
+<?php
+Agregar CSS
+
+Primer método:
+	a) En el directorio public/css agregar el archivo de estilos, ejemplo: custom.css
+	b) Incliur la hoha de estilos despues de los que vienen incorporados
+	<link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
