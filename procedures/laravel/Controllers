@@ -107,3 +107,57 @@ Route::get('/foros', 'PaginasController@foro');
 
 Y hacer las vistas: quienessomos.blade.php, dondeestamos.blade.php y foro.blade.php
 
+---------------------------------------------------------------------
+Curso Laravel. Controllers IV (Controladores). Vídeo 10
+https://www.youtube.com/watch?v=E0Y09v05RAk&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=10
+
+https://laravel.com/docs/6.x/controllers#restful-partial-resource-routes
+Partial Resource Routes
+
+Cómo generar rutas para utilizar controladores generados con  el comando php make artisan controller con recursos.
+
+Otra forma de crear la estructura de un sitio, es creando una ruta y accediendo a todos los recursos de un cotrolador, ejemplo:
+
+    # Route
+    Route::resource('posts','PostsController');
+
+Y ahora observe el resultado del comando 
+    $ php artisan route:list
++--------+-----------+------------------------+------------------+------------------------------------------------------------------------+--------------+
+| Domain | Method    | URI                    | Name             | Action                                                                 | Middleware   |
++--------+-----------+------------------------+------------------+------------------------------------------------------------------------+--------------+
+
+|        | POST      | posts                  | posts.store      | App\Http\Controllers\PostsController@store                             | web,auth     |
+|        | GET|HEAD  | posts                  | posts.index      | App\Http\Controllers\PostsController@index                             | web          |
+|        | GET|HEAD  | posts/create           | posts.create     | App\Http\Controllers\PostsController@create                            | web,auth     |
+|        | GET|HEAD  | posts/{post}           | posts.show       | App\Http\Controllers\PostsController@show                              | web          |
+|        | PUT|PATCH | posts/{post}           | posts.update     | App\Http\Controllers\PostsController@update                            | web,auth     |
+|        | DELETE    | posts/{post}           | posts.destroy    | App\Http\Controllers\PostsController@destroy                           | web,auth     |
+|        | GET|HEAD  | posts/{post}/edit      | posts.edit       | App\Http\Controllers\PostsController@edit                              | web,auth     |
+
+    
+# Controller
+class PostsControllerController extends Controller
+{   
+    public function create()
+    {   # Si en el navegador se escribe la URL posts/create 
+        return "Estas en el metodo create";
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id) # observa que hay un parametro
+    {   # y que la URL sera posts/{post}/edit
+
+        $post = Post::find($id);
+
+        //Ckeck for correct user
+        if (auth()->user()->id !== $post->user_id) {
+            return redirect('/posts')->with('error', 'Unauthorized page');
+        }
+        view('posts.edit')->with('post', $post);
+}
