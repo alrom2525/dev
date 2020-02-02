@@ -1,0 +1,102 @@
+<?php
+---------------------------------------------------------------------
+Curso Laravel. BBDD XIV. Eloquent IX. Vídeo 29
+ Que son las relaciones varios a varios y qué requisitos se han de cumplir para que se den este tipo de relaciones.
+
+https://laravel.com/docs/6.x/eloquent-relationships#many-to-many
+
+An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin".
+
+Table Structure
+To define this relationship, three database tables are needed: users, roles, and role_user. The role_user table is derived from the alphabetical order of the related model names, and contains the user_id and role_id columns:
+
+The role_user (alfabeticamente ordenada y en singular, se coloca la tabla role porque inicia por una 'r' y luego la tabla user porque su nombre inicia por una letra 'u')
+
+users
+    id - integer
+    name - string
+
+roles
+    id - integer
+    name - string
+
+role_user
+    user_id - integer
+    role_id - integer
+
+Suposicion: 
+    Tabla "clientes": id, nombres, appelidos.
+    
+    Tabla "perfils": id, nombre. (que son roles).
+    En esta tabla habran  nombres de perfil:
+        1) 'frecuente' (para asignarlo a aquellos clientes que a menudo nos compran productos. 
+        2) 'ocasional' lo usuaremos para referirnos a los clientes que nos comprar en una ocasion.
+        3) 'nuevo' lo usaremos para distinguir un nuevo cliente.
+
+    Siguiendo la nomenclatura que indica Laravel, la tabla intermedia o 'pivot' tendra que llamarse: "clientes_perfil"
+    Un cliente puede tener varios perfiles.
+    Un perfil puede tener varios clientes.
+    Campos: cliente_id, perfil_id
+
+---------------------------------------------------------------------
+Curso Laravel. BBDD XV. Eloquent X. Vídeo 30
+https://www.youtube.com/watch?v=Dge5VipF4RM&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=30
+https://laravel.com/docs/6.x/eloquent-relationships#many-to-many
+
+Elaboramos un ejemplo práctico donde establecemos una relación varios a varios. Utilizamos la información proporcionada en la documentación oficial de Laravel.
+
+$ php artisan make:model Perfil -m 
+$ php artisan make:migration create_clientes_perfiles_table --create=cliente_perfil
+
+Archivo migration para tabla clientes_perfil 
+    class CreatePerfilesTable extends Migration
+    {
+        /**
+         * Run the migrations.
+         *
+         * @return void
+         */
+        public function up()
+        {
+            Schema::create('perfils', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('cliente_id');
+                $table->integer('perfil_id');
+                $table->timestamps();
+            });
+        }
+    }
+
+Ejectutar el comando: $ php artisan migrate 
+y llenar la informacion en la base de datos con los campos.
+
+Establecer la relacion uno a muchos en el modelo Cliente:
+
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cliente extends Model
+{
+    /**
+     * 
+     */
+    public function perfils()
+    {
+        return $this->belongsToMany('App\Perfil');
+    }
+}
+
+La ruta:
+
+Route::get("/cliente/{id}/perfil", function($id){
+    
+    $cliente = Cliente::find($id);
+    foreach($cliente->perfils as $perfil) {
+        return $perfil->nombre;
+    }
+
+});
+
