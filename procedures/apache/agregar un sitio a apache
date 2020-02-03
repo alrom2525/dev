@@ -1,45 +1,44 @@
   cd /var/www/
   ls
-  sudo mkdir ldap.sofad.qc.ca
+  sudo mkdir mydomain.org
   ls
 
-  cd /var/www/ldap.sofad.qc.ca/
+  cd /var/www/mydomain.org/
   sudo mkdir www
   cd /home/administrator/
   729  ls
-  730  sudo cp ldap.sofad.qc.ca.conf /etc/apache2/sites-available/
-  731  sudo a2ensite ldap.sofad.qc.ca.conf 
+  730  sudo cp mydomain.org.conf /etc/apache2/sites-available/
+  731  sudo a2ensite mydomain.org.conf 
   732  sudo systemctl reload apache2
   
   733  ifconfig
   734  cd /var/www/
   735  ls
   736  ls -l
-  737  sudo chown -R www-data:www-data ldap.sofad.qc.ca/
+  737  sudo chown -R www-data:www-data mydomain.org/
   738  ls -l
-  739  sudo chmod -r 775 ldap.sofad.qc.ca/
-  740  sudo chmod 775 ldap.sofad.qc.ca/
-  741  cd ldap.sofad.qc.ca/
+  739  sudo chmod -r 775 mydomain.org/
+  740  sudo chmod 775 mydomain.org/
+  741  cd mydomain.org/
   742  ls -l
   743  sudo chmod 775 www/
   744  ls -l
   745  cd /var/www/
   746  ls
-  747  cd auteur.sofad.qc.ca/
-  748  ls
+  
 
 
 
-  contenido del archivo ldap.sofad.qc.ca.conf /etc/apache2/sites-available/
+  contenido del archivo mydomain.org.conf /etc/apache2/sites-available/
 
 
 
   <VirtualHost 10.0.8.13:80>
-  ServerName ldap.sofad.qc.ca
-  DocumentRoot /var/www/ldap.sofad.qc.ca/www/
+  ServerName mydomain.org
+  DocumentRoot /var/www/mydomain.org/www/
         
-        ErrorLog /var/log/apache2/ldap.sofad.qc.ca_error.log
-        CustomLog /var/log/apache2/ldap.sofad.qc.ca_access.log full
+        ErrorLog /var/log/apache2/mydomain.org_error.log
+        CustomLog /var/log/apache2/mydomain.org_access.log full
         AddDefaultCharset Off
 
 <FilesMatch \.php$>
@@ -47,9 +46,9 @@
     SetHandler "proxy:unix:/var/run/php/php7.1-fpm.sock|fcgi://localhost/"
   </FilesMatch>
 
-  Alias / "/var/www/ldap.sofad.qc.ca/www/" 
+  Alias / "/var/www/mydomain.org/www/" 
 
-  <Directory /var/www/ldap.sofad.qc.ca/www/*>
+  <Directory /var/www/mydomain.org/www/*>
     Options -Indexes +FollowSymLinks
     AllowOverride All
     Allow from all

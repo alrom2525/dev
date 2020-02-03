@@ -1,0 +1,45 @@
+Certificados HTTPS Cerbot
+cat   000-default.conf     
+ifconfig       
+exit        
+hostname       
+exit        
+cfdisk         
+sudo  cfdisk      
+sudo  shutdown -r now
+sudo  cfdisk      
+sudo  parted   -l 
+sudo  cfdisk      
+df -h    
+sudo  cfdisk      
+sudo  resize2fs   /dev/sda1   
+df -h    
+sudo  resize2fs   /dev/sda1   
+sudo  shutdown -r now
+sudo  resize2fs   /dev/sda1   
+sudo  parted   -l 
+sudo  resize2fs   /dev/sda1   
+sudo  cfdisk      
+sudo  xfs_growfs  /dev/sda1   
+sudo  fdisk -l /dev/sda1
+sudo  fdisk -l 
+udo   fsck.ext4   -v /dev/sda2
+sudo  xfs_growfs  /dev/sda2   
+sudo  resize2fs   /dev/sda2   
+df -h    
+sudo  shutdown -r now
+
+https://certbot.eff.org/lets-encrypt/ubuntubionic-apache.html
+sudo  add-apt-repository   ppa:certbot/certbot  
+sudo  apt   install  python-certbot-apache
+sudo  nano  /etc/cron.d 
+
+https://certbot.eff.org/lets-encrypt/ubuntubionic-apache.html
+sudo  certbot-auto      
+sudo  /usr/sbin/certbot-auto  -q renew
+sudo  /usr/bin/certbot-auto   renew --dry-run
+sudo  certbot  renew --dry-run
+sudo  crontab  -e 
+crontab  -e    
+systemctl   list-timers    
+history        

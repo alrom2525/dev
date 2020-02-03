@@ -1,0 +1,202 @@
+<?php
+CRUD con formularios
+---------------------------------------------------------------------
+Curso Laravel. CRUD con formularios I. Preparación de sitio. Vídeo 34
+
+https://www.youtube.com/watch?v=rUaiPn8hQeA&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=34
+
+tabla productos: id, nombre_articulo, seccion, precio, fecha, pais_origen, timestamps;
+
+---------------------------------------------------------------------
+Curso Laravel. CRUD con formularios II. Creación de controller y rutas Vídeo 35
+Creando el  controller de la aplicación, plantillas y rutas.
+
+correcciones de actualizaciones en Laravel, Juan el en minuto 9:11 hereda la plantilla de la siguiente manera: @extends('../layout/plantilla.blade.php') haciendo referencia a la ruta relativa del archivo, en laravel 5.8 se llama de la siguiente forma: @extends('layout.plantilla') De la antigua manera daba un error de no encontrar la vista plantilla, saludos
+
+---------------------------------------------------------------------
+Curso Laravel. CRUD con formularios III Inserción de datos en BBDD. Vídeo 36
+Voy por el minuto 10
+https://www.youtube.com/watch?v=yCP4-3G-ZGs&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=36
+https://laravel.com/docs/5.7/controllers#resource-controllers
+
+como almacenar información en la BBDD desde el formulario creado en el vídeo anterior.
+
+El comando $ php artisan make:controller PhotoController --resource
+asigna en un tipico CRUD las rutas correctas a cada una de las paginas CRUD.
+
+Despues debe hacerse la siguiente declaracion de ruta, esta crea multiples rutas para administrar una variedad de acciones del recurso, ejemplo:
+	Route::resource('photos', 'PhotoController');
+
+	You may register many resource controllers at once by passing an array to the resources method:
+
+	Route::resources([
+	    'photos' => 'PhotoController',
+	    'posts' => 'PostController'
+	]);
+ 
+
+Muestra todas las rutas configuradas=>    $ php artisan route:list 
+
+
+---------------------------------------------------------------------
+Creando el modelo
+$ php artisan make:model Producto
+
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Producto extends Model
+{
+    
+}
+
+---------------------------------------------------------------------
+
+Rutas: archivo web.php
+// Sintaxis Route::resource('directorio de paginas CRUD', 'CRUDController');
+Route::resource('/productos', 'PhotoController');
+
+/*Route::get('/inicio',     'ProductosController@index');
+Route::get('/crear',      'ProductosController@create');
+Route::get('/actualizar', 'ProductosController@update');
+Route::get('/insertar',   'ProductosController@store');
+Route::get('/borrar',     'ProductosController@destroy');*/
+
+
+---------------------------------------------------------------------
+archivo ProductosController.php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Producto;
+
+class ProductosController extends Controller
+{
+    
+    public function create()
+    {
+    	return view("productos.create");
+    }    
+
+    public function store(Request $request)
+    {
+    	// return view("productos.insert");
+    	// Esto segun los videos de Eloquent
+    	$producto = new Producto;
+    	$producto->nombre_articulo = $request->nombre_articulo;
+    	$producto->save();
+
+    }
+
+    public function update(Request $request, $id)
+    {
+    	return view("productos.update");
+    }
+
+	public function destroy($id)
+    {
+    	return view("productos.delete");
+    }    
+}
+---------------------------------------------------------------------
+Directorio para las vistas:
+
+views/layouts 
+	
+plantilla.blade.php
+<!doctype html>
+<html>
+	<head>
+   		<meta charset="utf-8">
+	    <title>Test page</title>
+	</head>
+	
+	<body>
+
+	    <div class="cabecera">
+	        @yield('cabecera')
+		</div>
+
+	    <div class="contenido">
+	        @yield('contenido')
+		</div>
+
+	    <div class="pie">
+	          @yield('pie')      
+		</div>
+	</body>
+
+</html>
+
+
+views/productos
+---------------------------------------------------------------------	
+create.blade.php
+@extends("../layouts.plantilla")
+
+@section("cabecera")
+
+@section("contenido")
+	<form method="post" action="/productos">
+		<input type="text" name="nombre_articulo">
+		{{ csrf_field() }}
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+@endsection
+
+---------------------------------------------------------------------
+create.blade.php
+@extends("../layouts.plantilla")
+
+@section("cabecera")
+
+@section("contenido")
+	<form method="post">
+		<input type="text" name="nombre_articulo">
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+@endsection
+
+---------------------------------------------------------------------
+update.blade.php
+@extends("../layouts.plantilla")
+
+@section("cabecera")
+
+@section("contenido")
+	<form method="post">
+		<input type="text" name="nombre_articulo">
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+@endsection
+
+---------------------------------------------------------------------
+insert.blade.php
+@extends("../layouts.plantilla")
+
+@section("cabecera")
+
+@section("contenido")
+	<form method="post">
+		<input type="text" name="nombre_articulo">
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+@endsection
+
+---------------------------------------------------------------------
+delete.blade.php
+@extends("../layouts.plantilla")
+
+@section("cabecera")
+
+@section("contenido")
+	<form method="post">
+		<input type="text" name="nombre_articulo">
+		<input type="submit" name="enviar" value="Enviar">
+	</form>
+@endsection
+
+---------------------------------------------------------------------
