@@ -10,6 +10,7 @@
 		is going to be be the plural Example: services (lower case)
 
 Pasos para crear tablas en BBDD Laravel:
+	0. Fast method: see item 1.2 Create a model including his controller and his migration
 	1. Crear un archivo migration
 	2. Configurar o editar ese archivo
 	3. Ejecutar el comando php artisan migrate
@@ -36,15 +37,21 @@ Pasos para crear tablas en BBDD Laravel:
 	https://laravel.com/docs/6.x/migrations#columns (tipos de datos)
 	$table->bigIncrements('id');
 	$table->integer('user_id');
+	$table->tinyInteger('status')->default('1');
     $table->decimal('amount', 8, 2);
+    $table->float('amount', 8, 2);
+    
     $table->string('name');
     $table->char('name', 100);
     $table->string('email')->unique();
-    $table->timestamp('email_verified_at')->nullable();
     $table->text('notes');
     $table->string('email')->index();
     $table->longText('payload');
     $table->mediumText('body');
+
+    $table->date('birthdate');
+    $table->timestamp('email_verified_at')->nullable();
+    
 	$table->boolean('confirmed');
 
 3. Ejecutar el comando php artisan migrate
