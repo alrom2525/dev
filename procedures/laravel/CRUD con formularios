@@ -20,6 +20,13 @@ https://laravel.com/docs/5.7/controllers#resource-controllers
 
 como almacenar información en la BBDD desde el formulario creado en el vídeo anterior.
 
+---------------------------------------------------------------------
+Curso Laravel. CRUD con formularios IV. Uso de blade en formulario. Vídeo 37 Min 15:39
+https://www.youtube.com/watch?v=Ya3Q1ogpF_M&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=37
+Completamos el formulario dela clase anterior y le damos formato utilizando las plantillas blade marcando la estructura para el resto de futuras páginas de nuestro sitio.
+
+---------------------------------------------------------------------
+
 El comando $ php artisan make:controller PhotoController --resource
 asigna en un tipico CRUD las rutas correctas a cada una de las paginas CRUD.
 
@@ -85,7 +92,11 @@ class ProductosController extends Controller
     	// return view("productos.insert");
     	// Esto segun los videos de Eloquent
     	$producto = new Producto;
-    	$producto->nombre_articulo = $request->nombre_articulo;
+    	$producto->nombre_articulo 	= $request->nombre_articulo;
+    	$producto->seccion 		 	= $request->seccion;
+    	$producto->precio 			= $request->precio;
+    	$producto->fecha 			= $request->fecha;
+    	$producto->pais_origen 		= $request->pais_origen;
     	$producto->save();
 
     }
@@ -100,6 +111,10 @@ class ProductosController extends Controller
     	return view("productos.delete");
     }    
 }
+
+---------------------------------------------------------------------
+Vamos a guardar todas las imagenes dentro del directorio public/images 
+
 ---------------------------------------------------------------------
 Directorio para las vistas:
 
@@ -111,12 +126,21 @@ plantilla.blade.php
 	<head>
    		<meta charset="utf-8">
 	    <title>Test page</title>
+<style>
+.pie {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+
+}
+</style>
 	</head>
 	
 	<body>
 
 	    <div class="cabecera">
 	        @yield('cabecera')
+	        <img src="public/logo.png">
 		</div>
 
 	    <div class="contenido">
@@ -137,13 +161,61 @@ create.blade.php
 @extends("../layouts.plantilla")
 
 @section("cabecera")
+	Insertar registros
+@endsection
 
 @section("contenido")
 	<form method="post" action="/productos">
-		<input type="text" name="nombre_articulo">
-		{{ csrf_field() }}
-		<input type="submit" name="enviar" value="Enviar">
+	<table>
+	<tr>
+		<td>Nombre</td>
+		<td>
+			<input type="text" name="nombre_articulo">
+			{{ csrf_field() }}
+		</td>
+	</tr>	
+	
+	<tr>
+		<td>Seccion</td>
+		<td>
+			<input type="text" name="seccion">
+		</td>
+	</tr>	
+
+	<tr>
+		<td>Precio</td>
+		<td>
+			<input type="text" name="precio">
+		</td>
+	</tr>
+
+	<tr>
+		<td>Fecha</td>
+		<td>
+			<input type="text" name="fecha">
+		</td>
+	</tr>
+
+	<tr>
+		<td>Pais de origen</td>
+		<td>
+			<input type="text" name="pais_origen">
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" align="center">
+			<input type="submit" name="enviar" value="Enviar">
+		</td>
+	</tr>	
+		
+	</table>	
 	</form>
+@endsection
+
+
+@section("pie")
+
 @endsection
 
 ---------------------------------------------------------------------
