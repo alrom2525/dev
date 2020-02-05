@@ -5,7 +5,7 @@ https://www.youtube.com/watch?v=DkxHCVGkpwE&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpA
 
 https://laravel.com/docs/6.x/eloquent-relationships
 
-Cómo crear relaciones uno a uno entre dos tablas con eloquent.
+Cómo crear la RELACION UNO a UNO entre dos tablas con eloquent.
 
 Suposicion: Cada cliente compra un unico articulo.
 	Tabla articulos: id, cliente_id(clave foranea), nombre_articulo, precio, observaciones, seccion.
@@ -60,7 +60,8 @@ https://www.youtube.com/watch?v=reUaUQKP0bA&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpA
 
 https://laravel.com/docs/6.x/eloquent-relationships#one-to-many-inverse
 
-Que es una relacion inversa y como crear este tipo de relaciones.
+Que es una RELACION INVERSA y como crear este tipo de relaciones.
+No es ni más ni menos que invertir el sentido de la relación entre dos tablas. 
 
 Se cambia el sentido 
 Por cada cliente solo puede haber un articulo.
@@ -87,8 +88,8 @@ use App\Articulo;
 use App\Cliente;
 
 Route::get('/articulo/{$id}/cliente', function($id) {
-	// return Articulo::find($id)->cliente;
-	return Articulo::find($id)->cliente->Nombre;
+	// return Articulo::find($id)->cliente; # obtiene todos los campos del cliente
+	return Articulo::find($id)->cliente->Nombre; #obtiene solo el cmapo nombre del cliente
 });
 
 
@@ -117,7 +118,8 @@ Curso Laravel. BBDD XIII. Eloquent VIII. Vídeo 28
 https://www.youtube.com/watch?v=w02iIRjyZ28&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=28
 
 https://laravel.com/docs/6.x/eloquent-relationships#one-to-many
-Consultas uno a varios.
+Como crear la RELACION UNO a VARIOS
+Como crear la RELACION UNO a MUCHOS
 
 Suposicion: Cada cliente compra varios articulos.
     Tabla articulos: id, cliente_id(clave foranea), nombre_articulo, precio, observaciones, seccion.
@@ -163,12 +165,13 @@ Route::get('/articulos/', function() {
 
 2) Usando la clausula where
 
-use App\Articulo;
+use App\Articulo; #estas instrucciones deben estar al exterior de todas las rutas
 use App\Cliente;
 
 Route::get('/articulos/', function() {
  
-    $articulos = Cliente::find(3)->articulos->where('pais_origen', 'Suiza')->first();
+    // $articulos = Cliente::find(3)->articulos->where('pais_origen', 'Suiza')->first();
+    $articulos = Cliente::find(3)->articulos->where('pais_origen', 'Suiza');
     $comment = App\Post::find(1)->comments()->where('title', 'foo')->first();
     foreach ($articulos as $articulo) {
         echo $articulo->nombre_articulo . '<br>';
@@ -177,6 +180,51 @@ Route::get('/articulos/', function() {
 });
 
 
+ejemplo 3: previamente se configuro la relacion inversa en el modelo Review
+    a) Un estudiante puede hacer muchas revisiones de test 
+    b) Una revision de test le pertene a un solo estudiante 
+
+Modelo Student:
+class Student extends Model
+{
+    public function reviews() 
+    {
+        return $this->hasMany('App\Review');
+    }
+}
+
+Modelo Review:
+class Review extends Model
+{
+    /**
+     * Get the student that owns the review
+     */
+    public function student()
+    {
+        return $this->belongsTo('App\Student');
+    }
+}
+
+Creacion de ruta para observar el funcionamiento
+
+        Route::get('/review-tmp/', function() {
+         
+            $reviews = Student::find(1)->reviews;
+            
+
+            foreach ($reviews as $review) {
+                echo $review->workphone . '<br>';
+                echo $review->email . '<br>';
+                
+                $review_student = Review::find($review->student_id)->student;
+                echo $review_student->firstname . '<br>';
+                echo $review_student->lastname . '<br>';
+                echo $review_student->street . '<br>';
+
+                echo Review::find($review->student_id)->student->firstname . '<br>'; #obtiene solo el campo firstname
+                echo Review::find($review->student_id)->student->lastname . '<br>'; # obtiene solo el campo lastname 
+ 
+             }
 
 
 For example, a blog post may have an infinite number of comments. Like all other Eloquent relationships, one-to-many relationships are defined by placing a function on your Eloquent model:

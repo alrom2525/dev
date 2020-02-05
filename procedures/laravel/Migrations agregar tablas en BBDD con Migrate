@@ -31,7 +31,7 @@ Pasos para crear tablas en BBDD Laravel:
 	$ php artisan make:model Post -m
 
 	1.2 Create a model including his controller and his migration:
-	$ php artisan make:model Customer -c -m  
+	$ php artisan make:model Customer -c --resource -m
 
 2. Configurar o editar ese archivo
 	https://laravel.com/docs/6.x/migrations#columns (tipos de datos)
@@ -56,6 +56,12 @@ Pasos para crear tablas en BBDD Laravel:
 
 3. Ejecutar el comando php artisan migrate
 	$ php artisan migrate
+
+4. Crear las relaciones, ejemplo si es una relacion RELACION UNO a VARIOS tambien hay 
+   que hacer la relacion inversa para poder consultar en ambos sentidos
+   https://laravel.com/docs/6.x/eloquent-relationships
+
+   Nota: revisar el archivo BDD Eloquent relationships
 
 Comandos adicionales respecto a migrate:
 a) Vuelve un paso atras de una migracion (equivalente a un CTRL-Z deshacer)

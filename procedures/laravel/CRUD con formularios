@@ -21,11 +21,18 @@ https://laravel.com/docs/5.7/controllers#resource-controllers
 como almacenar información en la BBDD desde el formulario creado en el vídeo anterior.
 
 ---------------------------------------------------------------------
-Curso Laravel. CRUD con formularios IV. Uso de blade en formulario. Vídeo 37 Min 15:39
+Curso Laravel. CRUD con formularios IV. Uso de blade en formulario. Vídeo 37
 https://www.youtube.com/watch?v=Ya3Q1ogpF_M&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=37
 Completamos el formulario dela clase anterior y le damos formato utilizando las plantillas blade marcando la estructura para el resto de futuras páginas de nuestro sitio.
 
 ---------------------------------------------------------------------
+Curso Laravel. CRUD con formularios V. Leer información. Vídeo 38
+https://www.youtube.com/watch?v=tewkuz3L-1I&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=38
+cómo leer la información almacenada en la BBDD.
+
+Solo he iniciado a verlo generalmente
+---------------------------------------------------------------------
+
 
 El comando $ php artisan make:controller PhotoController --resource
 asigna en un tipico CRUD las rutas correctas a cada una de las paginas CRUD.
@@ -131,6 +138,8 @@ plantilla.blade.php
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
+	font-size: 0.7em;
+	margin-bottom: 15px;
 
 }
 </style>
@@ -148,7 +157,8 @@ plantilla.blade.php
 		</div>
 
 	    <div class="pie">
-	          @yield('pie')      
+	          @yield('pie')
+	          Mi sitio y mi pie de pagina 
 		</div>
 	</body>
 
@@ -204,8 +214,12 @@ create.blade.php
 	</tr>
 
 	<tr>
-		<td colspan="2" align="center">
+		<td>
 			<input type="submit" name="enviar" value="Enviar">
+		</td>
+
+		<td>
+			<input type="reset" name="borrar" value="Borrar">
 		</td>
 	</tr>	
 		
