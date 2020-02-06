@@ -1,0 +1,131 @@
+<?php 
+CRUD con formularios II
+---------------------------------------------------------------------
+
+Curso Laravel. Validación de formularios. Campo requerido.
+https://www.youtube.com/watch?v=jEqnHCgh7MY&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=45
+
+En el controller ir a la funcion store, 
+ahi tenemos que indicar la validacion:
+
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ReviewController extends Controller
+{
+	/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+	
+    public function store(Request $request)
+    {	
+    	# La lista de campos a verificar deben ser escritos igual como se llaman
+    	# los campos de la base de datos
+        $this->validate($request, ['seccion' => 'required', 'pais_origen' => 'required', 
+    								'nombre_articulo' => 'required'] );
+    }
+}
+
+Cuando el usuario deja un campo vacio que es requerido, internamente Laravel guarda el error en un objeto   llamado $error, para que el registro no se inserte en la BDD.
+En la vista o plantilla Blade se debe hacer una seccion para indicar que ahi vamos a mostrar los errores:
+
+
+@if(count($errors) > 0)
+	<ul>
+		# Recorrer todos los errores en un bucle y mostrarlos
+		@foreach ($errors->all() as $error) {
+			<li>{{ $error }}<li>
+		@endforeach
+	<ul>
+@endiif
+
+
+---------------------------------------------------------------------
+Curso Laravel. Validación de formularios con clase Request. Vídeo 46
+https://www.youtube.com/watch?v=hnyGzVr4Snw&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=46
+En este vídeo vemos cómo crear una validación de formulario con creación de clase propia de tipo Request. Esto permitirá reutilizar la validación en otros formularios sin necesidad de volver a escribirla.
+
+# vamos a crear una clase en la cual podamos inyectar como parametro del siguiente metodo store, esa clase que va a crear la validacion, de tal forma que podamos prescindir en el metodo store de la linea $this-validate. Y si en un futuro necesitamos otros formularios que inserten datos en la misma tabla, entonces se puede llamar a la clase.
+	public function store(Request $request)
+
+Hacer una clase de tipo request, un nuevo formulario con una clase tipo request
+	$ php artisan make:request CreateProductosRequest
+
+
+
+Estos creara un directorio Request, en el metodo authorize() cambiar a true
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class CreateProductosRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        # return false; cambiarlo a true; para que autorize a todos los usuarios
+        # a utilizar esta funcion de validacion
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {	# aqui hay que crear la validacion
+        return [
+            'seccion' => 'required', 'pais_origen' => 'required', 
+    		'nombre_articulo' => 'required'
+        ];
+    }
+}
+
+
+Y hacer el cambio en el controlador
+
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests\CreateProductosRequest; # importando la clase que contruimos
+
+class ReviewController extends Controller
+{
+	/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+	
+	/*	Cambiar la clase Request por defecto y agregar la clase que hicimos
+		en el video anterior (45)
+		public function store(Request $request) 
+		y luego  importar la clase que contruimos 
+		use App\Http\Requests\CreateProductosRequest (en la seccion donde se importan las librerias, clases, etc);
+	*/
+    public function store(CreateProductosRequest $request)
+    {	
+    	# La lista de campos a verificar deben ser escritos igual como se llaman
+    	# los campos de la base de datos
+        /*  video anterior 45
+        $this->validate($request, ['seccion' => 'required', 'pais_origen' => 'required', 
+    								'nombre_articulo' => 'required'] );
+    	*/
+
+    								
+    }
+}
