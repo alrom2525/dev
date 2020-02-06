@@ -28,18 +28,23 @@ https://www.youtube.com/watch?v=ymdcTOXXSBY
 
 
 
-App::setLocale('fr'); // Establece el idioma de la aplicacion
+1. App::setLocale('fr'); // Establece el idioma de la aplicacion
 
-App::getLocale(); // Muestra el idioma configurado
-App::isLocale('fr');
-Agregar la carpeta lan/fr con todos sus archivos
-Crear un controlador para el cambio de idioma
+2. App::getLocale(); // Muestra el idioma configurado
+3. App::isLocale('fr');
+4. Agregar la carpeta lan/fr con todos sus archivos
+5. Crear un controlador para el cambio de idioma
 
-Every route we need to add the followin parameter: app()->getLocale()
+6. Every route we need to add the followin parameter: app()->getLocale()
 Example:
 original: <a href="{{ route('login'), app()->getLocale() }}">Login</a>
 with change: <a href="{{ route('login' }}">Login</a>
 
+7. Inside of any view 
+<div class="card-body">
+        <h4 class="card-text">{{ __('search.Instruction') }}</h4>
+	{{ app()->getLocale() }}
+</div>
 
 Blog's questions:
 a) Oleg: I would like to ask you about your language switcher with possible parameters in routes?

@@ -42,7 +42,7 @@ En la vista o plantilla Blade se debe hacer una seccion para indicar que ahi vam
 			<li>{{ $error }}<li>
 		@endforeach
 	<ul>
-@endiif
+@endif
 
 
 ---------------------------------------------------------------------
@@ -93,7 +93,7 @@ class CreateProductosRequest extends FormRequest
 }
 
 
-Y hacer el cambio en el controlador
+Y hacer el cambio en el controlador (no olvidar importar la clase que contruimos)
 
 
 namespace App\Http\Controllers;
