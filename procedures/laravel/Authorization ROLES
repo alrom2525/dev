@@ -1,0 +1,42 @@
+<?php 
+Roles Authorization vía middleware.
+Curso Laravel. Roles de usuario. Vídeo 51
+Vemos en este vídeo cómo crear roles o perfiles de usuario en Laravel vía middleware.
+https://laravel.com/docs/6.x/authorization
+https://laravel.com/docs/6.x/authorization#authorizing-actions-using-policies
+
+// min 5:27
+---------------------------------------------------------------------
+Vamos a crear dos perfiles de usuario, un perfil ADMINISTRADOR y un perfil USUARIO.
+
+Luego a un usuario registrado en la base de datos le vamos a otorgar uno de estos roles.
+
+1) Se tiene que crear un middleware para todas las tareas de roles,
+permisos, etc.
+	$ php artisan make:middleware RoleMiddleware
+
+2) Registrar el middleware en el Kernel. 
+	app/Http/Kernel.php
+/*
+
+    protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\ , 
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+    ];
+
+3) Editar el archivo app/Http/Middleware/RoleMiddleware.php 
+	
+	public function handle($request, Closure $next)
+    {   
+        return redirect('/');
+        // return $next($request);
+    }
+/*******************************************************************/
+
+4) Necesitemos crear una tabla de roles y relacionar la tabla usuarios con esa tabla.
+	$ php artisan make:model Role -m
+
+/*******************************************************************/

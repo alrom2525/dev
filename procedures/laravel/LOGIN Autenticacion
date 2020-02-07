@@ -1,0 +1,80 @@
+<?php 
+LOGIN Autenticacion 
+Curso Laravel. Personalización del login. Vídeo 50
+En este vídeo vemos algunas ideas de cómo iniciar una personalización del sistema de login de Laravel.
+---------------------------------------------------------------------
+
+	app/Http/Controllers/HomeController.php
+/*******************************************************************/
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; #importar Auth
+
+class HomeController extends Controller
+{
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {   
+        $user = Auth::user(); # almacena el objeto del usuario que ha hecho login
+        return view('home', compact('user'));
+    }
+}
+
+/*******************************************************************/
+	resources/views/home.blade.php 
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Dashboard</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in  {{ $user->name }}!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+/*******************************************************************/
+	resources/views/welcome.blade.php
+<div class="flex-center position-ref full-height">
+            @if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        User logged in 
+                        <a href="{{ url('/home') }}">Home</a>
+                    @else
+                        <a href="{{ route('login') }}">Login</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+</div>
+
+/*******************************************************************/
+	routes/web.php
+Route::get('/', function () {
+    // return view('welcome');
+    if(Auth::check()){
+        return "You are logged in";
+    } 
+    else{
+        return "You aren't logged in";
+    }
+});
