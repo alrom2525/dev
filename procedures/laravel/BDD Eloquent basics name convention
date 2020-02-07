@@ -3,6 +3,7 @@ BDD Eloquent basics name convention
 ---------------------------------------------------------------------
 Curso Laravel. BBDD VI. Eloquent I. Vídeo 21
 https://www.youtube.com/watch?v=LHJjFZsd5Iw&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=21
+https://laravel.com/docs/6.x/eloquent
 
 Name convention, el modelo debe llamarse al igual que la tabla pero en singular,
 por ejemplo: 
@@ -62,6 +63,12 @@ hay que crear otra variable:
 
 
 Como hacer las consultas con filtros:
+	https://laravel.com/docs/6.x/eloquent#retrieving-models
+ver tambien: 
+	https://laravel.com/docs/6.x/queries
+
+Para importar un modelo se usa la sintaxis: use App\Model;
+	Ejemplo: use App\Product;
 
 Se usa el metodo where, sintaxis:
 	$products = Product::where('field','value');
@@ -71,6 +78,11 @@ Se usa el metodo where, sintaxis:
 	c) $products = Product::where("seccion","Ceramica")->take(1)->get(); #LIMIT 1
 	d) $products = Product::where("seccion","Ceramica")->orderBy("nombre", "desc")->get(); #ORDER BY
 	e) $products = Product::where("seccion","Ceramica")->max("precio"); #MAX 
+	f) $products = Product::where("seccion", "Cereales")->where("precio", 5.99)->get();
+					
+					App\Flight::where('active', 1)
+          			->where('destination', 'San Diego')
+
 	return $products;
 
 ---------------------------------------------------------------------
