@@ -78,11 +78,15 @@ Se usa el metodo where, sintaxis:
 	c) $products = Product::where("seccion","Ceramica")->take(1)->get(); #LIMIT 1
 	d) $products = Product::where("seccion","Ceramica")->orderBy("nombre", "desc")->get(); #ORDER BY
 	e) $products = Product::where("seccion","Ceramica")->max("precio"); #MAX 
-	f) $products = Product::where("seccion", "Cereales")->where("precio", 5.99)->get();
-					
-					App\Flight::where('active', 1)
-          			->where('destination', 'San Diego')
-
+	f) $products = Product::where("seccion", "Cereales")
+				            ->where("precio", 5.99)->get();
+	
+	$student =  Student::where("firstname",$request->firstname)
+                    ->where("lastname",$request->lastname)
+                    ->where("birthdate",$request->birthdate)
+                    ->take(1)
+                    ->get();
+	
 	return $products;
 
 ---------------------------------------------------------------------
