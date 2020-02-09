@@ -39,4 +39,128 @@ permisos, etc.
 4) Necesitemos crear una tabla de roles y relacionar la tabla usuarios con esa tabla.
 	$ php artisan make:model Role -m
 
+
+Abrir la migracion de la tabla USERS porque se debe agregar un campo nuevo llamado "role_id";
+class CreateUsersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+
+            $table->integer('role_id'); # el nombre es asi para poder
+            							# agregar la relacion facilmente
+            							# segun el naming convention
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+}
 /*******************************************************************/
+
+5) Abrir archivo migration de la tabla ROLES 
+y agregar un campo nuevo para colocar el nombre de los roles ejemplo (Administrador, usuario, etc)
+
+class CreateRolesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+      
+            $table->string('nombre_rol'); # campo agregado
+            
+            $table->timestamps();
+        });
+    }
+}
+/*******************************************************************/
+
+6) Hacer un migration refresh
+	$ php artisan migrate:refresh 
+IMPORTANTE: Con este campo, al agregar el campo Laravel borrara los registros existentes en la BDD (revisar si es mas conveniente hacerlo mejor con el comando $ php artisan migrate)
+
+/*******************************************************************/
+
+7) Agregar dos registros en la base de datos, por ejemplo:
+
+	id -> 1
+	nombre_rol-> 'Administrador'
+
+	id -> 2
+	nombre_rol-> 'Estudiante' 
+
+Y agregar algunos usuarios asignandoles uno de estos roles (campo rol_id) a cada uno.
+
+/*******************************************************************/
+
+8) Crear otro Middleware que identifique si un usuario es administrador o no.
+
+	8.1 $ php artisan make:middleware EsAdminMiddleware
+
+	8.2 Registrar el middleware en el Kernel. 
+		app/Http/Kernel.php
+	
+	/*
+    protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\ , 
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'EsAdmin' => \App\Http\Middleware\EsAdminMiddleware::class,
+    ];
+
+    */
+
+/*******************************************************************/
+9) Crear la relacion uno a uno en los modelos user y roles
+
+	9.1 modelo User app/User.php
+
+	class User extends Authenticatable
+	{
+	 	public function role() {
+	 		return $this->belongsTo('App\Role');
+	 	}
+
+	 	public function EsAdmin() {
+	 		// Suposicion: es Administrador? return true (sino false)
+	 		if($this->role->nombre_rol == 'Administrador') {
+	 			return true;
+	 		}
+
+	 		return false;
+	 	}
+	}
+
+
+/*******************************************************************/
+
+10) Editar el archivo routes/web.php 
+
+Route::get('/', function () {
+    $user = Auth::user();
+    
+    if($user->esAdmin()) {
+    	echo "Eres usuario Administrador ";
+    } else {
+    	echo "Eres usuario estudiante ";
+    }
+
+    return view('welcome');
+});
