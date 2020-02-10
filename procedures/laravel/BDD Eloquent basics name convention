@@ -84,7 +84,7 @@ Se usa el metodo where, sintaxis:
 	$student =  Student::where("firstname",$request->firstname)
                     ->where("lastname",$request->lastname)
                     ->where("birthdate",$request->birthdate)
-                    ->take(1)
+                    ->take(1)  
                     ->get();
 	
 	return $products;

@@ -1,0 +1,29 @@
+https://stackoverflow.com/questions/21004310/in-laravel-the-best-way-to-pass-different-types-of-flash-messages-in-the-sessio
+
+In Laravel, the best way to pass different types of flash messages in the session
+
+Session::flash('message', 'This is a message!'); 
+Session::flash('alert-class', 'alert-danger'); 
+Then in your view:
+
+@if(Session::has('message'))
+<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+@endif
+
+
+https://laravel.com/docs/6.x/session#flash-data
+
+Controller.php:
+    session()->flash('alert-text', 'This is my text or message!'); 
+    session()->flash('alert-class', 'alert-warning');
+            
+
+view alert.blade.php:
+    @if(session()->has('alert-text'))
+    <div class="alert {{ session()->get('alert-class', 'alert-primary') }} " role="alert">
+        {{ session()->get('alert-text') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif

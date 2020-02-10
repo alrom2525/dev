@@ -1,0 +1,5 @@
+Laravel-5 'LIKE' equivalent (Eloquent)
+https://stackoverflow.com/questions/30761950/laravel-5-like-equivalent-eloquent
+
+BookingDates::where('email', Input::get('email'))
+    ->orWhere('name', 'like', '%' . Input::get('name') . '%')->get();

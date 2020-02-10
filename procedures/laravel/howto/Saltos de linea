@@ -1,0 +1,8 @@
+Respetar saltos de linea de contenido de una cadena de texto
+
+https://es.stackoverflow.com/questions/242333/respetar-saltos-de-linea-de-contenido-de-un-textarea-al-ser-enviado-por-mail
+
+
+Tienes que usar {!! !!} de Blade para que te muestre los Tags de HTML ya que {{ }} usa la función htmlspecialchars() (Visualización de datos no escapados):
+
+{!! $msg !!}
