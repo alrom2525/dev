@@ -5,7 +5,6 @@ Vemos en este vídeo cómo crear roles o perfiles de usuario en Laravel vía mid
 https://laravel.com/docs/6.x/authorization
 https://laravel.com/docs/6.x/authorization#authorizing-actions-using-policies
 
-// min 5:27
 ---------------------------------------------------------------------
 Vamos a crear dos perfiles de usuario, un perfil ADMINISTRADOR y un perfil USUARIO.
 
