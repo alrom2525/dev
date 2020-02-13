@@ -1,0 +1,148 @@
+
+
+<?php
+
+# arrays
+
+echo "<h2>Curso PHP MySQL. Arrays I. Vídeo 30</h2><br>";
+echo "https://www.youtube.com/watch?v=xPci19sTjek&list=PLU8oAlHdN5BkinrODGXToK9oPAlnJxmW_&index=30<br>";
+
+# Array asociativo, en vez de usar un indice, se usa un texto
+# para referirnos al elemento de un array.
+# Recomendacion, cuando se usan nombres en un array,
+# por ejemplo el array datos;
+# tratar de no repetirlos porque a veces es muy dificil
+# de detectar.
+$semanax = array("Lunes", "Martes", "Miercoles");
+
+$datos = array("Nombre"=>"Esteban", "Apellido"=>"Rivas", 
+        "Edad"=>21);
+echo "<br>";
+echo $datos["Apellido"];
+
+echo "<br><br><br><hr>";
+
+
+echo "<h2>Curso PHP MySQL. Arrays II. Vídeo 31</h2>";
+echo "https://www.youtube.com/watch?v=vzt7sdRMs84&list=PLU8oAlHdN5BkinrODGXToK9oPAlnJxmW_&index=31<br>";
+# cómo comprobar si un nombre corresponde a un array o a una variable. Vemos también cómo recorrer un array con un bucle for y cómo agregar elementos a un array.
+# is_array es una funcion que detecta si es un array.
+
+# $datos= "Evelyn"; esta variable reemplaza al array, ese es
+# el problema que hay que evitar.
+
+// if(is_array($datos)) {  
+//     echo " datos Es un array";
+// } else {
+//     echo "datos No es un array";
+// }
+
+# Recorrer elementos de un array asociativo.
+    echo "<br> <br> <b> 1. Recorrer elementos de un array asociativo</b>";
+    echo "<blockquote>";
+    echo "<br> <br> <b> 1.1 Recorrer el array datos </b> <br>";
+
+    foreach($datos as $clave=>$valor) {
+        echo " a la clave $clave le corresponde el valor: $valor <br>";
+    }
+
+
+    echo "<br> <br> <b> 1.2 Agregar un elemento mas al array asociativo (datos) </b> <br>";
+    
+    $datos ["Pais"] = "El Salvador"; # asi es como se agrega un valor
+
+    foreach($datos as $clave=>$valor) {
+        echo " a la clave $clave le corresponde el valor: $valor <br>";
+    }
+    echo "</blockquote>";
+
+echo "<br> <br> <b> 2. como recorrer un array indexado? </b>";
+    $semana[] = "Domingo";      # index = 0
+    $semana[] = "Lunes";        # index = 1
+    $semana[] = "Martes";       # index = 2
+    $semana[] = "Miercoles";    # index = 3
+    $semana[] = "Jueves";       # index = 4
+    $semana[] = "Viernes";      # index = 5 
+    $semana[] = "Sabado";       # index = 6
+
+# Recorrer un array indexado cuando ya sabemos la longitud
+echo "<br> <blockquote>2.1 Recorrer un array indexado cuando ya sabemos la longitud? ";
+
+for($i=0; $i<=6; $i++) {
+    echo  $semana[$i] . " , ";
+}
+echo "</blockquote>";
+#Recorrer un array indexado cuando ya NO sabemos la longitud
+    echo "<blockquote>2.2 Recorrer un array indexado cuando NO se sabe su longitud? <i>";
+    for($i=0; $i<count($semana); $i++) {
+        echo  $semana[$i] . " , ";
+    }
+    echo "</i> </blockquote>";
+
+# Agregando un elemento mas al array
+    echo "<blockquote>2.3 Recorrer un array indexado cuando NO se sabe su longitud y agregando un elemento al array  <i>";
+    $semana[] = "Semana 2: Domingo";       # index = 7
+    for($i=0; $i<count($semana); $i++) {
+        echo  $semana[$i] . " , ";
+    }
+    echo "</i> </blockquote>";
+
+
+# Ordenar los elementos de un array
+    echo "<blockquote>2.4 Ordenar alfabeticamente, los elementos de un array  <i>";
+    sort($semana); # ordena el array
+    for($i=0; $i<count($semana); $i++) {
+        echo  $semana[$i] . " , ";
+    }
+    echo "</i> </blockquote>";
+
+
+echo "<br><br><br><hr>";
+
+echo "<h2> Curso PHP MySQL Arrays III Arrays multidimesionales Vídeo 32 </h2>";
+echo "https://www.youtube.com/watch?v=uU9jlYQHGQw&list=PLU8oAlHdN5BkinrODGXToK9oPAlnJxmW_&index=32";
+echo "<br>arrays multidimensionales";
+
+$cat_alimentos = array("Fruta", "Leche", "Carne"); # una dimension
+
+$alimentos = array("Fruta" => array("Tropical" =>"Kiwi", 
+                                    "Citrico" => "Mandarina",
+                                    "Otros"   => "Manzana"), 
+
+                   "Leche" => array("Animal" =>"Vaca", 
+                                   "Vegetal" => "Coco"),
+
+                   "Carne" => array("Vacuno" =>"Lomo", 
+                                    "Porcino" => "Pata")
+                );
+
+echo "<br><br> <b>Accediendo a un elemento en concreto del array: </b>";
+echo "<blockquote> " . $alimentos["Carne"][Vacuno] . "</blockquote>";
+                // foreach($alimentos as $ca)
+
+
+# La funcion list,  crea una especie de listado
+echo "<br><br>"; 
+
+foreach($alimentos as $primera_dimension => $segunda_dimension) {
+    echo "<b>Categoria de Alimentos: $primera_dimension </b>";
+    echo "<blockquote> "; 
+    
+    # Por cada categoria de alimentos, se va a separar en 
+    # clave y valor.    
+    while(list($clave, $valor) = each ($segunda_dimension)) {
+        
+        echo " $clave = $valor <br>";
+    }
+    echo "</blockquote> ";
+}
+
+
+# Ahora ver el resultado con la instruccion var_dump
+echo "Mostrando el array con la function var_dump() ";
+echo var_dump($alimentos);
+
+
+echo "<blockquote> Mostrando el array con la function print_r() :";
+    print_r($alimentos);
+echo "</blockquote> "; 
