@@ -43,3 +43,13 @@ sudo  crontab  -e
 crontab  -e    
 systemctl   list-timers    
 history        
+
+
+sudo mkdir domain.test
+sudo chown www-data:www-data domain.test/
+  sudo chmod 775 domain.test/
+cd /etc/apache2/sites-available/
+sudo cp domain.example.conf domain.test.conf
+sudo nano domain.test.conf
+cerbot
+history

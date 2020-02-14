@@ -3,6 +3,10 @@ Sesiones en Laravel
 https://laravel.com/docs/6.x/session
 ---------------------------------------------------------------------
 
+En una sesion se pueden gaurdar arreglos,
+y la forma para obtener un atributo de ese arreglo es:
+dd($request->session()->get('student.firstname'));
+
 The way to pass different types of flash messages in the session:
 Controller.php:
     session()->flash('alert-text', 'This is my text or message!'); 
@@ -17,7 +21,13 @@ view alert.blade.php:
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    @endif
+	@endif
+	
+	# observar attributos de la session en una vista
+	@if(session()->has('review')) 
+		{{ session()->get('review') }}
+		{{ session()->get('review_lastname') }}
+	@endif
 
 
 Curso Laravel. Sesiones I. Vídeo 53
@@ -45,15 +55,19 @@ Ejemplo, escribir lo siguiente dentro del HomeController:
 
 	    	# Eliminar una clave de la sesion
 	    	$request->session()->forget('miusario'); 
-
+			$request->session()->forget(['review', 'review_student_id', 'review_profile', 
+                                        'review_birthdate', 'review_firstname', 'review_lastname',
+                                        'review_telephone', 'review_workphone', 'review_email' ]);
+            
 	    	# ingresa informacion adicional usando la funcion global session
 	    	session(['maria' => 'Estudiante']); 
 
-	    	# Eliminar toda la informacion de la sessio
+	    	# Eliminar toda la informacion de la session
 	    	$request->session()->flush();
 
-	    	return $request->session->all(); # Toda la informacion de la sesion
 
+	    	return $request->session()->all(); # Toda la informacion de la sesion
+			
 	    }
 	}
 
@@ -83,8 +97,16 @@ Ejemplo, escribir lo siguiente dentro del HomeController:
 
 
 
-	    	# Guardar mas informacion a la sesion
+			# Guardar mas informacion a la sesion
+			# This makes the data available for the next request.
+
 	    	$request->session()->flash('status 3', 'Task 3 was successful!');
+			
+			# If you need to keep your flash data around for several requests, 
+			# you may use the reflash method, which will keep all of the flash data 
+			# for an additional request. 
+			# igual que  flash + 1 request
+			$request->session()->reflash();
 
 	    	# Mantiene guardada informacion de la session por siempre
 	    	$request->session()->keep(['username', 'email']);
