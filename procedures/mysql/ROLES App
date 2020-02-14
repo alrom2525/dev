@@ -1,0 +1,124 @@
+
+SELECT * FROM empleado; # user
+SELECT * FROM categoria; # rol
+SELECT * FROM pantalla; # URL capabilities
+SELECT * FROM accede; # capabilities
+
+user
+Field,Type,Null,Key,Default,Extra
+id,bigint(10),NO,PRI,NULL,auto_increment
+auth,varchar(20),NO,MUL,manual,
+confirmed,tinyint(1),NO,MUL,0,
+policyagreed,tinyint(1),NO,,0,
+deleted,tinyint(1),NO,MUL,0,
+suspended,tinyint(1),NO,,0,
+mnethostid,bigint(10),NO,MUL,0,
+username,varchar(100),NO,,,
+password,varchar(255),NO,,,
+idnumber,varchar(255),NO,MUL,,
+firstname,varchar(100),NO,MUL,,
+lastname,varchar(100),NO,MUL,,
+email,varchar(100),NO,MUL,,
+emailstop,tinyint(1),NO,,0,
+icq,varchar(15),NO,,,
+skype,varchar(50),NO,,,
+yahoo,varchar(50),NO,,,
+aim,varchar(50),NO,,,
+msn,varchar(50),NO,,,
+phone1,varchar(20),NO,,,
+phone2,varchar(20),NO,,,
+institution,varchar(255),NO,,,
+department,varchar(255),NO,,,
+address,varchar(255),NO,,,
+city,varchar(120),NO,MUL,,
+country,varchar(2),NO,MUL,,
+lang,varchar(30),NO,,en,
+calendartype,varchar(30),NO,,gregorian,
+theme,varchar(50),NO,,,
+timezone,varchar(100),NO,,99,
+firstaccess,bigint(10),NO,,0,
+lastaccess,bigint(10),NO,MUL,0,
+lastlogin,bigint(10),NO,,0,
+currentlogin,bigint(10),NO,,0,
+lastip,varchar(45),NO,,,
+secret,varchar(15),NO,,,
+picture,bigint(10),NO,,0,
+url,varchar(255),NO,,,
+description,longtext,YES,,NULL,
+descriptionformat,tinyint(2),NO,,1,
+mailformat,tinyint(1),NO,,1,
+maildigest,tinyint(1),NO,,0,
+maildisplay,tinyint(2),NO,,2,
+autosubscribe,tinyint(1),NO,,1,
+trackforums,tinyint(1),NO,,0,
+timecreated,bigint(10),NO,,0,
+timemodified,bigint(10),NO,,0,
+trustbitmask,bigint(10),NO,,0,
+imagealt,varchar(255),YES,,NULL,
+lastnamephonetic,varchar(255),YES,MUL,NULL,
+firstnamephonetic,varchar(255),YES,MUL,NULL,
+middlename,varchar(255),YES,MUL,NULL,
+alternatename,varchar(255),YES,MUL,NULL,
+
+
+id,auth,confirmed,policyagreed,deleted,suspended,mnethostid,username,password,idnumber,firstname,lastname,email,emailstop,icq,skype,yahoo,aim,msn,phone1,phone2,institution,department,address,city,country,lang,calendartype,theme,timezone,firstaccess,lastaccess,lastlogin,currentlogin,lastip,secret,picture,url,description,descriptionformat,mailformat,maildigest,maildisplay,autosubscribe,trackforums,timecreated,timemodified,trustbitmask,imagealt,lastnamephonetic,firstnamephonetic,middlename,alternatename
+1,manual,1,0,0,0,1,guest,$2y$10$Q1ZREC17VK4cyg/sbPc.pu.9SVLOEfjYRN1y./0zxCytTchRJlBV6,,"Guest user"," ",root@localhost,0,,,,,,,,,,,,,en,gregorian,,99,0,0,0,0,,,0,,"This user is a special user that allows read-only access to some courses.",1,1,0,2,1,0,0,1581645837,0,NULL,NULL,NULL,NULL,NULL
+2,manual,1,0,0,0,1,admin,$2y$10$qBKz6rvx8FpxYKpv0I0AxO.3HwjiKV1/utXgt9BWhilTQRkC60.Ti,,Admin,User,admin@google.com,0,,,,,,,,,,,MONTRÉAL,CA,en,gregorian,,99,1581646007,1581646097,0,1581646007,0:0:0:0:0:0:0:1,,0,,,1,1,0,1,1,0,0,1581646063,0,NULL,,,,
+
+----------------------------------------------------------
+SELECT * FROM categoria; # rol
+DESCRIBE mdl_role;
+Field,Type,Null,Key,Default,Extra
+id,bigint(10),NO,PRI,NULL,auto_increment
+name,varchar(255),NO,,,
+shortname,varchar(100),NO,UNI,,
+description,longtext,NO,,NULL,
+sortorder,bigint(10),NO,UNI,0,
+archetype,varchar(30),NO,,,
+
+SELECT * FROM mdl_role;
+id,name,shortname,description,sortorder,archetype
+1,,manager,,1,manager
+2,,coursecreator,,2,coursecreator
+3,,editingteacher,,3,editingteacher
+4,,teacher,,4,teacher
+5,,student,,5,student
+6,,guest,,6,guest
+7,,user,,7,user
+8,,frontpage,,8,frontpage
+
+----------------------------------------------------------
+SELECT * FROM pantalla; # URL capabilities
+DESCRIBE mdl_capabilities
+Field,Type,Null,Key,Default,Extra
+id,bigint(10),NO,PRI,NULL,auto_increment
+name,varchar(255),NO,UNI,,
+captype,varchar(50),NO,,,
+contextlevel,bigint(10),NO,,0,
+component,varchar(100),NO,,,
+riskbitmask,bigint(10),NO,,0,
+
+SELECT * FROM mdl_capabilities;
+id,name,captype,contextlevel,component,riskbitmask
+1,moodle/site:config,write,10,moodle,62
+2,moodle/site:configview,read,10,moodle,0
+3,moodle/site:readallmessages,read,10,moodle,8
+
+----------------------------------------------------------
+SELECT * FROM accede; # role_capabilities
+
+DESCRIBE mdl_role_capabilities;
+Field,Type,Null,Key,Default,Extra
+id,bigint(10),NO,PRI,NULL,auto_increment
+contextid,bigint(10),NO,MUL,0,
+roleid,bigint(10),NO,MUL,0,
+capability,varchar(255),NO,MUL,,
+permission,bigint(10),NO,,0,
+timemodified,bigint(10),NO,,0,
+modifierid,bigint(10),NO,MUL,0,
+
+SELECT * FROM mdl_role_capabilities;
+id,contextid,roleid,capability,permission,timemodified,modifierid
+1,1,1,moodle/site:configview,1,1581645837,0
+2,1,2,moodle/site:configview,1,1581645837,0
+3,1,1,moodle/site:readallmessages,1,1581645837,0
