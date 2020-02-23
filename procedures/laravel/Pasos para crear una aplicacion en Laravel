@@ -3,7 +3,7 @@ Pasos para crear una aplicacion en Laravel:
 1. Crear el proyecto
 	composer create-project laravel/laravel myProject
 	
-	composer create-project laravel/laravel dev.stepform.com
+	composer create-project laravel/laravel voyager.test
 
 2. Configurar permisos
 	https://laravel.com/docs/6.x/installation#configuration

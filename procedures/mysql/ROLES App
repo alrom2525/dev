@@ -88,7 +88,7 @@ id,name,shortname,description,sortorder,archetype
 8,,frontpage,,8,frontpage
 
 ----------------------------------------------------------
-SELECT * FROM pantalla; # URL capabilities
+SELECT * FROM pantalla; # URL Pages capabilities
 DESCRIBE mdl_capabilities
 Field,Type,Null,Key,Default,Extra
 id,bigint(10),NO,PRI,NULL,auto_increment
