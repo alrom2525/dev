@@ -2,6 +2,10 @@ Añadir tu usuario de linux al grupo www-data
 
 http://ecapy.com/anadir-tu-usuario-de-linux-al-grupo-www-data/index.html
 
+
+1) Conocer los grupos a los que pertenece un usuario
+    $ groups nombre_usuario
+
 sudo chgrp -R www-data /var/www
 sudo chmod -R g+w /var/www/
 sudo find /var/www -type d -exec chmod 2775 {} \;

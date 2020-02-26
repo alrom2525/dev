@@ -1,0 +1,16 @@
+Cannot obtain task lock Scheduled tast
+
+
+Agregar en el archivo config.php en la seccion:
+
+// Moodle 2.7 introduces a locking api for critical tasks (e.g. cron).
+// The default locking system to use is DB locking for Postgres, and file locking for
+// MySQL, Oracle and SQLServer. If $CFG->preventfilelocking is set, then the default
+// will always be DB locking. It can be manually set to one of the lock
+// factory classes listed below, or one of your own custom classes implementing the
+// \core\lock\lock_factory interface.
+//
+//      $CFG->lock_factory = "auto";
+	
+	$CFG->lock_factory = "\\core\\lock\\db_record_lock_factory";
+

@@ -53,4 +53,35 @@ Route::get('/', funcion_anonima () {
 		Route::get('/post/{id}', function ($locale, $id) { 
 		    	return 'This is the post number '. $id. " Languague is set: ". $locale; 
 			});
-		
+
+2) Otra forma de crear la estructura de un sitio, es creando una ruta y accediendo a todos los recursos de un cotrolador, ejemplo:
+
+    # Route
+    Route::resource('posts','PostsController');
+
+3) Importante: el comando php artisan route:list  muestra la estructura:
+	Domain | Method | URI | Name | Action | Middleware|
+	
+	3.1 Al agregar metodos en un controlador estos generalmente estaran 
+	vinculados a una ruta (archivo web.php) entonces en ese caso 
+	a esas nuevas rutas hay que especificarles tambien el campo name.
+	esto se mira en el controlador por defecto:
+		Route::get('/home', 'HomeController@index')->name('home');
+	o por ejemplo al crear una nueva ruta:
+		Route::post('/review/search', 'ReviewController@search')->name('review.search');
+
+
+	luego al ejecutar de nuevo el comando php artisan route:list
+	se mostrara la ruta con el campo 'name'
+	y de esta forma se evita el error:
+	exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): Route [] not defined
+	
+	https://laracasts.com/discuss/channels/laravel/facadeignitionexceptionsviewexception-route-adminpasswordupdate-not-defined-view-cwamp64wwwcmscmsresourcesviewsadminpasswordsresetbladephp 
+
+	Antes:
+	Route::get(‘/myroute’, ‘MyController@index’); // no funciona
+
+	Despues:
+	Route::get(‘/myroute’, ‘MyController@index’)->name(‘myroute’); // Si funciona
+
+	https://laravel.com/docs/6.x/routing#named-routes

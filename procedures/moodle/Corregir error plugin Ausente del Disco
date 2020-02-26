@@ -1,0 +1,16 @@
+<?php
+Corregir error plugin Ausente del Disco
+https://moodle.org/mod/forum/discuss.php?d=260188
+
+Tengo (o tenia) una plataforma moodle en la version 2.4.4 y la he subido y actualizado a la version 2.6.2 solicitada por el cliente. El proceso de actualización se ha realizado con éxito, pero a la hora de ver "Vista general de extensiones" me da un "Ausente del disco" el plugin "
+
+
+	Al final lo solucioné de la forma más radical, y fue yendo por base de datos y buscar el registro exacto. 
+	Estos registros estan en la tabla "mdl_config_plugins".
+	1) Hice una busqueda del plugin de la siguiente forma:
+		select * from mdl_config_plugins
+		where plugin like '%qtype%';
+
+	Y busco el registro que hace mención al plugin, eliminandolo directamente en base de datos.
+
+	2) despues realice un purgado de todas las caches de mi instancia

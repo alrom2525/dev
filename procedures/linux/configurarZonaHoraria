@@ -2,18 +2,15 @@ https://www.ochobitshacenunbyte.com/2018/09/25/configurar-la-zona-horaria-en-gnu
 Configurar la zona horaria en GNU Linux
 
 Para las distribuciones basadas en Debian, como Ubuntu, Linux Mint y derivadas, podemos utilizar:
+	$ dpkg-reconfigure tzdata
 
-1
-dpkg-reconfigure tzdata
-
-cambiar timezone a servidor linux
-dpkg-reconfigure tzdata
-
+------------------- NTP Server and Client ---------------------
+https://www.howtoforge.com/tutorial/ubuntu-ntp-server/
 
 ---------------------------- MySQL ----------------------------
 http://qbit.com.mx/blog/2015/02/09/modificando-la-zona-horaria-a-mysql-local-timezone/
 
-mysql> SELECT @@global.time_zone;
+	mysql> SELECT @@global.time_zone;
 +--------------------+
 | @@global.time_zone |
 +--------------------+
@@ -21,4 +18,10 @@ mysql> SELECT @@global.time_zone;
 +--------------------+
 1 row in set (0.00 sec)
 si MySQL ya está con SYSTEM, y luego reinicias mysql, lee la hora correcta.
+
+	mysql> SELECT NOW();
+
+	NOW(); #Ambos resultados son iguales
+
+
 

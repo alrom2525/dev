@@ -1,0 +1,8 @@
+Configuraciones a php_ini
+
+post_max_size = 250M
+max_execution_time = 600
+upload_max_filesize = 250M
+max_file_uploads = 40
+date.timezone = America/Toronto
+memory_limit = 512M
