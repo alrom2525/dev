@@ -27,3 +27,24 @@ Archivo routes/web.php
 y crear su controlador:
 	php artisan make:controller --resource AdminUsersController
 
+---------------------------------------------------------------------
+
+Curso Laravel. Aplicación completa III. Vídeo 59
+
+https://www.youtube.com/watch?v=TSQuq6HWceE&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=59
+
+Continuamos con nuestra aplicación. En este vídeo incluimos todos los usuarios que hay en la BBDD (de momento solo 1) en la página del administrador.
+
+---------------------------------------------------------------------
+Curso Laravel. Aplicación completa IV. Vídeo 60
+
+https://www.youtube.com/watch?v=RSxNujE3bKw&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=60
+
+Comenzamos a crear al formulario para insertar usuarios en la BBDD desde la página del administrador.
+
+---------------------------------------------------------------------
+Curso Laravel. Aplicación completa V. Formulario creación de usuario. Vídeo 61
+
+https://www.youtube.com/watch?v=gNGdL3x-gKM&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=61
+En este vídeo terminamos de crear el formulario de la página de insertar usuarios. 
+Terminado
