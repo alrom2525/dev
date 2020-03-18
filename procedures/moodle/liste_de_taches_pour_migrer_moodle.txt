@@ -1,0 +1,72 @@
+<?php
+
+Liste de tâches pour migrer moodle
+
+Documentation:
+https://www.evirtualplus.com/wp-content/uploads/2017/02/ruta-actualizacion-moodle-actualizada-version-38.png
+https://docs.moodle.org/33/en/Upgrading
+https://docs.moodle.org/35/en/MySQL_full_unicode_support
+https://docs.moodle.org/37/en/MySQL_full_unicode_support
+https://docs.moodle.org/38/en/Upgrading
+https://docs.moodle.org/38/en/Administration_via_command_line#Upgrading
+
+Prerequisites:
+1. Creation du virtual host sur apache2 http et https
+2. Verifier le taille de stockage sur le disque dur
+
+Exemple Migration CS de Laval
+	Version existante:
+		PHP Version 5.5.9-1ubuntu4.29
+		Moodle 2.8.3+ (Build: 20150305)
+
+	Version objectif:
+		PHP Version 7.1
+		Moodle 3.8.1+ (Build: 20200228)
+
+Nous devons faire la mise à jour comme ça:
+2.8 > 3.3 > 3.8.
+
+Des étapes du plan de migration Moodle:
+1. Copiez le dossier Moodle / moodledata /  base de données sur le nouveau serveur,
+   avec les mêmes versions du logiciel actuel (Php et Mysql)
+
+2. Restaurer la base de données dans le nouveau schéma
+  2.1  Décompression de la base de données
+  2.2  Création de l'utilisateur de BD et l'autorisation dans le nouveau schéma
+  2.3 Ajouter la selection de la base de données à le fichier .sql dans le premier ligne
+		$ sed -i '1i use base_de_donnees;' moodle_bd.sql &
+  2.4  Restaurer la base de données dans le nouveau schéma
+
+3.  Décompression du moodle.tar.gz
+  3.1  Déplacer le fichier moodledata.tar.gz jusqu'à la place finale
+  3.2  Décompression
+
+4. Migration Moodle 
+	4.1 Mise en marche  Moodle actuelle (2.8 par exemple) 
+	4.2 Mise à jour Moodle 3.3
+		https://docs.moodle.org/33/en/Upgrading
+	4.3 MySQL storage engine conversion - support des émoticônes
+		https://docs.moodle.org/35/en/MySQL_full_unicode_support
+		Patience longtemps pour s'executer
+	4.5 Changement à php version PHP 7.1
+	4.6 Mise à jour Moodle 3.8
+		https://docs.moodle.org/38/en/Upgrading
+	4.7 Configurer le nouveau format du fichier config.php 
+		$CFG->lock_factory = "\\core\\lock\\db_record_lock_factory";
+		$CFG->disableupdatenotifications = true;
+
+	4.8	 Suprimer all roles sites admin
+	4.9  Renommer le dossier install
+
+5. Configurations Moodle
+  5.1 Désactiver Analyses de données (enableanalytics)
+                 Tableau de bord - Administration du site - Fonctions avancées
+  5.2 Écrire la variable Locale du site fr_CA.UTF-8
+  
+  5.3 Configuration du courriel entrant et sortant
+  5.4 modifier le texte dans des liens créés manuellement pour pointer vers la nouvelle URL
+  	  https://docs.moodle.org/38/en/Administration_via_command_line#Search_and_replace_text
+  5.5 Cron service
+
+
+

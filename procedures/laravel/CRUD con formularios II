@@ -129,3 +129,8 @@ class ReviewController extends Controller
     								
     }
 }
+
+
+// Enviar archivos(fotos, documentos, etc.) atraves de formularios
+
+{!! Form::open(['method' => 'POST', 'action'=>'AdminUsersController@store', 'files'=>true ]) !!}

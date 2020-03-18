@@ -33,6 +33,23 @@ Pasos para crear tablas en BBDD Laravel:
 	1.2 Create a model including his controller and his migration:
 	$ php artisan make:model Customer -c --resource -m
 
+	1.3 Agregar un campo a una tabla:
+	$ php artisan make:migration agregar_campoFoto_users --table=users
+
+		public function up()
+    	{
+        	Schema::table('users', function (Blueprint $table) {
+            $table->string('foto_id');
+        	});
+    	}
+
+    	public function down()
+	    {
+	    	Schema::table('users', function (Blueprint $table) {
+	            $table->dropColumn('foto_id');
+	        });
+	    }
+
 2. Configurar o editar ese archivo
 	https://laravel.com/docs/6.x/migrations#columns (tipos de datos)
 

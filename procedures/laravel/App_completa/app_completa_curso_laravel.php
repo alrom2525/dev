@@ -47,4 +47,28 @@ Curso Laravel. Aplicación completa V. Formulario creación de usuario. Vídeo 6
 
 https://www.youtube.com/watch?v=gNGdL3x-gKM&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=61
 En este vídeo terminamos de crear el formulario de la página de insertar usuarios. 
+
+---------------------------------------------------------------------
+Curso Laravel. Aplicación completa VI. Correcciones y campo foto. Vídeo 62
+
+https://www.youtube.com/watch?v=wacwXSwn17k
+
+En este vídeo corregimos que el campo role_id no se inserte en la BBDD y preparamos el formulario y la BBDD para poder subir imágenes de los usuarios desde el formulario de creación de usuario.
+
+---------------------------------------------------------------------
+Curso Laravel. Aplicación completa VII. Campo foto y carpeta en servidor. Vídeo 63
+
+https://www.youtube.com/watch?v=PfHumCFUbcM
+En este vídeo vemos cómo subir la imagen del formulario a la BBDD y a una carpeta "images" del servidor.
+
+---------------------------------------------------------------------
+Curso Laravel. Aplicación completa VIII. Encriptación de contraseña y relaciones entre tablas.
+
+https://www.youtube.com/watch?v=npB53qae_2s&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=64
+En este vídeo vemos cómo encriptar las contraseñas introducidas en el formulario de registro de usuarios y corregimos la relación entre la tabla fotos y users.
+
+---------------------------------------------------------------------
+Curso Laravel. Aplicación completa IX. Mostrar usuarios con foto. Vídeo 65
+https://www.youtube.com/watch?v=VEVvJe5MiSA&list=PLU8oAlHdN5Bk-qkvjER90g2c_jVmpAHBh&index=65
+En este vídeo vemos cómo mostrar la foto juntos con los datos de usuario en la página de usuarios.
 Terminado
