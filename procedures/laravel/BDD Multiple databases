@@ -38,3 +38,97 @@ In config/database.php
     'password'  => env('DB_PASSWORD_SECOND'),
 ],
 Note: In mysql2 if DB_username and DB_password is same, then you can use env('DB_USERNAME') which is metioned in .env first few lines.
+
+Without .env <5.0
+Define Connections
+
+app/config/database.php
+
+return array(
+
+    'default' => 'mysql',
+
+    'connections' => array(
+
+        # Primary/Default database connection
+        'mysql' => array(
+            'driver'    => 'mysql',
+            'host'      => '127.0.0.1',
+            'database'  => 'database1',
+            'username'  => 'root',
+            'password'  => 'secret'
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ),
+
+        # Secondary database connection
+        'mysql2' => array(
+            'driver'    => 'mysql',
+            'host'      => '127.0.0.1',
+            'database'  => 'database2',
+            'username'  => 'root',
+            'password'  => 'secret'
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ),
+    ),
+);
+
+Schema
+
+To specify which connection to use, simply run the connection() method
+
+Schema::connection('mysql2')->create('some_table', function($table)
+{
+    $table->increments('id'):
+});
+Query Builder
+
+$users = DB::connection('mysql2')->select(...);
+Eloquent
+
+Set the $connection variable in your model
+
+class SomeModel extends Eloquent {
+
+    protected $connection = 'mysql2';
+
+}
+You can also define the connection at runtime via the setConnection method or the on static method:
+
+class SomeController extends BaseController {
+
+    public function someMethod()
+    {
+        $someModel = new SomeModel;
+
+        $someModel->setConnection('mysql2'); // non-static method
+
+        $something = $someModel->find(1);
+
+        $something = SomeModel::on('mysql2')->find(1); // static method
+
+        return $something;
+    }
+
+}
+Note Be careful about attempting to build relationships with tables across databases! It is possible to do, but it can come with some caveats and depends on what database and/or database settings you have.
+
+
+
+From Laravel Docs
+Using Multiple Database Connections
+
+When using multiple connections, you may access each connection via the connection method on the DB facade. The name passed to the connection method should correspond to one of the connections listed in your config/database.php configuration file:
+
+$users = DB::connection('foo')->select(...);
+You may also access the raw, underlying PDO instance using the getPdo method on a connection instance:
+
+$pdo = DB::connection()->getPdo();
+Useful Links
+
+Laravel 5 multiple database connection FROM laracasts.com
+Connect multiple databases in laravel FROM tutsnare.com
+Multiple DB Connections in Laravel FROM fideloper.com
