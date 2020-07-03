@@ -1,0 +1,9 @@
+Quitar archivos añadidos antes de un commit
+https://es.stackoverflow.com/questions/3575/quitar-archivos-a%C3%B1adidos-antes-de-un-commit
+
+si por error añades archivos que no quieres agregar a un commit, haz esto:
+
+git reset <paths>
+
+git reset [-q] [<tree-ish>] [--] <pathspec>
+https://git-scm.com/docs/git-reset#_description
