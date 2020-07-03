@@ -1,0 +1,18 @@
+Remover Logo Moodle
+
+/theme/fordson/scss/preset/Perception.scss 
+
+.sitelink {
+
+    display: none;
+
+}
+
+
+.logininfo {
+
+    display: none;
+
+}
+
+

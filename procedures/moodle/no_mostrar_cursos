@@ -1,0 +1,16 @@
+No mostrar los cursos en pagina principal
+https://moodle.org/mod/forum/discuss.php?d=78372
+Otras alternativas a lo sugerido por Iris serían:
+
+1) Administración del sitio -> 
+
+Página Principal
+
+    Ajustes de la página principal
+ -> Ajustes de portada -> Del lado derecho,
+en la sección "Elementos de la portada al entrar al sitio", elegir "Mostrar la lista
+de cursos".
+
+2) Usar MyMoodle.
+
+3) En la portada del sitio, agregar el bloque "Cursos".

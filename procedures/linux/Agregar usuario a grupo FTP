@@ -1,0 +1,15 @@
+Agregar usuario a grupo FTP
+groups my-user
+groups
+id my-user2
+
+getent group sftpusers
+cat /etc/group
+vim /etc/group
+
+id my-user
+id my-user2
+sudo usermod -a -G sftpusers mlim
+ls -al
+sudo chmod -R ugo+rw *
+ls -al

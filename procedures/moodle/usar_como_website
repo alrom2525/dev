@@ -1,0 +1,11 @@
+usar moodle como website
+https://moodle.org/mod/forum/discuss.php?d=376680
+
+Sí que puedes hacerlo. 
+
+La forma más sencilla podría ser crear un espacio diferenciado ("curso") para cada una de esas secciones. Después habilitas el acceso de "invitados" sin contraseña a cada uno de dichos espacios.
+
+Ten en cuenta que un "curso" en Moodle puedes ser muy muy simple. De hecho, si en los ajustes de un curso eliges el "formato de curso" el que se denomina "Formato de actividad única" y seleccionas "Página" ... ese curso solo estará compuesto de lo que escribas en esa "página", es decir, texto, con o sin imágenes, enlaces, etc.
+
+Saludos.
+
