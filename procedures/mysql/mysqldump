@@ -1,0 +1,11 @@
+mysqldump
+
+https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html
+
+shell> mysqldump [options] > dump.sql
+
+
+
+$ mysqldump -u administrator -p my_bd > dump_my_bd.sql
+
+

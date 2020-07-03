@@ -1,17 +1,17 @@
 Crear un nuevo usuario y otorgarle permisos en MySQL
 https://www.digitalocean.com/community/tutorials/crear-un-nuevo-usuario-y-otorgarle-permisos-en-mysql-es
-use dev_cslaval;
 
 a) CREATE USER 'nombre_usuario'@'localhost' IDENTIFIED BY 'tu_contrasena';
-CREATE USER 'administrator'@'localhost' IDENTIFIED BY '123456';
+CREATE USER 'exam_pesticides'@'localhost' IDENTIFIED BY 'P3st1';
+
 
 b) GRANT ALL PRIVILEGES ON * . * TO 'nombre_usuario'@'localhost';
-GRANT ALL PRIVILEGES ON administrator.* TO 'administrator'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON exam_pesticides.* TO 'exam_pesticides'@'localhost' WITH GRANT OPTION;
 
 GRANT ALL PRIVILEGES ON vbox_mocn.* TO 'vbox_mocn'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
-Administrator$1
+
 ¿Cómo crear un nuevo usuario?
 En la parte 1 del tutorial de MySQL, hicimos todas las ediciones como usuario root, con acceso completo a todas las bases de datos. Como sea, en este caso hay mas restricciones que pueden ser requeridas, hay formas de crear usuarios con persmisos personalizados.
 
