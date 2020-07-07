@@ -1,0 +1,12 @@
+Cron Moodle
+https://docs.moodle.org/38/en/Cron
+
+
+Agregar una entrada cron al usuario WEB (www-data)
+	$ sudo crontab -u www-data -e 
+
+El contenido siguiente:
+* * * * * /usr/bin/php7.1 /var/www/moodle.test/www/admin/cli/cron.php >/dev/null
+* * * * * /usr/bin/php7.1 /var/www/moodle2.test/www/admin/cli/cron.php >/dev/null
+
+

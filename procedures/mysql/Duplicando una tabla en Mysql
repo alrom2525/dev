@@ -1,0 +1,13 @@
+Duplicando una tabla en Mysql
+
+https://www.damianculotta.com.ar/bases-de-datos/duplicando-una-tabla-en-mysql/
+
+duplicar tabla:
+	CREATE TABLE tabla_nueva LIKE tabla_original;
+
+insertamos todos los registros de la original de la siguiente forma:
+	INSERT INTO tabla_nueva SELECT * FROM tabla_original;
+
+
+Crear una copia de la tabla con un solo comando:	
+	CREATE TABLE tabla_nueva SELECT * FROM tabla_original;	

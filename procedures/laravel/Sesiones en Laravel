@@ -3,7 +3,7 @@ Sesiones en Laravel
 https://laravel.com/docs/6.x/session
 ---------------------------------------------------------------------
 
-En una sesion se pueden gaurdar arreglos,
+En una sesion se pueden guardar arreglos,
 y la forma para obtener un atributo de ese arreglo es:
 dd($request->session()->get('student.firstname'));
 
@@ -52,6 +52,13 @@ Ejemplo, escribir lo siguiente dentro del HomeController:
 	    {
 	    	# ingresa informacion adicional a la sesion, formato clave => valor
 	    	$request->session()->put(['miusario' => 'Administrador']); 
+
+			# ingresa toda los campos (atributos) del objeto $request 
+			# (todos los campos procedentes de un formulario via POST / GET)
+			$request->session()->put('mi_nombre_de_sesion', $request->toArray());
+
+        	# actualiza una clave de la sesion (mi_nombre_de_sesion.atributo)
+			$request->session()->put(['student.firstname' => $request->firstname]);
 
 	    	# Eliminar una clave de la sesion
 	    	$request->session()->forget('miusario'); 

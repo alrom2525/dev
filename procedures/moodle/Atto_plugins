@@ -1,0 +1,37 @@
+Atto Plugins
+https://moodle.org/plugins/browse.php?list=category&id=53
+
+cd lib/editor/atto/plugins/
+
+Moodle 3.8
+sudo wget https://moodle.org/plugins/download.php/17025/atto_wordimport_moodle38_2018060401.zip
+sudo wget https://moodle.org/plugins/download.php/17254/atto_morefontcolors_moodle37_2018050202.zip
+sudo wget https://moodle.org/plugins/download.php/21147/atto_fullscreen_moodle38_2015122011.zip
+sudo wget https://moodle.org/plugins/download.php/8431/atto_fontsize_moodle32_2015042701.zip
+sudo wget https://moodle.org/plugins/download.php/8582/atto_fontfamily_moodle36_2015051500.zip
+sudo wget https://moodle.org/plugins/download.php/10791/atto_pastespecial_moodle30_2016031100.zip
+sudo wget https://moodle.org/plugins/download.php/9418/atto_chemistry_moodle31_2015092900.zip
+sudo wget https://moodle.org/plugins/download.php/16925/atto_corrections_moodle37_2018050201.zip
+sudo wget https://moodle.org/plugins/download.php/17250/atto_count_moodle35_2018062700.zip
+sudo wget https://moodle.org/plugins/download.php/17255/atto_morebackcolors_moodle37_2018050202.zip	
+sudo wget https://moodle.org/plugins/download.php/17937/atto_hr_moodle35_2018093000.zip
+sudo wget https://moodle.org/plugins/download.php/19626/atto_sketch_moodle37_2019052400.zip
+
+	sudo wget https://moodle.org/plugins/download.php/21174/atto_styles_moodle38_2020031100.zip
+	sudo wget https://moodle.org/plugins/download.php/17099/atto_preview_moodle38_2016021501.zip
+
+
+Moodle 3.3
+sudo wget https://moodle.org/plugins/download.php/17254/atto_morefontcolors_moodle37_2018050202.zip
+sudo wget https://moodle.org/plugins/download.php/15331/atto_wordimport_moodle33_2017111201.zip
+sudo wget https://moodle.org/plugins/download.php/17764/atto_htmlplus_moodle35_2018090400.zip
+sudo wget https://moodle.org/plugins/download.php/21147/atto_fullscreen_moodle38_2015122011.zip
+sudo wget https://moodle.org/plugins/download.php/8431/atto_fontsize_moodle32_2015042701.zip
+sudo wget https://moodle.org/plugins/download.php/8582/atto_fontfamily_moodle36_2015051500.zip
+sudo wget https://moodle.org/plugins/download.php/10791/atto_pastespecial_moodle30_2016031100.zip
+sudo wget https://moodle.org/plugins/download.php/9418/atto_chemistry_moodle31_2015092900.zip
+sudo wget https://moodle.org/plugins/download.php/16925/atto_corrections_moodle37_2018050201.zip
+sudo wget https://moodle.org/plugins/download.php/17255/atto_morebackcolors_moodle37_2018050202.zip	
+sudo wget https://moodle.org/plugins/download.php/17937/atto_hr_moodle35_2018093000.zip
+sudo wget https://moodle.org/plugins/download.php/19626/atto_sketch_moodle37_2019052400.zip
+	sudo wget https://moodle.org/plugins/download.php/17250/atto_count_moodle35_2018062700.zip
