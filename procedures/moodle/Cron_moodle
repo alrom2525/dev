@@ -8,5 +8,3 @@ Agregar una entrada cron al usuario WEB (www-data)
 El contenido siguiente:
 * * * * * /usr/bin/php7.1 /var/www/moodle.test/www/admin/cli/cron.php >/dev/null
 * * * * * /usr/bin/php7.1 /var/www/moodle2.test/www/admin/cli/cron.php >/dev/null
-
-
