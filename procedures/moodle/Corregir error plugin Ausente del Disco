@@ -11,6 +11,9 @@ Tengo (o tenia) una plataforma moodle en la version 2.4.4 y la he subido y actua
 		select * from mdl_config_plugins
 		where plugin like '%qtype%';
 
+		SELECT * FROM  mdl_config_plugins
+			WHERE plugin LIKE '%qtype%';
+
 	Y busco el registro que hace mención al plugin, eliminandolo directamente en base de datos.
 
 	2) despues realice un purgado de todas las caches de mi instancia

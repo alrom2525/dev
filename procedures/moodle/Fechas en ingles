@@ -1,0 +1,50 @@
+<?php
+Fechas en ingles
+https://moodle.org/mod/forum/discuss.php?d=315136
+
+
+    -> tengo instalado moodle 2.8.2 en este tengo instalado los paquetes de idioma español 
+    -> internacional, todo funciona correctamente excepto los campos de fechas como son en actividades me aparecen en ingles, al generar reportes o certificaciones tambien aparecen en ingles, he corregido la ubicacion o zona horaria del servidor, he actualizado paquetes de idiomas y he corregido zona horaria en el servidor pero no funciona.
+
+te sugiero cambiar estas opciones
+
+
+Detectar idioma automáticamente
+autolang
+dejarla en no
+
+
+
+Idioma por defecto
+lang
+dejar en español que agregaste
+
+
+
+pero la que debes tener cuidado es en
+
+'Locale' del sitio
+locale
+Ya que es esta la que define "al final" si se usara o no el español.
+
+debe ser la misma que tienes configurada en el sistema, en linux por ejemplo ejecutas el comando "locale" y debes tener un resultado como este.
+
+ locale
+LANG=es_CL.UTF-8
+LANGUAGE=es_CL:es
+LC_CTYPE="es_CL.UTF-8"
+LC_NUMERIC="es_CL.UTF-8"
+LC_TIME="es_CL.UTF-8"
+LC_COLLATE="es_CL.UTF-8"
+LC_MONETARY="es_CL.UTF-8"
+LC_MESSAGES="es_CL.UTF-8"
+LC_PAPER="es_CL.UTF-8"
+LC_NAME="es_CL.UTF-8"
+LC_ADDRESS="es_CL.UTF-8"
+LC_TELEPHONE="es_CL.UTF-8"
+LC_MEASUREMENT="es_CL.UTF-8"
+LC_IDENTIFICATION="es_CL.UTF-8"
+LC_ALL=
+
+así que configuras tu locale como es_CL.UTF-8 y no deberías tener ese problema.
+

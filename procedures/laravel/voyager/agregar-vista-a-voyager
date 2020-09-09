@@ -1,0 +1,53 @@
+# agregar-vista-a-voyager
+
+https://medium.com/@matthewcoatney/wiring-laravel-voyager-custom-menus-6d75d637842
+
+1) In your views folder create a vendor folder with a voyager subfolder inside. 
+	Then create a blade file in the voyager folder called gravy.blade.php
+	In your controller file add an entry:
+	public function gravy()
+	{
+	    return view('/vendor/voyager/gravy');
+	}
+
+2) Add a route (routes/web.php of Laravel):
+	Route::get('/vendor/voyager/gravy','MyController@gravy');
+
+3) The most important part is getting the URL field right:
+ 	/vendor/voyager/gravy
+
+
+Example, add a view called report.blade.php
+
+1)	In your views folder create a folder called admin (resources/views/admin).
+	Then create a blade file in the admin folder called report.blade.php
+	and add the following content or make some HTML content.
+
+	@extends('voyager::master')
+	@section('page_title', __('voyager::generic.viewing'))
+
+	@section('content')
+	  <p>Report!</p>
+	  <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h2>
+	@endsection
+
+2)	In your controller (app/Http/Controllers/HomeController.php) 
+	file add an entry:
+	public function report()
+    {
+        return view('/admin/report');
+    }
+
+3)	And a route (routes/web.php of Laravel):
+	Route::get('/admin/report','HomeController@report');
+
+4) 	In your browser go to URL:
+ 	http://yourdomain.xyz/admin/report
+ 	
+
+
