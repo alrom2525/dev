@@ -1,0 +1,6 @@
+<?php 
+# Obtener los usuarios de Moodle en objetos
+
+\core_user::get_support_user(); // Usuario de soporte o administrador
+core_user::get_noreply_user(); // No reply
+$USER;	// Usuario actual

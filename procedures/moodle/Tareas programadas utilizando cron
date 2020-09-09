@@ -10,21 +10,28 @@ php admin/cli/mysql_collation.php --collation=utf8mb4_unicode_ci
 
 
 
-
-/usr/bin/php7.1 /var/www/dev.ldap-moodle.sofad.qc.ca/www/admin/cli/cron.php
+/usr/bin/php7.1 /var/www/mydomain.org/www/admin/cli/cron.php
 
 
 
 Example:
-\$sudo -u www-data /usr/bin/php admin/cli/cron.php
-";
+	$ sudo -u www-data /usr/bin/php admin/cli/cron.php
 
-    echo $help;
-    die;
-}
+	/usr/bin/php7.1 /var/www/mydomain.org/www/auth/ldap/cli/sync_users.php 
+	/usr/bin/php7.1 /var/www/mydomain.org/www/admin/cli/cron.php
 
 
+https://docs.moodle.org/39/en/Administration_via_command_line#Scheduled_tasks
+Revisar la lista de las tareas programadas:
+	$ sudo -u www-data	/usr/bin/php7.1 /var/www/mydomain.org/www/admin/tool/task/cli/schedule_task.php --list
 
-/usr/bin/php7.1 /var/www/dev.ldap-moodle.sofad.qc.ca/www/auth/ldap/cli/sync_users.php 
+Ejecutar una tarea programada específica:
+	$ sudo -u www-data /usr/bin/php7.1 /var/www/mydomain.org/www/admin/tool/task/cli/schedule_task.php --execute='\mod_assign\task\cron_task' 
 
-/usr/bin/php7.1 /var/www/dev.ldap-moodle.sofad.qc.ca/www/admin/cli/cron.php
+Si queremos agregar esta tarea al cron de linux para que sea mas rapida su ejecucion o que sea prioritaria: 
+	$ sudo crontab -u www-data -e
+
+	Agregar la linea suiguiente:
+* * * * * /usr/bin/php7.1 /var/www/mydomain.org/www/admin/tool/task/cli/schedule_task.php --execute='\mod_assign\task\cron_task' 
+
+'\local_o365\task\usersync' 

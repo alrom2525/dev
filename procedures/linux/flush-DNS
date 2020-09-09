@@ -1,0 +1,17 @@
+flush-DNS
+
+flush my DNS cache on a Mac / Apple 
+	$ killall -HUP mDNSResponder
+
+https://vitux.com/how-to-flush-dns-cache-on-ubuntu/
+
+Most modern Linux distributions such as Ubuntu 18.04 are using systemd resolved service to cache DNS entries.
+
+To find out whether the service is running use the following command:
+
+sudo systemctl is-active systemd-resolved.service
+
+To clear the Systemd Resolved DNS cache, type:
+	$ sudo systemd-resolve --flush-caches
+
+	$sudo system-resolve - -statistics

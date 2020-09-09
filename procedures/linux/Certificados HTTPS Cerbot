@@ -1,5 +1,76 @@
 https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04
 
+https://www.youtube.com/watch?v=zglf0UWi2gQ
+https://www.qtithow.com/2019/08/how-to-install-ssl-certificate-on-ubuntu-1804-lts.html
+
+$ sudo su 
+Step 1 - Installing Certboot
+	$ sudo add-apt-repository ppa:certbot/certbot
+	$ sudo apt install python-certbot-apache
+
+Step 2 — Set Up the SSL Certificate
+	Check the directive serverName 
+
+	$ cat /etc/apache2/sites-available/your-site.conf 
+		<VirtualHost *:80>
+				#ServerAdmin youremail@mydomain.org
+		        ServerName mydomain.org
+		        ServerAlias www.mydomain.org
+		        DocumentRoot /var/www/mydomain.org/www/
+		        
+		        ErrorLog /var/log/apache2/mydomain.org_error.log
+		        CustomLog /var/log/apache2/mydomain.org_access.log full
+		        AddDefaultCharset Off
+		        Alias / "/var/www/mydomain.org/www/" 
+		        <Directory /var/www/mydomain.org/www/*>
+		                Options -Indexes +FollowSymLinks
+		                AllowOverride All
+		                Allow from all
+		        </Directory>
+		RewriteEngine on
+		RewriteCond %{SERVER_NAME} =mydomain.org
+		</VirtualHost>
+
+Step 3 — Allowing HTTPS Through the Firewall
+	Check status of ufw
+	$ sudo ufw status
+	Status: inactive
+
+	$ sudo ufw allow 'Apache Full'
+	Rules updated
+	Rules updated (v6)
+
+	$ sudo ufw delete allow 'Apache'
+	Could not delete non-existent rule
+	Could not delete non-existent rule (v6)
+
+	$ sudo ufw status
+
+Step 4 — Obtaining an SSL Certificate
+
+Me quede aqui en el 5:52
+
+Step 5 — Verifying Certbot Auto-Renewal
+
+
+
+
+
+
+
+IMPORTANT NOTES:
+ - Unable to install the certificate
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/educatools.ca/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/educatools.ca/privkey.pem
+   Your cert will expire on 2020-11-12. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot again
+   with the "certonly" option. To non-interactively renew *all* of
+   your certificates, run "certbot renew"
+
+
+   
 Certificados HTTPS Cerbot
 cat   000-default.conf     
 ifconfig       

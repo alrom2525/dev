@@ -1,0 +1,16 @@
+descargar-version-anterior-git
+¿Como se baja un proyecto de git hub desde una version anterior a la ultima?
+
+
+Puedes clonar el repositorio y luego ejecutar
+
+git checkout <hash commit>
+así iras al commit que deseas, luego puedes crear una rama basada en ese commit por ejemplo
+
+
+
+git checkout -b <nombre-rama>
+o también luego de clonarlo puedes hacer lo siguiente
+
+git reset --hard <hash commit>
+https://git-scm.com/docs/git-reset

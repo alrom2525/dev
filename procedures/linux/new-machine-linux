@@ -1,0 +1,4 @@
+new-machine-linux
+
+Activar rewrite en apache
+sudo a2enmod rewrite

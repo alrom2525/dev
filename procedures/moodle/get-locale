@@ -1,0 +1,23 @@
+get-locale
+
+ Gets the system locale
+ *
+ * @return string Retuns the current locale.
+ */
+function moodle_getlocale() {
+
+
+
+$lang = isset($SESSION->lang) ? $SESSION->lang : $CFG->lang;
+$lang = empty($user->lang) ? $CFG->lang : $user->lang;
+
+
+
+$CFG->lang
+/**
+ * Returns the code for the current language
+ *
+ * @category string
+ * @return string
+ */
+function current_language() {

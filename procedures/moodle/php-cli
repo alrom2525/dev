@@ -1,0 +1,7 @@
+php-cli
+
+// Path to PHP CLI.
+// Probably something like /usr/bin/php. If you enter this, cron scripts can be
+// executed from admin web interface.
+// $CFG->pathtophp = '';
+   $CFG->pathtophp = '/usr/bin/php7.1';

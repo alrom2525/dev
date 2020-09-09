@@ -6,3 +6,10 @@ upload_max_filesize = 250M
 max_file_uploads = 40
 date.timezone = America/Toronto
 memory_limit = 512M
+
+
+Si está utilizando PHP-FPM, 
+archivo /etc/php/7.1/fpm/php.ini
+
+debe reiniciar ese servicio. Sustituir  php7.2 con su propia versión.
+sudo service php7.2-fpm restart

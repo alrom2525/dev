@@ -1,0 +1,14 @@
+establecer-ip-fija
+https://www.youtube.com/watch?v=uLt3BPX5sCY
+
+Aunque se apague la máquina virtual, la dirección IP se mantendrá fija.
+
+
+En la consola de de GCloud, en las instancias de VM
+
+Contiguo a la lista del menu Conectar ... seleccionar Ver detalles de la red
+
+ir a Red de VPC --> Direcciones ip externas
+
+inicialmente el tipo de dirección IP se encuentra como "Efímera"
+cambiarla a "Estática" 

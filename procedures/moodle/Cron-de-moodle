@@ -1,0 +1,10 @@
+Cron de moodle
+https://docs.moodle.org/39/en/Cron
+
+$ sudo crontab -u www-data -e
+
+Agregar la linea suiguiente:
+
+* * * * * /usr/bin/php7.3 /var/www/yourdomain/www/admin/cli/cron.php >/dev/null
+
+ 
