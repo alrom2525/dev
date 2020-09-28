@@ -25,3 +25,14 @@ DB::update("UPDATE articulos SET secccion='decoracion' WHERE id=?",[2]);
 DB::delete("DELETE FROM articulos WHERE id=?",[2]);
 
 -----------------------------------------------------------------------
+
+use DB;
+$expireditems = DB::select('select *, DATEDIFF(current_date(), dateexpiration) AS qtydays
+FROM mediarights WHERE DATEDIFF(current_date(), dateexpiration) >= -90 
+ORDER BY  DATEDIFF(current_date(), dateexpiration) DESC
+');
+
+
+
+$expireditems = Mediaright::whereRaw('DATEDIFF(current_date(), dateexpiration) >= -90')
+->select('*','DATEDIFF(current_date(), dateexpiration) AS qtydays')->get();

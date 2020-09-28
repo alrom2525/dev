@@ -9,7 +9,7 @@ se debe hacer un repositorio en Internet, siguiendo los pasos:
 	Aparecera el mensaje: Initialized empty Git repository in  /path/to/your/project
 	4. $ git remote add origin [URL del repo] 
 	Ejemplo:
-	git remote add origin https://edgardoalberto@bitbucket.org/SOFAD/checklist.git
+	git remote add origin https://user@bitbucket.org/YourOrganisation/your-project.git
 	5. $ git add *
 	6. $ git status 
 	es un comando opcional

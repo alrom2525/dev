@@ -1,0 +1,43 @@
+Deployment - paso a produccion
+->Clear caches
+$ composer install
+$ php artisan config:clear
+$ php artisan cache:clear
+$ php artisan view:clear
+$ php artisan config:cache
+
+->I'm having troubles using special chars in values of a Laravel .env file. For example:
+is for commenting in a .env file. If you want to use # as a value, you need to wrap it in ":
+DB_USERNAME="voyager_usr"
+DB_PASSWORD="some#secret"
+
+->The images problem:
+[core:error] [pid 22833] [client 136.143.217.37:61328] AH00037: Symbolic link not allowed or link target not accessible: /var/www/your-domain/www/public/storage
+	
+	Solution: 
+Go to public directory and run: (delete the symbolic link)
+	$ rm public/storage
+	$ php artisan storage:link
+
+o mediante linux ln -s [target file] [Symbolic filename]
+	$ ln -s /var/www/voyager.sofad.qc.ca/voyager/storage/app/public /var/www/voyager.sofad.qc.ca/www/storage
+
+	Review:
+	$ ls -lrth public/
+	storage -> /var/www/your-virtual-host/www/storage/app/public
+	storage -> /var/www/voyager.sofad.qc /wwww/storage/app/public
+
+-> ErrorException
+file_put_contents(/var/www/voyager.sofad.qc.ca/www/storage/framework/sessions/vMTDrimiuzkiZAX9BjMw76Ln4QjwDWjqrak7uO1a): failed to open stream: No such file or directory
+https://voyager.sofad.qc.ca/
+
+
+Cambiar el password del usuario admin@admin.com password: password
+Editer mon profil
+
+public/
+
+Current: DocumentRoot /var/www/voyager.sofad.qc.ca/www/
+Change:  DocumentRoot /var/www/voyager.sofad.qc.ca/www/public/
+
+
