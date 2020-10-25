@@ -1,0 +1,7 @@
+Confirm-APIs-are-enabled
+
+1. In the GCP Console, on the Navigation menu (Navigation menu), click APIs & Services.
+2. Scroll down in the list of enabled APIs, and confirm that both of these APIs are enabled:
+
+	Kubernetes Engine API
+	Container Registry API

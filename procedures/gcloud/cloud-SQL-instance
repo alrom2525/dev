@@ -1,0 +1,46 @@
+cloud-SQL-instance
+
+1. In the GCP Console, on the Navigation menu (Navigation menu), click SQL.
+
+2. Click Create instance.
+
+3. For Choose a database engine, select MySQL.
+
+4. For Instance ID, type blog-db, and for Root password type a password of your choice.
+
+	Choose a password that you remember. There's no need to obscure the password because you'll use mechanisms to connect that aren't open access to everyone.
+
+5. Set the region and zone
+	The best performance is achieved by placing the client and the database close to each other.
+
+6. Click Create.
+	Wait for the instance to finish deploying. It will take a few minutes.
+
+7. Click on the name of the instance, blog-db, to open its details page.
+
+8. From the SQL instances details page, copy the Public IP address for your SQL instance to a text editor for use later in this lab.
+
+9. Click on Users menu on the left-hand side, and then click ADD USER ACCOUNT.
+
+10. For User name, type username
+
+11. For Password, type a password of your choice. Make a note of it.
+
+12. Click Create to create the user account in the database.
+
+	Wait for the user to be created.
+
+13. Click the Connections tab, and then click Add network.
+	If you are offered the choice between a Private IP connection and a Public IP connection, choose Public IP for purposes of this lab. The Private IP feature is in beta at the time this lab was written.
+
+	The Add network button may be grayed out if the user account creation is not yet complete.
+
+14. For Name, type web front end
+
+15. For Network, type the external IP address of your bloghost VM instance, followed by /32
+	The result will look like this:
+	35.192.208.2/32
+
+	Be sure to use the external IP address of your VM instance followed by /32. Do not use the VM instance's internal IP address. Do not use the sample IP address shown here.
+
+16. Click Done to finish defining the authorized network.

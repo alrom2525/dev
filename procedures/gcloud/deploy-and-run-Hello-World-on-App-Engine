@@ -1,0 +1,19 @@
+Deploy-and-run-Hello-World-on-App-Engine
+
+1. Navigate to the source directory:
+	$ cd ~/your-path/hello_world
+
+2. Deploy your Hello World application.
+	$ gcloud app deploy
+
+	If prompted "Do you want to continue (Y/n)?", press Y and then Enter.
+	This app deploy command uses the app.yaml file to identify project configuration.
+
+3. Launch your browser to view the app at http://YOUR_PROJECT_ID.appspot.com
+
+	$ gcloud app browse
+
+Copy and paste the URL into a new browser window.
+
+
+	

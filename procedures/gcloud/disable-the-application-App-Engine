@@ -1,0 +1,17 @@
+Disable-the-application-App-Engine
+
+App Engine offers no option to Undeploy an application. After an application is deployed, it remains deployed, although you could instead replace the application with a simple page that says something like "not in service."
+
+However, you can disable the application, which causes it to no longer be accessible to users.
+
+1. In the Cloud Console, on the Navigation menu (Navigation menu), click App Engine > Settings.
+
+2. Click Disable application.
+
+3. Read the dialog message. Enter the App ID and click DISABLE.
+
+If you refresh the browser window you used to view to the application site, you'll get a 404 error.
+
+
+
+

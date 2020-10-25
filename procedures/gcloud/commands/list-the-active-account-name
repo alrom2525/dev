@@ -1,0 +1,2 @@
+list-the-active-account-name 
+	$ gcloud auth list

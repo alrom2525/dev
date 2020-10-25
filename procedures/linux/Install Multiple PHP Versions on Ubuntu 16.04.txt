@@ -34,6 +34,9 @@ a2dismod php7.3 ; a2enmod php7.1 ; service apache2 restart
 a2dismod php7.2 ; a2enmod php7.3 ; service apache2 restart
 a2dismod php7.1 ; a2enmod php5.6 ; service apache2 restart
 
+service php7.1-fpm restart
+
+
 Note
 Optionally you can switch back to PHP 7.0 with the following command:
 a2dismod php5.6 ; a2enmod php7.0 ; service apache2 restart

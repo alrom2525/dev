@@ -1,0 +1,2 @@
+list-the-project-ID
+	$ gcloud config list project

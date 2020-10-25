@@ -1,0 +1,6 @@
+revisar-log-multi-php
+
+/var/log/ php7.1-fpm.log
+
+La configuracion se encuentra en:
+vi /etc/php/7.1/fpm/pool.d/www.conf
