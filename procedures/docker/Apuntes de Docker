@@ -1,6 +1,8 @@
 Apuntes de Docker
 https://docker-hy.github.io/part1/
 
+$ docker info
+$ docker --version
 1. buscar una imagen en dockerhub:
 	docker search <nombre de la imagen>
 ejemplo: docker search hello-world

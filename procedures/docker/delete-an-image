@@ -1,0 +1,3 @@
+delete-an-image
+
+	$ docker rmi <image-id> OR <image-name> 

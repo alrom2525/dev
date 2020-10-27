@@ -1,0 +1,20 @@
+invalid-parameter-moodle
+
+Dès qu'on clique pour ajouter une activité, ressource ou ailleurs, on obtient le pop-up "valeur incorrecte de paramètre détectée", quel que soit l'utilisateur et que dans ce cours à notre connaissance. 
+
+
+https://moodle.org/mod/forum/discuss.php?d=383586
+
+El error se produce porque el navegador sale a buscar un parametro relacionado con el acceso al calendario.
+
+en este campus, estaba el bloque configurado en la HOME, pero ubicado en la zona oculta disponible para los admins.
+
+
+llevando el bloque al area "visible" por todos, el error no se produce más.
+
+obviamente es algo entre el codigo del calendar, la gestion del área oculta, y los permisos del usuario "alumno" que no tiene acceso a ver lo que está en esa área de la HOME.
+
+hasta aqui llegamos... 
+al menos, sabemos que es lo que lo produce.
+
+https://tracker.moodle.org/browse/MDL-62775

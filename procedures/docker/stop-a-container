@@ -1,0 +1,5 @@
+stop-a-container
+
+	$ docker stop <container-id> OR <container-name>
+
+

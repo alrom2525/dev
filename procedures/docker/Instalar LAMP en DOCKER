@@ -4,15 +4,18 @@ https://hub.docker.com/r/mattrayner/lamp
 sudo docker run -d -p "8081:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1604
 sudo docker run -p "8081:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1604
 
-sudo docker exec -it  <containerName>
-apt-get update
-apt-get install net-tools
-apt-get install nmap
+$ sudo docker exec -it  <containerID> bash
+	
+
+	$ apt-get update 
+	$ apt-get install net-tools 
+	$ apt-get install -y nmap ;
 
 Cambiar el password de MySQL (dafosdafos)
-mysql_secure_installation
+	$ mysql_secure_installation
 
-Crear el archivo  vi /var/www/html/info.php
+Crear el archivo  
+	$ vi /var/www/html/info.php
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,14 +36,6 @@ apt install graphviz aspell ghostscript clamav php7.3-pspell php7.3-curl php7.3-
 
 service apache2 restart
 apt install git
-
-Docker moodle 3.6
-moreauf
-moreauf@sofad.qc.ca
-yescarrier carriers@sofad.qc.ca
-mot de passe: Dafosdafos-1
-
-sudo docker run -d -p "8081:80" -v ${PWD}/app:/app mattrayner/lamp:latest-1604
 
 
 
