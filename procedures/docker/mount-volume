@@ -1,0 +1,22 @@
+mount-volume
+
+$ docker run -ti --rm -v /path-local-machine:/path-container nginx:alpine ash
+
+Montar un directorio de nuestra computadora y establecerlo como volumen o disco en un directorio dentro del contenedor.
+https://docker-hy.github.io/part1/
+
+Seccion: Volumes: bind mount
+$ docker run -v $(pwd):/mydir youtube-dl https://www.youtube.com/watch?v=420UIn01VVc
+
+$ docker run -v $(pwd)/logs.txt:/usr/app/logs.txt devopsdockeruh/first_volume_exercise
+
+docker run devopsdockeruh/first_volume_exercise --name first
+
+
+Exercise 1.9 (https://docker-hy.github.io/part1/)
+In this exercise we won’t create a new Dockerfile. Image devopsdockeruh/ports_exercise will start a web service in port 80. Use -p flag to access the contents with your browser.
+
+Submit your used commands for this exercise.
+
+$ touch logs.txt
+$ docker run -v $(pwd)/logs.txt:/usr/app/logs.txt devopsdockeruh/first_volume_exercise
