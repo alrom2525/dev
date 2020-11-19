@@ -2,13 +2,15 @@ New-moodle-task-list
 1. Domain DNS
 2. Virtual host
 3. Database schema
-4. Database user
+4. Database user & assign permissions
 5. Installation
-6. Dropbox Excel registration
+	6. Dropbox Excel registration
 7. Deactivate Analyses de données enableanalytics
 8. Add cron moodle to operating system
 9. Deactivate $CFG->disableupdatenotifications = true;
 10. Create test course
-11. Create IT accounts
 12. Create Test accounts
+11. Create IT accounts
 13. Install plugins
+
+
