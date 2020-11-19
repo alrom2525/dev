@@ -347,7 +347,7 @@ Nmap done: 1 IP address (1 host up) scanned in 1.84 seconds
 docker-php-ext-install gettext (necesario para instalar phpLDAPAdmin)
 
 http://localhost:8082/phpldapadmin/
-Login DN:   cn=admin,dc=sofadtest,dc=qc
+Login DN:   cn=admin,dc=mysitetest,dc=qc
 Password:	root
 
 

@@ -145,116 +145,6 @@ history
 
 
 --------
-
-
-
-
-
- 1908  netstat -ntlp | grep 80
- 1909  sudo netstat -ntlp | grep 80
- 1910  sudo pstree
- 1911  sudo ps aux | grep apache
- 1912  cd /var/www/
- 1913  ls
- 1914  ll
- 1915  ls | grep -i voyager
- 1916  cd /etc/apache2/sites-available/
- 1917  ll
- 1918  ls | grep voyager
- 1919  l
- 1920  ll
- 1921  vim chusj.sofad.qc.ca.conf 
- 1922  ll
- 1923  vim pesticides.sofad.qc.ca.conf
- 1924  cp  pesticides.sofad.qc.ca.conf voyager.sofad.qc.ca.conf 
- 1925  sudo cp  pesticides.sofad.qc.ca.conf voyager.sofad.qc.ca.conf  
- 1926  sudo cp  pesticides.sofad.qc.ca-le-ssl.conf voyager.sofad.qc.ca-le-ssl.conf
- 1927  vim voyager.sofad.qc.ca.conf 
- 1928  sudo vim voyager.sofad.qc.ca.conf 
- 1929  cat pesticides.sofad.qc.ca-le-ssl.conf 
- 1930  history | grep certbot
- 1931  history | grep bot
- 1932  cd /etc/apache2/sites-available/
- 1933  ls
- 1934  ll
- 1935  cat tad.sofad.qc.ca-le-ssl.conf
- 1936  certbot list
- 1937  certbot certificates
- 1938  certbot --help
- 1939  sudo certbot certificates
- 1940  ll
- 1941  ls -ltr 
- 1942  rm voyager.sofad.qc.ca-le-ssl.conf 
- 1943  sudo rm voyager.sofad.qc.ca-le-ssl.conf  
- 1944  ls -ltr 
- 1945  cd /var/www/
- 1946  ls
- 1947  ll
- 1948  mkdir voyager.sofad.qc.ca.conf
- 1949  ls -ltr 
- 1950  chown -R 33:33 voyager.sofad.qc.ca.conf/
- 1951  sudo chown -R 33:33 voyager.sofad.qc.ca.conf/ 
- 1952  ls -ltr 
- 1953  sudo chmod g+s voyager.sofad.qc.ca.conf/ 
- 1954  ls -ltr
- 1955  cd /etc/apache2/sites-enabled/
- 1956  ll
- 1957  sudo a2ensite voyager.sofad.qc.ca.conf 
- 1958  sudo systemctl reload apache2.service 
- 1959  ls -ltr 
- 1960  sudo certbot 
- 1961  ll
- 1962  vim ../sites-available/voyager.sofad.qc.ca.conf 
- 1963  ll
- 1964  cat ../sites-available/praedictia.com.conf
- 1965  vim ../sites-available/voyager.sofad.qc.ca.conf 
- 1966  sudo vim ../sites-available/voyager.sofad.qc.ca.conf 
- 1967  cd /var/www/
- 1968  ls
- 1969  cd voyager.sofad.qc.ca.conf/
- 1970  mkdir www
- 1971  ll
- 1972  cd ..
- 1973  ll
- 1974  sudo chown -R 33:33 voyager.sofad.qc.ca.conf/ 
- 1975  sudo chmod -R g+s voyager.sofad.qc.ca.conf/ 
- 1976  ll voyager.sofad.qc.ca.conf/
- 1977  sudo systemctl reload apache2.service 
- 1978  cd /etc/apache2/sites-enabled/
- 1979  ll
- 1980  sudo certbot 
- 1981  dig voyager.sofad.qc.ca
- 1982  whois sofad.qc.ca
- 1983  sudo apt install whois
- 1984  whois sofad.qc.ca
- 1985  whois sofad.qc.ca | grep -i registra
- 1986  ip a
- 1987  dig voyager.sofad.qc.ca
- 1988  dig voyager.sofad.qc.ca @8.8.8.8
- 1989  ll
- 1990  sudo certbot 
- 1991  ll
- 1992  cd
- 1993  ls
- 1994  ls -la 
- 1995  cd db/
- 1996  ls
- 1997  cd
- 1998  sudo netstat -ntlp
- 1999  mysql -u root -p
- 2000  sudo mysql -u root -p
- 2001  ls
- 2002  ls /var/www/
- 2003  cd 
- 2004  ls
- 2005  cd tmp/
- 2006  ls
- 2007  rm -Rf journal-bitbucket/
- 2008  rm portailfc3.tar.gz 
- 2009  ls
- 2010  cd ..
- 2011  ifconfig
- 2012  history
 sudo certbot
 [sudo] password for administrator: 
 Saving debug log to /var/log/letsencrypt/letsencrypt.log
@@ -266,24 +156,24 @@ Which names would you like to activate HTTPS for?
 2: deveniraidant.ca
 3: www.deveniraidant.ca
 4: e-propane.ca
-5: servicedegarde-moodle.edusofad.com
+5: servicedegarde-moodle.edumysite.org
 6: enligne-idp-innovation.com
 7: epropane.ca
 8: fc3.quebec
 9: gestion-stress-aidants.ca
 10: dev.mocn.ca
 11: praedictia.com
-12: chum-moodle.sofad.qc.ca
-13: chusj.sofad.qc.ca
-14: cisssme.sofad.qc.ca
-15: cssslaval-moodle.sofad.qc.ca
-16: icm-moodle.sofad.qc.ca
-17: litteratie-moodle.sofad.qc.ca
-18: pesticides.sofad.qc.ca
-19: pestpt.sofad.qc.ca
-20: specimens.sofad.qc.ca
-21: tad.sofad.qc.ca
-22: voyager.sofad.qc.ca
+12: chum-moodle.mysite.org
+13: chusj.mysite.org
+14: cisssme.mysite.org
+15: cssslaval-moodle.mysite.org
+16: icm-moodle.mysite.org
+17: litteratie-moodle.mysite.org
+18: pesticides.mysite.org
+19: pestpt.mysite.org
+20: specimens.mysite.org
+21: tad.mysite.org
+22: voyager.mysite.org
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Select the appropriate numbers separated by commas and/or spaces, or leave input
 blank to select all options shown (Enter 'c' to cancel): c

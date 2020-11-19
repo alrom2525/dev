@@ -20,16 +20,16 @@ Go to public directory and run: (delete the symbolic link)
 	$ php artisan storage:link
 
 o mediante linux ln -s [target file] [Symbolic filename]
-	$ ln -s /var/www/voyager.sofad.qc.ca/voyager/storage/app/public /var/www/voyager.sofad.qc.ca/www/storage
+	$ ln -s /var/www/voyager.mysite.org/voyager/storage/app/public /var/www/voyager.mysite.org/www/storage
 
 	Review:
 	$ ls -lrth public/
 	storage -> /var/www/your-virtual-host/www/storage/app/public
-	storage -> /var/www/voyager.sofad.qc /wwww/storage/app/public
+	storage -> /var/www/voyager.mysite.qc /wwww/storage/app/public
 
 -> ErrorException
-file_put_contents(/var/www/voyager.sofad.qc.ca/www/storage/framework/sessions/vMTDrimiuzkiZAX9BjMw76Ln4QjwDWjqrak7uO1a): failed to open stream: No such file or directory
-https://voyager.sofad.qc.ca/
+file_put_contents(/var/www/voyager.mysite.org/www/storage/framework/sessions/vMTDrimiuzkiZAX9BjMw76Ln4QjwDWjqrak7uO1a): failed to open stream: No such file or directory
+https://voyager.mysite.org/
 
 
 Cambiar el password del usuario admin@admin.com password: password

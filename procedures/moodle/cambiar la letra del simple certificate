@@ -1,6 +1,6 @@
 cambiar la letra del simple certificate
 
-/var/www/dev.portailsofad.com/www/lib/pdflib.php
+/var/www/dev.portailmysite.com/www/lib/pdflib.php
 
 modificar esta linea: define('PDF_DEFAULT_FONT', 'Helvetica');
 

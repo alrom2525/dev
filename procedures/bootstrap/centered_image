@@ -6,4 +6,4 @@ Centered Image
 
 Center an image by adding the utility classes .mx-auto (margin:auto) and .d-block (display:block) to the image:
 
-<img class="mx-auto d-block img-fluid" src="https://dev.cslaval.sofad.qc.ca/imgguide/scg4059/chap1/image234.png">
+<img class="mx-auto d-block img-fluid" src="https://mysite.org/imgguide/scg4059/chap1/image234.png">
