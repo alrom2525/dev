@@ -12,6 +12,16 @@ https://docs.microsoft.com/en-us/microsoftteams/platform/moodleinstructions
 ----
 [Done] Step 1: Install the Office 365 Moodle Plugin
 
+Plugins in this set provide integration with Office 365:
+
+
+Microsoft Office 365 Integration
+OpenID Connect
+Office 365 Repository
+Microsoft Block
+oEmbed Filter
+Office 365 Teams Theme
+
 [Permissions] Step 2: Configure the connection between the Office 365 plugin and Azure Active Directory
 
 	Permissions manquantes :

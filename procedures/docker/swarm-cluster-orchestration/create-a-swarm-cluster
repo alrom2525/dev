@@ -1,0 +1,34 @@
+create-a-swarm-cluster
+
+Setup a docker swarm cluster with two virtual machines
+
+FIRST NODE:
+$ docker swarm
+
+1) initialize/setup a swarm docker cluster (create the first node to our cluster)
+	$ docker swarm init
+Swarm initialized: current node (udsy6qzgdw47tkfia0vymx7fk) is now a manager.
+
+To add a worker to this swarm, run the following command:
+$ docker swarm join --token SWMTKN-1-67woz1zz17hmdxq48qhz3wfq7bpy8v5vb8xls1wdw32an02t9a-59wzj7k21tu7mw7owvr972sc6 192.168.65.3:2377
+
+1.1 check the nodes
+	$ docker node ls
+
+2) add a second node to our cluster (the URL provided by previous command docker swarm init)
+
+If we didn't copy the command line from above where did provide the join token and the full swarm join command, we simply use: 
+	$ docker swarm join-token worker 
+
+
+SECOND NODE:
+2.2 copy that join token in YOUR SECOND NODE (virtual machines)
+    $ docker swarm join --token SWMTKN-1-67woz1zz17hmdxq48qhz3wfq7bpy8v5vb8xls1wdw32an02t9a-59wzj7k21tu7mw7owvr972sc6 192.168.65.3:2377
+
+3) Verify the cluster in the FIRST NODE but only one of them is manager/leader
+
+node1@dc1n1:~$ docker node ls
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
+jmmunh8mx16fc35oinkct7ytx *   dc1n1               Ready               Active              Leader              19.03.13
+z018lh2amcvs09d6du4mvpeio     dc1n2               Ready               Active                                  19.03.13
+

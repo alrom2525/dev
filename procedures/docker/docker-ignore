@@ -1,2 +1,9 @@
 docker-ignore
 https://docs.docker.com/engine/reference/builder/
+
+
+# Evitar adicionar carpetas temporales
+cache/
+downloads/
+temp?
+*/tmp

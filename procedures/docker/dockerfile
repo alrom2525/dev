@@ -21,14 +21,18 @@ No es recomendable hacer tantas capas al contenedor.
 siempre agregar el parametro YES por ejemplo: apt-get install -y
 
 -> Ya teniendo el archivo Dockerfile, establecer un nombre a la imagen e ingresar en forma interactiva:
+	
+	a) Construir el contenedor:
 	$ docker build -t myfirst .
-
+	$ docker build -t ubuntu:ubuntu1604 .
 	-t colocar un tag
 
-$ docker run -it myfirst 
-  root@accf99660aeb:/mydir# ls 
-  hello.txt  index.html  local.txt
+	b) Ingresar al contenedor creado previamente:
+	$ docker run -it myfirst 
+  	root@accf99660aeb:/mydir# ls 
+  	hello.txt  index.html  local.txt
 
+  	$ docker run -it -rm ubuntu:ubuntu1604
 
 -> Las imagenes en Docker usan el minimo de espacio posible y ellos borran todas las caches de los repositorios apt, por eso si se van a instalar software se debe agregar el comando RUN apt-get update
 
@@ -100,9 +104,9 @@ CMD ["/bin/bash"]
 
 
 2. Crear el contenedor
-	$ docker build -t ubuntuexample .
+	$ docker build -t ubuntu:ubuntu1604 .
 
 3. Ingresar al contenedor
-	$ 
+	$ docker run -it -p80:80 myfirst
 
 

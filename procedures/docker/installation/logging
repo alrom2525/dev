@@ -1,0 +1,19 @@
+logging
+
+1) check the driver type
+	$ docker info | grep 'Logging'
+	WARNING: No swap limit support
+	 Logging Driver: json-file
+
+2) move to the docker path
+	$ cd /etc/docker/
+
+3) Find the container 
+	$ docker ps -a
+
+4) Check the logs
+	$ docker logs <container-id>
+	$ docker logs 66bc854f0e36	
+	
+5) create a file daemon.json
+	$ cd /etc/docker/daemon.json
