@@ -4,6 +4,10 @@ https://www.youtube.com/watch?v=zglf0UWi2gQ
 https://www.qtithow.com/2019/08/how-to-install-ssl-certificate-on-ubuntu-1804-lts.html
 àBuscar Let's Encrypt en Ubuntu
 
+Elements HTTPS: 
+CLE Prive
+CLE Public
+Bundle 
 
 $ sudo su 
 Step 1 - Installing Certboot

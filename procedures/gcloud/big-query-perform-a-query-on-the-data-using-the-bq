@@ -1,0 +1,10 @@
+big-query-perform-a-query-on-the-data-using-the-bq-command
+In this section, you use the bq command in Cloud Shell to query the accesslog table you created previously.
+
+On the Google Cloud Platform Console, click Activate Cloud Shell Activate Cloud Shell then click Continue.
+
+At the Cloud Shell prompt, enter this command:
+
+bq query "select string_field_10 as request, count(*) as requestcount from logdata.accesslog group by request order by requestcount desc"
+
+The first time you use the bq command, it caches your Google Cloud Platform credentials, and then asks you to choose your default project
