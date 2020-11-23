@@ -1,0 +1,26 @@
+# is not working
+# Set the operating system base
+FROM debian:9
+RUN apt-get update \ 
+ && apt-get install -y \
+ 	nginx \
+    curl \
+    vim \
+ && rm -rf /var/lib/apt/lists/*
+RUN rm /etc/nginx/sites-enabled/default 
+ADD files/nginx.conf /etc/nginx/conf.d/nginx.conf
+ADD files/index.html /var/www/html/index.html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+
+
+
+
+---------- nginx.conf ----------
+server {
+	root /var/www/html;
+	location / {
+	index index.html;
+	}
+}

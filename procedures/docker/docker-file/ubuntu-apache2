@@ -1,0 +1,19 @@
+# Set the operating system base
+FROM ubuntu:18.04
+RUN apt-get update \ 
+ && apt-get install -y \
+    apache2 \
+    vim \
+ && sed -i '1i ServerName 127.0.0.1' /etc/apache2/apache2.conf \
+ && rm -rf /var/lib/apt/lists/*  
+ADD files/index.html /var/www/html/index.html
+EXPOSE 80
+CMD ["httpd-foreground"]
+
+
+$ docker build -t ubuntu:1804 .
+$ docker run -it --rm -p80:80 ubuntu:1804 bash
+
+
+Ingresar al contenedor de forma interactiva:
+$ docker exec -it id-container bash
