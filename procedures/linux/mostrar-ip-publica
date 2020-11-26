@@ -1,0 +1,4 @@
+mostrar-ip-publica
+
+
+$ curl ifconfig.me
