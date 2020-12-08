@@ -6,7 +6,10 @@
 sudo apt update
 
 # Install commands like ifconfig
-sudo apt-get install net-tools
+sudo apt-get install net-tools, nmap, curl;
+
+# Vim
+sudo apt-get install -y vim;
 
 # Install nmap
 sudo apt-get install -y nmap

@@ -1,0 +1,27 @@
+connect-ssh-tunneling
+
+Connect to the Server Using SSH Tunneling
+In this section we will learn how to connect to the Jupyter Notebook web interface using SSH tunneling. Since Jupyter Notebook will run on a specific port on the server (such as :8888, :8889 etc.), SSH tunneling enables you to connect to the server’s port securely.
+
+The next two subsections describe how to create an SSH tunnel from 1) a Mac or Linux, and 2) Windows. Please refer to the subsection for your local computer.
+
+SSH Tunneling with a Mac or Linux
+If you are using a Mac or Linux, the steps for creating an SSH tunnel are similar to using SSH to log in to your remote server, except that there are additional parameters in the ssh command. This subsection will outline the additional parameters needed in the ssh command to tunnel successfully.
+
+SSH tunneling can be done by running the following SSH command in a new local terminal window:
+
+	$ ssh -L 8888:localhost:8888 your_server_username@your_server_ip
+
+The ssh command opens an SSH connection, but -L specifies that the given port on the local (client) host is to be forwarded to the given host and port on the remote side (server). This means that whatever is running on the second port number (e.g. 8888) on the server will appear on the first port number (e.g. 8888) on your local computer.
+
+Optionally change port 8888 to one of your choosing to avoid using a port already in use by another process.
+
+server_username is your username (e.g. sammy) on the server which you created and your_server_ip is the IP address of your server.
+
+For example, for the username sammy and the server address 203.0.113.0, the command would be:
+	$ ssh -L 8888:localhost:8888 sammy@203.0.113.0
+
+If no error shows up after running the ssh -L command, you can move into your programming environment and run Jupyter Notebook:
+
+jupyter notebook
+You’ll receive output with a URL. From a web browser on your local machine, open the Jupyter Notebook web interface with the URL that starts with http://localhost:8888. Ensure that the token number is included, or enter the token number string when prompted at http://localhost:8888.

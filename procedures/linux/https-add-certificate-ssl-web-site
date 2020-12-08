@@ -1,6 +1,21 @@
 https-add-certificate-ssl-web-site
-
+https://www.laraveltip.com/instalar-certificado-ssl-gratuito-en-apache/ 
 Certbot software is required in the server.
+
+Requisites:
+a) Configuration in DNS (add an ipv4 address to www and other to your non-www)
+Nombre 				Tipo 	TTL 	Datos
+@ 					A 		1h 		192.168.1.15
+www 				CNAME	1h		mydomain.org.
+www.mydomain.org	A 		1h 		35.239.73.238
+
+b) Installation in server
+	$ sudo add-apt-repository ppa:certbot/certbot
+	$ sudo apt-get update
+	$ sudo apt install python-certbot-apache
+	$ sudo ufw allow 'Apache Full'
+	$ sudo ufw delete allow 'Apache'
+	$ sudo ufw status
 
 1. Add the domain name DNS.
 
@@ -26,7 +41,7 @@ Certbot software is required in the server.
 	[ ok ] Reloading apache2 configuration (via systemctl): apache2.service.
 
 6. Add the certificate and ALWAYS choose the option Redirect (2) 
-	
+	6.2 $ sudo certbot –apache -d ejemplo.com -d www.ejemplo.com OR 
 	6.1 $ sudo certbot
 	Saving debug log to /var/log/letsencrypt/letsencrypt.log
 	Plugins selected: Authenticator apache, Installer apache
@@ -85,5 +100,3 @@ IMPORTANT NOTES:
 
    Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
    Donating to EFF:                    https://eff.org/donate-le
-
-

@@ -1,0 +1,19 @@
+logging
+
+1) Check the driver type
+	$ docker info | grep 'Logging'
+	WARNING: No swap limit support
+	 Logging Driver: json-file
+
+2) Create a file daemon.json
+	$ touch /etc/docker/daemon.json #create this file
+
+3) Find the container 
+	$ docker ps -a
+
+4) Check the logs of a specific container
+	$ docker logs <container-id>
+	$ docker logs 66bc854f0e36	
+	
+5) Customizing the logdriver to specific container
+	$ docker run --log-driver=syslog --log-opt syslog-address=udp://1.1.1.1 alpine

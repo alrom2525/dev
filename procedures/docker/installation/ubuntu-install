@@ -57,3 +57,6 @@ ubuntu-install
 11) Verify docker is installed
 	$ docker version
 	$ docker run hello-world
+
+12) Ensure that the Docker service is enabled
+	$ sudo systemctl enable docker

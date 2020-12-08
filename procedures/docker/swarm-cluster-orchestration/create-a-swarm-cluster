@@ -1,5 +1,8 @@
 create-a-swarm-cluster
 
+The $ docker info command will show you the status of your swarm cluster, status of your containers, and Docker version:
+	$ docker info
+
 Setup a docker swarm cluster with two virtual machines
 
 FIRST NODE:
