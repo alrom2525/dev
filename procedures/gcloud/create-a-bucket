@@ -1,0 +1,9 @@
+create-a-bucket
+
+1. On the Navigation menu, click Storage > Browser.
+2. Click Create bucket.
+3. Specify the following, and leave the remaining settings as their defaults:
+	Property	Value (type value or select option as specified)
+	Name	Enter a globally unique name
+	Location type	Multi-Regional
+4. Click Create.

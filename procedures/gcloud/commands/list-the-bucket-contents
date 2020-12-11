@@ -1,0 +1,3 @@
+list-the-bucket-contents
+
+	$ gsutil ls gs://[YOUR_BUCKET_NAME]
