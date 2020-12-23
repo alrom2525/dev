@@ -1,0 +1,7 @@
+save-changes-of-container
+https://medium.com/@martinkenneth/el-comando-commit-9b0b5df268e3
+
+$ sudo docker commit [container-name or containerid] image-name:tag
+
+eg:
+$ sudo docker commit 27b66ad4b704 ubuntu:1804

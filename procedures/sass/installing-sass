@@ -1,0 +1,15 @@
+installing-sass
+
+# install nodeJS
+	$ node --version 
+
+$ ruby --version #built-in MAC
+
+$ sudo gem install sass
+$ sudo gem install compass
+$ sudo gem install compass --pre
+$ compass --version
+$ sudo gem install susy
+$ sudo gem install breakpoint
+
+

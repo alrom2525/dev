@@ -1,0 +1,22 @@
+# Set the operating system base
+FROM ubuntu:18.04
+RUN apt-get update \ 
+ && apt-get install -y \
+    nginx \
+    vim \
+ 	net-tools \
+ 	lynx \
+ 	curl \
+ 	nmap \
+ 	python3 \
+ 	python3-venv \
+ 	python3-pip \
+ 	ssh 
+EXPOSE 8000
+
+$ docker build -t ubuntu:1804jupyter .
+$ docker run -it -p8000:80 ubuntu:1804jupyter bash
+
+
+Ingresar al contenedor de forma interactiva:
+$ docker exec -it id-container bash

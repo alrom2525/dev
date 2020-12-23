@@ -37,12 +37,14 @@ ubuntu-install
 
 	$ curl -O https://download.docker.com/linux/ubuntu/dists/bionic/pool/edge/amd64/containerd.io_1.2.2-3_amd64.deb
 
-	$ sudo apt install ./containerd.io_1.2.2-3_amd64.deb 
+	$ sudo apt install ./containerd.io_1.2.2-3_amd64.deb
 
 9) install a specific version of docker
 	$ sudo apt-get install docker-ce=17.12.0~ce-0~ubuntu
 
 	$ sudo apt-get install docker-ce -y (install latest)
+
+	$ sudo apt-get install docker -y
 
 10) Verification make sure that the docker group are added
 	$ sudo groupadd docker

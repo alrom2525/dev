@@ -15,7 +15,7 @@ Now we have three nodes in our docker cluster.
 
 ->Services
 We want to deploy a new service across this docker cluster, we're going to give this service a name (webapp1), in other words; we want this new webapp1 service to created and have six tasks (--replicas) run across the swarm cluster:
-	docker service create --name webapp1 --replicas=6 ngnix
+	$ docker service create --name webapp1 --replicas=6 ngnix
 
 https://docs.docker.com/engine/swarm/swarm-tutorial/deploy-service/
 https://docs.docker.com/engine/swarm/services/
