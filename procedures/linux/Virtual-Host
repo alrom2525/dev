@@ -34,10 +34,15 @@ file /etc/apache2/sites-available/mydomain.org.conf
 		Allow from all
 	</Directory>
 RewriteEngine on
-RewriteCond %{SERVER_NAME} =mydomain.org
-RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+# Until here was writing by manual mode
+
 </VirtualHost>
 
+Important note: if you add https with certbot, the script will automatically write the next three lines:
+
+	RewriteCond %{SERVER_NAME} =www.store.educatools.ca [OR]
+	RewriteCond %{SERVER_NAME} =store.educatools.ca
+	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 
 
 file /etc/apache2/sites-available/mydomain.org-le-ssl.conf 

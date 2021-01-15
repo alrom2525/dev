@@ -1,0 +1,31 @@
+smtp-gmail
+
+Solution to Common error (date 3/10/20):
+visit https://accounts.google.com/DisplayUnlockCaptcha
+
+https://support.google.com/mail/answer/7104828?hl=es-419&visit_id=637457191439513192-4034107606&rd=1 
+
+smtp.gmail.com
+Requiere SSL: Sí
+Requiere TLS: Sí (si está disponible)
+Requiere autenticación: Sí
+Puerto para TLS/STARTTLS: 587
+
+https://support.google.com/mail/answer/7126229?visit_id=637457191439513192-4034107606&hl=es-419&rd=1
+smtp.gmail.com
+
+Requiere SSL: Sí
+Requiere TLS: Sí (si está disponible)
+Requiere autenticación: Sí
+Puerto para SSL: 465
+Puerto para TLS/STARTTLS: 587
+
+keep seeing error when my website tries to connect to my email  1 Reply
+I keep seeing this error when I try to connect my website to my mail so it can send password recovery emails automatically to users when necessary.
+" (534, b'5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbu\n5.7.14 pLkyHPu_-F8wzPaFJJqYdVIws5qcs1uyxn6eEOQr-_OUhTx9sHm9bK7qPB10tUHN3TGPA\n5.7.14 dHU0gErlPM07OjR7kTTK4CfaX0nXQIFoZCn3AHV6hDy9m235NCF2urMrCx_CL0j9>\n5.7.14 Please log in via your web browser and then try again.\n5.7.14 Learn more at\n5.7.14 https://support.google.com/mail/answer/78754 m19sm24085608wmc.34 - gsmtp') "
+
+Solution
+If you have checked that access for less secure apps is still enabled (Gmail turns it off if it is not being used), then you probably just need to clear Captcha: visit https://accounts.google.com/DisplayUnlockCaptcha and sign in with the username and password of the other account.
+
+If necessary (it's usually not), enter the letters in the distorted picture then press Continue. This will allow ten minutes for Send Mail As to register as an approved connection.  NB: you must open this page using the credentials for the account you are using on the website - if the browser is already signed into another account, you must sign out first.  Also, you must trigger the website to make the connections within ten minutes of pressing Continue.
+

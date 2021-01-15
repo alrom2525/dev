@@ -1,0 +1,23 @@
+sass-install
+
+$ sudo apt-get install git
+$ git --version
+$ sudo apt install nodejs
+$ sudo apt install npm
+$ nodejs -v
+$ sudo apt install ruby-full
+$ ruby --version
+
+# SASS
+$ sudo gem install sass
+
+# http://compass-style.org
+$ sudo gem install compass
+
+# http://susy.oddbird.net
+$ sudo gem install susy
+
+# http://breakpoint-sass.com
+$ sudo gem install breakpoint
+
+$ sudo npm install -g gulp
