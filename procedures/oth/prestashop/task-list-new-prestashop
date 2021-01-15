@@ -1,0 +1,78 @@
+task-list-new-prestashop
+
+a) [4] Domain configuration
+	Google account
+	domain name registration
+	DNS settings
+	name servers
+	custom resource records
+
+b) [8] Compute engine
+	install dependencies, libraries
+	adjust firewall
+	install LAMP, PHP-FPM
+	cloud dns
+
+c) [4] VirtualHost
+	document root
+	apache site configuration
+	enable site
+	install SSL certificate
+
+d) [8]	Prestashop installation
+	database user
+	prestashop user registration
+	download prestashop
+	installation
+	file permissions and attributes
+	enable SSL (Back office)
+	smtp
+
+e) [8]	Prestashop theme
+	selection
+	install
+	configuration
+
+f) [24]Theme elements customisation
+	Logo
+	Menu
+	Slider
+	Banner
+	Text bloc
+	Footer
+
+g) [16]Modules configuration
+	taxes
+	payment
+	shipping
+	rounded
+	terms ands conditions
+
+h) [8] Roles
+	users 
+	logistician
+	translator
+	administrator
+
+i) [16]Products catalog
+	Categories
+	Products
+	Attributes
+	Brands
+	Files
+	Stock
+
+[] Customer service	to define
+
+
+a) [4] Domain configuration
+b) [8] Compute engine
+c) [4] VirtualHost
+d) [8]	Prestashop installation
+e) [8]	Prestashop theme
+f) [24]Theme elements customisation
+g) [16]Modules configuration
+h) [8] Roles
+i) [16]Products catalog
+
+Total 96

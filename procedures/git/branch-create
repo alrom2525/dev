@@ -1,0 +1,16 @@
+branch-create
+
+# create a new branch
+$ git checkout -b your-branch-name
+
+# show the active
+$ git branch
+
+# edit some files in order to change the status project
+  
+# update the repositorie as normal in git
+$ git status
+$ git add *
+$ git status
+$ git commit -m "your commit message"
+$ git push -u origin your-branch-name

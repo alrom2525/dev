@@ -1,0 +1,27 @@
+admin-users-problem
+https://github.com/jupyterhub/jupyterhub/issues/2025
+
+1. Generate a default config file
+	$ jupyterhub --generate-config
+	$ sudo mkdir /etc/jupyterhub
+	$ mv jupyterhub_config.py /etc/jupyterhub 
+
+2. Edit the file and add the admin user (an user of operating system):
+	$ sudo vi /etc/jupyterhub/jupyterhub_config.py
+
+I used this form and it works: c.Authenticator.admin_users = {"user_admin"}
+ 
+c.Authenticator.admin_users = {"administrateur"}
+
+c.Authenticator.admin_users = set("username")
+which creates the set {'u', 's', 'e', 'r',...} because the set constructor creates a set with each element in the input as an element in the set (each element in a string is a character). The same is true if you do list("string"). What you need is to pass a list of names to set, or use a set literal:
+
+c.Authenticator.admin_users = set(["username"])
+# or 
+c.Authenticator.admin_users = {"username"}
+
+3.	Run jupyterhub
+	$ jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
+
+4. Delete the records in the database at http://localhost:8000/hub/admin
+Don't forget to delete the jupyterhub.sqlite database (or at least the user entries) after you've fixed this in your config file. Otherwise, the system will continue to recreate these users and drive you crazy :)

@@ -6,11 +6,11 @@ http://ecapy.com/anadir-tu-usuario-de-linux-al-grupo-www-data/index.html
 1) Conocer los grupos a los que pertenece un usuario
     $ groups nombre_usuario
 
-sudo chgrp -R www-data /var/www
-sudo chmod -R g+w /var/www/
+sudo chgrp -R www-data /var/www ;
+sudo chmod -R g+w /var/www/ ;
 sudo find /var/www -type d -exec chmod 2775 {} \;
 sudo find /var/www -type f -exec chmod ug+rw {} \;
-sudo usermod -a -G www-data edgardo
+sudo usermod -a -G www-data edgardo ;
 
 
 sudo find /var/www/dev.freecodegram.com/freeCodeGram/storage

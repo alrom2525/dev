@@ -1,0 +1,15 @@
+cloud-IAM-Add-storage-permissions
+
+1. On the Navigation menu, click IAM & admin > IAM.
+2. Click Add to add the user.
+3. For New members, paste the Username 2 value you copied from the Qwiklabs Connection Details dialog.
+4. For Select a role, select Cloud Storage > Storage Object Viewer.
+5. Click Save.
+
+
+Verify that Username has storage access
+1. To start Cloud Shell, click Activate Cloud Shell. If prompted, click Continue.
+
+2. To view the contents of the bucket you created earlier, run the following command, replacing [YOUR_BUCKET_NAME] with the unique name of the Cloud Storage bucket you created:
+
+	gsutil ls gs://[YOUR_BUCKET_NAME]
