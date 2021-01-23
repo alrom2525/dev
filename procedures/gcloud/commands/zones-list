@@ -1,0 +1,5 @@
+zones-list
+
+	$ gcloud compute zones list
+	$ gcloud compute zones list | grep us-central
+	$ gcloud compute zones list | grep us-central1

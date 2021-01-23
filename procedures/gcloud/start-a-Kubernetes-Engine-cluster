@@ -1,0 +1,17 @@
+Start-a-Kubernetes-Engine-cluster
+
+1. In GCP console, on the top right toolbar, click the Open Cloud Shell button.
+
+2. Click Continue.
+
+3. For convenience, place the zone into an environment variable called MY_ZONE.
+	$ export MY_ZONE=us-central1-a
+
+4. Start a Kubernetes cluster managed by Kubernetes Engine. Name the cluster webfrontend and configure it to run 2 nodes:
+	$ gcloud container clusters create webfrontend --zone $MY_ZONE --num-nodes 2
+
+5. After the cluster is created, check your installed version of Kubernetes using the kubectl version command:
+	$ kubectl version
+
+6. View your running nodes in the GCP Console. On the Navigation menu (Navigation menu), click Compute Engine > VM Instances.
+	Your Kubernetes cluster is now ready for use.

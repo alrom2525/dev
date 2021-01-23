@@ -1,0 +1,37 @@
+# Set the operating system base
+FROM nginx
+RUN apt-get update \ 
+ && apt-get install -y \
+    curl \
+ && rm -rf /var/lib/apt/lists/*  
+ADD files/index.html /usr/share/nginx/html/index.html
+EXPOSE 80
+STOPSIGNAL SIGTERM
+CMD ["nginx", "-g", "daemon off;"]
+
+$ docker build -t nginx:latest .
+$ docker run -it --rm -p80:80 nginx:latest bash
+$ docker run --name nginx:latest -d -p 80:80
+
+Ingresar al contenedor de forma interactiva:
+$ docker exec -it id-container bash
+
+
+
+--------Second option--------------
+https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/
+
+Build Custom NGINX Image
+One of the most portable and simplest ways to do this is to copy our index.html files into the image by building a custom image.
+
+1) Edit Dockerfile content:
+	FROM nginx:latest
+	COPY ./index.html /usr/share/nginx/html/index.html
+
+2) To build our image, run the following command:
+	$ docker build -t webserver .
+
+3) Now we can run our image in a container but this time we do not have to create a bind mount to include our html.
+	$ docker run -it --rm -d -p 8080:80 --name web webserver
+
+4) Open your browser and navigate to http://localhost:8080 to make sure our html page is being served correctly.

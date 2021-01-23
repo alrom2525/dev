@@ -1,0 +1,112 @@
+dockerfile
+
+Se debe crear un archivo llamado "Dockerfile"
+
+
+Ejemplo de contenedor usando el Dockerfile:
+	FROM ubuntu:16.04 
+	WORKDIR /mydir 
+	RUN touch hello.txt 
+	RUN touch local.txt
+	RUN apt-get update && apt-get install -y wget 
+	RUN wget http://example.com/index.html 
+	CMD ["/bin/bash"]
+
+la ultima linea establece que se ejecute el bash
+
+-> RUN: es para ejecutar comandos en la imagen como root
+cada comando RUN crea una capa dentro del contenedor.
+No es recomendable hacer tantas capas al contenedor.
+
+siempre agregar el parametro YES por ejemplo: apt-get install -y
+
+-> Ya teniendo el archivo Dockerfile, establecer un nombre a la imagen e ingresar en forma interactiva:
+	
+	a) Construir el contenedor:
+	$ docker build -t myfirst .
+	$ docker build -t ubuntu:ubuntu1604 .
+	-t colocar un tag
+
+	b) Ingresar al contenedor creado previamente:
+	$ docker run -it myfirst 
+  	root@accf99660aeb:/mydir# ls 
+  	hello.txt  index.html  local.txt
+
+  	$ docker run -it -rm ubuntu:ubuntu1604
+
+-> Las imagenes en Docker usan el minimo de espacio posible y ellos borran todas las caches de los repositorios apt, por eso si se van a instalar software se debe agregar el comando RUN apt-get update
+
+
+-> Agregando archivos al Dockerfile
+Para eso se usa el comando ADD, agregara archivos comenzando desde la ruta donde estara el Dockerfile.
+	Ejemplo: ADD archivos/curso.conf /etc/apache2/curso.conf
+			 ADD archivos/index.html /var/www/index.html
+
+-> Insertar variables de entorno
+Al momento de ejectuar el arranque de un contenedor,
+la variable se cargara con el valor que se haya especificado en el Dockerfile.
+Sintaxis:
+	ENV variable valor
+	ENV variable="valor" variable2="valor2" variable3="valor3"
+
+
+-> Ejecutar comando al arrancar un contenedor
+	CMD ["uname"]
+	CMD ["uname", "-a"]
+
+-> Expose un puerto TCP, con esto le decimos a docker que vamos 
+a utilizar el puerto que le digamos.
+	EXPOSE 80
+	despues de compilarlo, 
+	ejecutarlo asi: $ docker run -it -p2222:80 myfirst
+
+-> Borrar las caches de los paquetes de los repositorios
+   es decir despues de haber instalado paquetes
+   Ejemplo:
+	RUN apt-get update \ 
+ 	&& apt-get install -y \
+    apache2 \
+    && rm -rf /var/lib/apt/lists/* 
+
+-> Controlar la caché de Docker
+	$ docker build -t --no-cache=true ubuntu:myfirst .
+
+--- Ejemplo II de Dockerfile
+# Set the operating system base
+FROM ubuntu:16.04
+RUN apt-get update \ 
+    && apt-get install -y wget net-tools vim nmap curl \ 
+    && apt-get install -y apache2 php libapache2-mod-php php-cli
+ADD archivos/curso.conf /etc/apache2/curso.conf 
+ADD archivos/index.html /var/www/index.html
+ENV variable="valor" variable2="valor2"
+EXPOSE 80
+CMD ["service", "apache2", "start"]
+CMD ["/bin/bash"]
+
+
+-- Ejemplo III Dockerfile
+# Set the operating system base
+FROM ubuntu:16.04
+RUN apt-get update \ 
+ && apt-get install -y \
+    apache2 \
+    php \
+    libapache2-mod-php \
+    php-cli \
+ && rm -rf /var/lib/apt/lists/* 
+ADD archivos/curso.conf /etc/apache2/curso.conf 
+ADD archivos/index.html /var/www/index.html
+ENV variable="valor" variable2="valor2"
+EXPOSE 80
+CMD ["service", "apache2", "start"]
+CMD ["/bin/bash"]
+
+
+2. Crear el contenedor
+	$ docker build -t ubuntu:ubuntu1604 .
+
+3. Ingresar al contenedor
+	$ docker run -it -p80:80 myfirst
+
+

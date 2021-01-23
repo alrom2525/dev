@@ -3,3 +3,10 @@ dns
 sub-domain
 https://www.youtube.com/watch?v=qhozEqm2eWA
 min 7:03
+
+sudo killall -HUP nDNSResponder
+
+ns-cloud-b1.googledomains.com
+ns-cloud-b2.googledomains.com
+ns-cloud-b3.googledomains.com
+ns-cloud-b4.googledomains.com

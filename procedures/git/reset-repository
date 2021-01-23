@@ -1,0 +1,16 @@
+reset-repository
+
+For a new repository, the method works for me:
+
+Remote the files related with git
+sudo rm -rf .git
+
+Do the commit again
+git add . && git commit -m "your commit"
+
+Add the git URL and try to push again
+git remote add origin <your git URL>
+
+And then try to push again
+git push -u origin master -f
+

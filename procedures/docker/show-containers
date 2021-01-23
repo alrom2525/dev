@@ -1,0 +1,2 @@
+show-containers
+	$ docker ps -a

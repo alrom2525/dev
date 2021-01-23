@@ -1,0 +1,2 @@
+delete-a-container
+	$ docker rm <container-id>

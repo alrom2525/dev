@@ -1,0 +1,8 @@
+initialize-your-App-Engine-app-with-your-project-and-choose-its-region
+	$ gcloud app create --project=$DEVSHELL_PROJECT_ID
+
+When prompted, select the region where you want your App Engine application located.
+https://cloud.google.com/appengine/docs/locations
+
+
+

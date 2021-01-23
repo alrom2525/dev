@@ -13,14 +13,14 @@ Si queremos subir el archivo archivo.txt de nuestro ordenador a la carpeta /home
 $ scp archivo.txt usuario@dominio.com:/home/usuario
 
 
-scp -r galera archivo.txt administrator@10.0.8.13:/var/www/dev.cslaval.sofad.qc.ca/backup_original
+scp -r galera archivo.txt administrator@10.0.8.13:/var/www/dev.mysite.ca/backup_original
 
 
 b) COPIAR ARCHIVOS DESDE El SERVIDOR A LOCAL
 Si queremos copiar el fichero archivo.txt del servidor a nuestro ordenador en la carpeta Documentos, hacemos lo siguiente:
 
 $ scp usuario@dominio.com:/home/usuario/archivo.txt Documentos
-$ scp sofad@132.219.142.77:/transfert/gfs/simplesaml.tar.gz .
+$ scp mysite@132.219.142.77:/transfert/gfs/simplesaml.tar.gz .
 
 c) COPIAR ARCHIVOS DE SERVIDOR A SERVIDOR
 Para copiar un archivo de un servidor a otro, hacemos lo siguiente:

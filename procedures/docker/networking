@@ -1,0 +1,27 @@
+networking
+https://docs.docker.com/network/
+
+	$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+764356ef027b        bridge              bridge              local
+236141d1dfa5        host                host                local
+d751755d7915        none                null                local
+
+bridge = es donde arrancan todos los contenedores por defecto, es una red que crea un puente entre la interfaz de red del contenedor que se arranca y una interfaz de red virtual que se crea en la maquina local, cuando se instala Docker.
+
+host = copia la configuracion de red de la computadora local (donde se instalo Docker) hacia el contenedor que se inicie.
+
+
+none = elimina toda la configuracion de red, 
+solo estara loopback 127.0.0.1
+
+
+	$ sudo ifconfig docker0
+en MAC no me funciono este comando
+
+Si se desea crear otra red para los contenedores
+	$ docker network create --driver bridge nombre-red
+
+docker compose siempre hara una red diferente.
+
+	$ docker network inspect bridge

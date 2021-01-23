@@ -1,0 +1,47 @@
+create-a-cloud-SQL-database
+
+Task 1: Create a Cloud SQL database
+In this task, you configure a SQL server according to Google Cloud best practices and create a Private IP connection.
+
+On the Navigation menu (Navigation menu), click SQL.
+Click Create instance.
+Click Choose MySQL.
+Specify the following, and leave the remaining settings as their defaults:
+Property	Value
+Instance ID	wordpress-db
+Root password	type a password
+Region	us-central1
+Zone	Any
+Database Version	MySQL 5.7
+Note the root password; it will be used in a later step and referred to as [ROOT_PASSWORD].
+Expand Show configuration options.
+
+Expand the Connectivity section.
+
+Select Private IP.
+
+In the dialog box, click Enable API, click Allocate and connect, and then click Close. This enables Private Services Access and attaches a Private IP address to your Cloud SQL server.
+
+Private IP is an internal connection, unlike external IP, which egresses to the internet.
+Expand the Machine type and storage section.
+
+Provision the right amount of vCPU and memory. To choose a Machine Type, click Change, and then explore your options.
+
+A few points to consider:
+
+Shared-core machines are good for prototyping, and are not covered by Cloud SLA.
+Each vCPU is subject to a 250 MB/s network throughput cap for peak performance. Each additional core increases the network cap, up to a theoretical maximum of 2000 MB/s.
+For performance-sensitive workloads such as online transaction processing (OLTP), a general guideline is to ensure that your instance has enough memory to contain the entire working set and accommodate the number of active connections.
+For this lab, select db-n1-standard-1, and then click Select.
+
+Next, choose Storage type and Storage capacity.
+
+A few points to consider:
+
+SSD (solid-state drive) is the best choice for most use cases. HDD (hard-disk drive) offers lower performance, but storage costs are significantly reduced, so HDD may be preferable for storing data that is infrequently accessed and does not require very low latency.
+There is a direct relationship between the storage capacity and its throughput.
+Add a few zeros to the storage capacity to see how it affects the throughput. Reset the slider to 10GB.
+Setting your storage capacity too low without enabling an automatic storage increase can cause your instance to lose its SLA.
+Click Close.
+Click Create at the bottom of the page to create the database instance.
+You might have to wait for the Private IP changes to propagate before the Create button becomes clickable.

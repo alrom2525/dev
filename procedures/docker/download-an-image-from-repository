@@ -1,0 +1,10 @@
+download-an-image-from-repository
+
+	$ docker pull image-name
+$ docker pull ubuntu
+	En este caso usa el tag por defecto que es latest
+
+	$ docker pull image-name:version
+$ docker pull ubuntu:latest
+$ docker pull ubuntu:14.0
+$ docker pull ubuntu:16.04

@@ -1,0 +1,39 @@
+ERR_TOO_MANY_REDIRECTS-prestashop-1-7
+This problem is most of the times related to SSL issues.
+
+Solution:
+1. Try to log in to the backend via: https://<my-domain.com>/Backoffice/index.php
+
+2. In PrestaShop Backend, click Shop Parameters (under Configure) > General.
+
+3. Click "Yes" next to Enable SSL and click Save to apply the changes.
+
+4. Then click "Yes" next to Enable SSL on all pages and click Save to apply the changes.
+
+Explanation:
+If you have HTTP to HTTPS redirects enabled while there is some other setting which redirects a https request to an http webpage, hen you will get this error.
+For example, if you have HTTP to HTTPS redirects enabled, but you have a setting in .htaccess which redirects like this: Redirect 301 * http://<DOMAIN_NAME>.com/
+Or if you see some other settings in there which redirects to a http page.
+
+That's most commonly related to this issue in my opinion.
+
+Next is if you for example use Cloudflare.
+Cloudflare has 4 SSL options:
+
+1. "Off (Not Secure)"
+2. "Flexible"
+3. "Full"
+4. "Full (Strict)"
+
+What SSL setting should I use?
+
+This setting controls how Cloudflare’s servers connect to your origin for HTTPS requests. We recommend enabling the Full SSL (Strict) setting if possible. Common use cases for each are:
+
+Off: No visitors will be able to view your site over HTTPS; they will be redirected to HTTP.
+
+Flexible SSL: You cannot configure HTTPS support on your origin, even with a certificate that is not valid for your site. Visitors will be able to access your site over HTTPS, but connections to your origin will be made over HTTP.
+* Note: You may encounter a redirect loop with some origin configurations.
+
+Full SSL: Your origin supports HTTPS, but the certificate installed does not match your domain or is self-signed. Cloudflare will connect to your origin over HTTPS, but will not validate the certificate.
+
+Full (strict): Your origin has a valid certificate (not expired and signed by a trusted CA or Cloudflare Origin CA) installed. Cloudflare will connect over HTTPS and verify the cert on each request.

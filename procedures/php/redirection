@@ -1,0 +1,10 @@
+redirection
+
+Redirection in PHP can be done using the header() function. To setup a simple redirect simply creates an index.php file in the directory you wish to redirect from with the following content:
+
+	< ?php header("Location: http://www.redirect.to.url.com/"); ?>
+
+Where 'http://www.redirect.to.url.com/' is the URL you wish the users to be redirected too. This can also be a file, like so:
+	<?php header("Location: anotherDirectory/anotherFile.php"); ?>
+
+Files can be of any type including but not limited to HTML, python, php, cgi, perl, and compiled cgi programs.

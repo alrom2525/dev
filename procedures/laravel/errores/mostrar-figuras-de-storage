@@ -1,0 +1,19 @@
+mostrar figuras de la carpeta Storage en Laravel
+
+1. Go to public directory and run: (delete the symbolic link)
+
+	$ rm storage
+
+2. $ php artisan storage:link
+
+
+Revisar el enlace simbolico: 
+$ ls -lrth public/
+storage -> /var/www/your-virtual-host/www/storage/app/public
+
+
+Tambien es posible hacerlo con el comando de linux ln:
+ln -s /home/vagrant/code/storage/app/public /home/vagrant/code/public/storage
+
+
+https://www.laraveltip.com/como-mostrar-imagenes-de-la-carpeta-storage-en-laravel/

@@ -1,0 +1,6 @@
+delete-an-image
+
+	$ docker rmi <image-id> OR <image-name>
+
+	$ docker rmi ubuntu:14.04
+	

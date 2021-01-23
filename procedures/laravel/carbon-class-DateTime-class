@@ -1,0 +1,53 @@
+carbon-class-DateTime-class
+https://www.youtube.com/watch?v=m8tbRlTF83g
+
+https://carbon.nesbot.com/docs/
+
+use Carbon\Carbon;
+
+Route::get('/time', function(){
+	$dt = new Carbon();
+	echo $dt;
+	echo "<p style='color:red'> Today is: " . $dt->today() . "</p>";
+	echo "<p style='color:orange'> Yesterday was: " . $dt->yesterday() . "</p>";
+	echo "<p style='color:green'> Tomorrow will be: " . $dt->tomorrow() . "</p>";
+	echo "<p style='color:blue'> Function diffForHumans: " . $dt->diffForHumans() . "</p>";
+
+	$newYear = new Carbon('First day of september 2020');
+	echo "<p style='color:black'> First day of month diffForHumans: " . $newYear->diffForHumans() . "</p>";
+
+	// More control over date
+	echo "<p style='color:brown'> Create from date: " . Carbon::createFromDate(2020,9,4,'America/Toronto') . "</p>";
+	echo "<p style='color:brown'> Create from date with time: " . Carbon::createFromDate(2020,9,4,13,55,01,'America/Toronto') . "</p>";
+
+	// Getters and setters
+	$dt->year = 2025;
+	echo "<p style='color:DarkCyan'> Set the year at: " . $dt->year . "</p>";
+	echo "<p style='color:DarkCyan'> The quantity of days in the month of september: " . $dt->daysInMonth . "</p>";
+
+	// Formatting
+	echo "<p style='color:DarkGreen'> Function toDayDateTimeString: " . $dt->toDayDateTimeString() . "</p>";
+	echo "<p style='color:DarkGreen'> Function toFormattedDateString: " . $dt->toFormattedDateString() . "</p>";
+	echo "<p style='color:DarkGreen'> Function format('h:i:s A') " . $dt->format('h:i:s A'). "</p>";
+
+	// Some human readable
+	$dt = new Carbon();
+	//echo "<p style='color:Indigo'> Function subMonth & diffForHumans: " . 
+	//$dt->subMonth()->diffForHumans() . "</p>";
+	/*echo "<p style='color:Indigo'> Function addMonth & diffForHumans: " . 
+	$dt->addMonth()->diffForHumans() . "</p>";*/
+
+	echo "<p style='color:Indigo'> Dt: " . 
+	$dt . "</p>";
+
+	echo "<p style='color:Indigo'> diffInDays: " . 
+	$dt->diffInDays($dt->copy()->addMonth()) . "</p>";
+
+
+
+	//echo $dt->diffInDays($dt->copy()->addMonth());                         // 31
+
+
+
+
+});

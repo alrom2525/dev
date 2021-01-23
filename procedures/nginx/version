@@ -1,0 +1,4 @@
+version
+$ nginx -v
+$ nginx -V
+	esto permite observar las opciones de configuracion

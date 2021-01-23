@@ -1,0 +1,62 @@
+ubuntu-install
+
+1) uninstall docker
+	$ sudo apt-get remove docker docker-engine docker-ce docker.io
+
+2) update packages
+	$ sudo apt-get update
+
+3) Allow app to use a repository over HTTPS
+	$ 	sudo apt-get -y install \
+		apt-transport-https \
+		ca-certificates \
+		curl \
+		software-properties-common
+4) Add the docker official cgp key to apt
+	$	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	OK
+
+5) Verify that you now have the docker gcp key
+	$ sudo apt-key fingerprint 0EBFCD88
+	
+	pub   rsa4096 2017-02-22 [SCEA]
+    9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+	uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
+	sub   rsa4096 2017-02-22 [S]
+
+6) Add the docker repository to apt
+	$	sudo add-apt-repository \
+		"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+		$(lsb_release -cs) \
+		stable"
+
+7) reupdate packages
+	$ sudo apt-get update
+
+8) install containerd package
+
+	$ curl -O https://download.docker.com/linux/ubuntu/dists/bionic/pool/edge/amd64/containerd.io_1.2.2-3_amd64.deb
+
+	$ sudo apt install ./containerd.io_1.2.2-3_amd64.deb 
+
+9) install a specific version of docker
+	$ sudo apt-get install docker-ce=17.12.0~ce-0~ubuntu
+
+	$ sudo apt-get install docker-ce -y (install latest)
+
+10) Verification make sure that the docker group are added
+	$ sudo groupadd docker
+	groupadd: group 'docker' already exists
+
+10.1 Add our user account to the docker group
+	$ sudo usermod -aG docker $USER	
+
+10.2 Logout
+	$ exit
+
+11) Verify docker is installed
+	$ docker version
+	$ docker run hello-world
+
+12) Ensure that the Docker service is enabled
+	$ sudo systemctl enable docker

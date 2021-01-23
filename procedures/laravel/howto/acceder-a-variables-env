@@ -1,0 +1,11 @@
+# acceder-a-variables-env
+https://stackoverrun.com/es/q/11988121
+
+Env file:
+	APP_URL=http://localhost:8000
+	FACEBOOK_LOGIN_URL=/en/portal/facebook_login
+	FACEBOOK_CALLBACK_URL=/en/portal/facebook_callback
+
+in Laravel:
+
+env('APP_URL') . env('FACEBOOK_LOGIN_URL');

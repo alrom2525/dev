@@ -1,7 +1,15 @@
-https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04
+https://www.laraveltip.com/instalar-certificado-ssl-gratuito-en-apache/
+
+how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04
 
 https://www.youtube.com/watch?v=zglf0UWi2gQ
 https://www.qtithow.com/2019/08/how-to-install-ssl-certificate-on-ubuntu-1804-lts.html
+àBuscar Let's Encrypt en Ubuntu
+
+Elements HTTPS: 
+CLE Prive
+CLE Public
+Bundle 
 
 $ sudo su 
 Step 1 - Installing Certboot
@@ -49,11 +57,19 @@ Step 3 — Allowing HTTPS Through the Firewall
 Step 4 — Obtaining an SSL Certificate
 
 Me quede aqui en el 5:52
+sudo certbot --apache -d mysite.org -d www.mysite.org
 
 Step 5 — Verifying Certbot Auto-Renewal
+	sudo certbot renew --dry-run
+
+/etc/letsencrypt/live/mysite.org/fullchain.pem
+Processing /etc/letsencrypt/renewal/mysite.org.conf
+/etc/letsencrypt/live/mysite.org/privkey.pem
+/etc/letsencrypt/live/mysite.org/fullchain.pem
 
 
 
+fullchain.pem
 
 
 
@@ -61,9 +77,9 @@ Step 5 — Verifying Certbot Auto-Renewal
 IMPORTANT NOTES:
  - Unable to install the certificate
  - Congratulations! Your certificate and chain have been saved at:
-   /etc/letsencrypt/live/educatools.ca/fullchain.pem
+   /etc/letsencrypt/live/mysite.org/fullchain.pem
    Your key file has been saved at:
-   /etc/letsencrypt/live/educatools.ca/privkey.pem
+   /etc/letsencrypt/live/mysite.org/privkey.pem
    Your cert will expire on 2020-11-12. To obtain a new or tweaked
    version of this certificate in the future, simply run certbot again
    with the "certonly" option. To non-interactively renew *all* of
@@ -126,3 +142,43 @@ sudo cp domain.example.conf domain.test.conf
 sudo nano domain.test.conf
 cerbot
 history
+
+
+
+
+--------
+sudo certbot
+[sudo] password for administrator: 
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator apache, Installer apache
+
+Which names would you like to activate HTTPS for?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: communico.club
+2: deveniraidant.ca
+3: www.deveniraidant.ca
+4: e-propane.ca
+5: servicedegarde-moodle.edumysite.org
+6: enligne-idp-innovation.com
+7: epropane.ca
+8: fc3.quebec
+9: gestion-stress-aidants.ca
+10: dev.mocn.ca
+11: praedictia.com
+12: chum-moodle.mysite.org
+13: chusj.mysite.org
+14: cisssme.mysite.org
+15: cssslaval-moodle.mysite.org
+16: icm-moodle.mysite.org
+17: litteratie-moodle.mysite.org
+18: pesticides.mysite.org
+19: pestpt.mysite.org
+20: specimens.mysite.org
+21: tad.mysite.org
+22: voyager.mysite.org
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate numbers separated by commas and/or spaces, or leave input
+blank to select all options shown (Enter 'c' to cancel): c
+Please specify --domains, or --installer that will help in domain names autodiscovery, or --cert-name for an existing certificate name.
+
+

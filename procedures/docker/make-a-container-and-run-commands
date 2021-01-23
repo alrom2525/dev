@@ -1,0 +1,21 @@
+make-a-container-and-run-commands
+
+	$docker run -it image-name
+	$docker run -it ubuntu
+
+
+	$ docker run -it --rm ubuntu ls /etc
+	$ docker run -it 456fa7c58e09 bash
+	$ docker run -d ngnix
+	$ docker run -d ngnix --name web_server
+
+Iniciar una imagen o ejecutar un contenedor:
+docker run -d --rm -it --name exercise14  devopsdockeruh/exec_bash_exercise
+
+donde: 
+-d: 	se ejecutara en background
+--rm: 	se borrara al finalizar el contenedor (stop / kill)
+-it: 	establece el modo interactivo y agrega un terminal, es decir que se pueden ejecutar por ejemplo en un bash como: ls, top, who
+--name: establece un nombre corto para identificarlo facilmente
+
+El containerID es suministrado por Docker (aleatorio)

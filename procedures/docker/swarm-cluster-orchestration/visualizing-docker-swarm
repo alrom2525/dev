@@ -1,0 +1,23 @@
+visualizing-docker-swarm
+
+->check the nodes
+	$ docker node ls
+
+->get more information of swarm cluster such as quantity of nodes, 
+  nodeid, clusterid, to know if it's the manager, etc.
+	$ docker info | more
+
+How can investigate what happen inside swarm cluster?
+https://hub.docker.com/r/dockersamples/visualizer
+	$ docker run -it -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
+	
+	$ docker service ls
+
+->check the container's	
+	$ docker ps
+
+->To inspect all information about an application on swarm cluster  
+	$ docker inspect app-name | more
+	$ docker inspect app-name/container-id | grep Replicas
+	$ docker inspect app-name/container-id | grep IPAddress
+

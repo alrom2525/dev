@@ -1,0 +1,10 @@
+checking-status
+	$ docker version
+
+	$ docker info
+
+	$ docker ps 		#containers that are running
+
+	$ docker ps -a 		#containers that are exited & running
+
+	$ docker node ls	#only by leader in docker swarm - show the host

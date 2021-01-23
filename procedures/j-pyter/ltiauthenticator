@@ -1,0 +1,19 @@
+ltiauthenticator
+https://github.com/jupyterhub/ltiauthenticator
+
+3. Create an client-key for use by Moodle against your hub. You can do so by running 
+	$ openssl rand -hex 32 and saving the output.
+
+	ca4c4ef24082a34c4a8b7f38ca791aa4b6ef299e703dee82e1cd6e1d21f1e023
+
+4. Create an client-secret for use by Moodle against your hub. You can do so by running 
+	$ openssl rand -hex 32 and saving the output.
+	9d7153df054a9401b91689a8a593fd64200dffb5a7e57ed8acea115b2f981607
+
+5. If you are running Jupyterhub locally, you need to Configure it to accept LTI Launch requests from Moodle. You do this by enabling the LTI Authenticator class and giving JupyterHub access to the client key & secret generated in steps 3 and 4.
+ 
+  c.JupyterHub.authenticator_class = 'ltiauthenticator.LTIAuthenticator'
+
+  c.LTIAuthenticator.consumers = {
+       "ca4c4ef24082a34c4a8b7f38ca791aa4b6ef299e703dee82e1cd6e1d21f1e023": "9d7153df054a9401b91689a8a593fd64200dffb5a7e57ed8acea115b2f981607"
+   }

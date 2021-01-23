@@ -1,0 +1,65 @@
+nodes-services-containers-tasks(replicas)
+
+->Node 
+Is a physical host or could it be a virtual machine in the cloud that's running docker, the docker engine.
+https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/
+https://docs.docker.com/engine/swarm/swarm-tutorial/add-nodes/
+
+->Swarm-cluster or docker-cluster
+Imagine to scale our infrastructure and we add three nodes
+we run a docker swarm initialize to initialize a cluster
+
+	Swarm-cluster = Node-1, Node-2 and Node-3
+
+Now we have three nodes in our docker cluster.
+
+->Services
+We want to deploy a new service across this docker cluster, we're going to give this service a name (webapp1), in other words; we want this new webapp1 service to created and have six tasks (--replicas) run across the swarm cluster:
+	docker service create --name webapp1 --replicas=6 ngnix
+
+https://docs.docker.com/engine/swarm/swarm-tutorial/deploy-service/
+https://docs.docker.com/engine/swarm/services/
+
+The actual image that's going to be instantiated inside this container in this case is called NGINX (a popular web server).
+Recap, the nginx is going to be brought up inside six different tasks and run across the swarm cluster. We're going to give it a name of webapp1 and it's docker swarm that's going to execute this execute this service and ensure that it's always highly available that it's always scaled across all the nodes in the cluster.
+
+We're going to bring up this service across each of different nodes in the cluster and docker swarm that's bringing up these webapps tasks (replicas) across the hosts in the cluster.
+
+->Recap
+The difference between a container and a service 
+	
+	Container
+	- Runs only on one host, the host that you instantiated on when you performed the docker run command.
+	- You have to manually share the networks and storage per container in the docker RUN command string, so storage and nework configurations can be difficult to scale when you have tens or hundreds of containers that you need to start up.
+	- Are tough to scale and make highly available.
+
+
+	Service (are the better way to run containers)
+	- Automatically runs across however many nodes are needed, based on the number of replicas that you defined.
+	- High availability is built in, if I were to pull the power plug on one of those nodes in the docker cluster, the containers that were running on that node would be automatically restarted on other nodes based on the docker swarm functionality.
+	- Scalability of the app is easy to do, you can go and modify the number of replicas for the service and additional containers will be brought up across the docker cluster.
+	- Exposing networks and storage is easy, you can do it one time defining whatever networks or storage you want to share, and that functionality applies to all the containers. 
+
+
+-> Practice
+	$ docker service create --name webapp1 --replicas=4 nginx
+
+image nginx:latest could not be accessed on a registry to record
+its digest. Each node will access nginx:latest independently,
+possibly leading to different nodes running different
+versions of the image.
+
+8laiuy84qhy2jmqs3g75ix1ok
+overall progress: 4 out of 4 tasks 
+1/4: running   
+2/4: running   
+3/4: running   
+4/4: running   
+verify: Service converged
+
+
+	$ docker service ls
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+8laiuy84qhy2        webapp1             replicated          4/4                 nginx:latest
+
+ 

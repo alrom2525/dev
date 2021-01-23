@@ -1,0 +1,102 @@
+https-add-certificate-ssl-web-site
+https://www.laraveltip.com/instalar-certificado-ssl-gratuito-en-apache/ 
+Certbot software is required in the server.
+
+Requisites:
+a) Configuration in DNS (add an ipv4 address to www and other to your non-www)
+Nombre 				Tipo 	TTL 	Datos
+@ 					A 		1h 		192.168.1.15
+www 				CNAME	1h		mydomain.org.
+www.mydomain.org	A 		1h 		35.239.73.238
+
+b) Installation in server
+	$ sudo add-apt-repository ppa:certbot/certbot
+	$ sudo apt-get update
+	$ sudo apt install python-certbot-apache
+	$ sudo ufw allow 'Apache Full'
+	$ sudo ufw delete allow 'Apache'
+	$ sudo ufw status
+
+1. Add the domain name DNS.
+
+2. Create the folder in /var/www
+	2.1 $ sudo mkdir /var/www/www.site.com 
+	2.2 $ sudo mkdir /var/www/www.site.com/www
+
+3. Add the permissions
+	3.1 $ sudo chmod -R 775 www.site.com  (chmod g+s)
+	3.2 $ sudo chown -R www-data:www-data www.site.com
+
+4. Configure the file apache2 to the vhost
+	4.1 cd /etc/apache2/sites-available (make a copy without -ssl)
+	    $ sudo cp referencesite.conf site.com.conf
+
+5. Activate the site
+	$ sudo a2ensite site.com.conf
+	Enabling site site.com
+	To activate the new configuration, you need to run:
+  	systemctl reload apache2
+
+	$ sudo /etc/init.d/apache2 reload
+	[ ok ] Reloading apache2 configuration (via systemctl): apache2.service.
+
+6. Add the certificate and ALWAYS choose the option Redirect (2) 
+	6.2 $ sudo certbot –apache -d ejemplo.com -d www.ejemplo.com OR 
+	6.1 $ sudo certbot
+	Saving debug log to /var/log/letsencrypt/letsencrypt.log
+	Plugins selected: Authenticator apache, Installer apache
+
+	Which names would you like to activate HTTPS for?
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	1: oldsite.com
+	2: anothersite.com
+	3: site.com
+	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate numbers separated by commas and/or spaces, or leave input
+blank to select all options shown (Enter 'c' to cancel): 3
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for site.com
+Waiting for verification...
+Cleaning up challenges
+Created an SSL vhost at /etc/apache2/sites-available/site.com-le-ssl.conf
+Deploying Certificate to VirtualHost /etc/apache2/sites-available/site.com-le-ssl.conf
+Enabling available site: /etc/apache2/sites-available/site.com-le-ssl.conf
+
+
+	6.2 ALWAYS choose the option Redirect (2) 
+Please choose whether or not to redirect HTTP traffic to HTTPS, removing HTTP access.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: No redirect - Make no further changes to the webserver configuration.
+2: Redirect - Make all requests redirect to secure HTTPS access. Choose this for
+new sites, or if you're confident your site works on HTTPS. You can undo this
+change by editing your web server's configuration.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 2
+Enhancement redirect was already set.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Congratulations! You have successfully enabled https://site.com
+
+You should test your configuration at:
+https://www.ssllabs.com/ssltest/analyze.html?d=site.com
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/site.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/site.com/privkey.pem
+   Your cert will expire on 2021-02-07. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot again
+   with the "certonly" option. To non-interactively renew *all* of
+   your certificates, run "certbot renew"
+ - Some rewrite rules copied from
+   /etc/apache2/sites-enabled/site.com.conf were disabled in
+   the vhost for your HTTPS site located at
+   /etc/apache2/sites-available/site.com-le-ssl.conf because
+   they have the potential to create redirection loops.
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le

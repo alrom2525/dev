@@ -1,4 +1,4 @@
-/var/www/wordpress.portailsofad.com/wp-content/plugins/mappress-google-maps-for-wordpress
+/var/www/portalmysite.com/wp-content/plugins/mappress-google-maps-for-wordpress
 
 $wpdb->get_var("select 1 from $posts_table");
                 //$exists = $wpdb->get_var("show tables like '$posts_table'"); 

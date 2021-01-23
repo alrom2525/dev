@@ -1,0 +1,59 @@
+integration-ms-teams
+
+Microsoft teams - user feedback forum
+https://microsoftteams.uservoice.com/forums/916759-moodle
+
+Documentation
+https://education.microsoft.com/en-us/resource/3dffb3a8
+https://docs.microsoft.com/en-us/microsoftteams/platform/moodleinstructions
+
+
+
+----
+[Done] Step 1: Install the Office 365 Moodle Plugin
+
+Plugins in this set provide integration with Office 365:
+
+
+Microsoft Office 365 Integration
+OpenID Connect
+Office 365 Repository
+Microsoft Block
+oEmbed Filter
+Office 365 Teams Theme
+
+[Permissions] Step 2: Configure the connection between the Office 365 plugin and Azure Active Directory
+
+	Permissions manquantes :
+    Have full access to user calendars
+    Read and write directory data
+    Have full access to user files
+    Read and write all groups
+    Read and write all OneNote notebooks that user can access
+    Read items in all site collections
+    Read and write all users' full profiles
+
+Documentation:
+https://docs.moodle.org/34/en/Office365#Configure_your_Application_Permissions
+
+[Pending] Step 3: Deploy the Moodle Assistant Bot to Azure
+
+3.1 Create a new bot application
+	Accédez à la section Inscriptions d'applications du portail Azure et enregistrez une nouvelle application. Entrez l'ID de l'application et le secret client ci-dessous : 
+	https://aka.ms/MoodleBotRegistration
+
+	Champs manquantes :
+	bot_app_id
+	bot_app_password
+	
+3.2 Deploy to Azure (provisioning MoodleBot assistant)
+	https://aka.ms/DeployMoodleTeamsBot
+	Champs manquantes :
+	bot_sharedsecret
+	bot_webhook_endpoint
+
+[Pending] 3.3 Download manifest file
+
+Step 4: Deploy your Microsoft Teams app
+	Upload a custom app
+

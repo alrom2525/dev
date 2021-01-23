@@ -1,0 +1,11 @@
+Obtener los registros a vencerse y los que ya estan vencidos,
+comparando tres meses a partir de la fecha actual.
+ 
+select id, projet, titreprojet, current_date, dateexpiration, DATEDIFF(current_date(), dateexpiration) 
+from mediarights
+
+where  
+
+DATEDIFF(current_date(), dateexpiration) >= -90
+order by 
+DATEDIFF(current_date(), dateexpiration) desc

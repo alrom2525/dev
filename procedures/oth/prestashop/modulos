@@ -1,0 +1,33 @@
+modulos
+
+Organizacion:
+
+Position displayHome
+	->Banner 
+		20% OFF 
+	Custom text blocks
+
+Position displayFooterBefore
+	->Newsletter subscription
+	Get our latest news and special sales - Subscribe
+	->Social media follow links
+
+Position displayFooter
+    ->Link List
+    ->My Account block
+	->Contact information
+Pendientes: Taxes, module payment, shipping, rounded
+, terms ands conditions, invoice, smtp
+
+
+Customer Settings-Customers -> Re-display cart at login .
+
+Payments
+Canada
+https://addons.prestashop.com/en/payment-card-wallet/8016-moneris-payment-gateway-canada.html
+Multilang
+https://addons.prestashop.com/en/payment-card-wallet/45936-psigate-credit-card-transactions-api.html#specifications
+
+https://addons.prestashop.com/en/payment-card-wallet/19425-offline-credit-card.html#overview
+https://addons.prestashop.com/en/payment-card-wallet/47795-authorizenet-payment-method-with-refund.html
+	
