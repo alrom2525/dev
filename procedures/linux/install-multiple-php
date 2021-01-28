@@ -53,8 +53,7 @@ sudo apt-get install php5.6 php5.6-fpm php5.6-mysql php5.6-cli libapache2-mod-ph
 
 -------------------------------------------------------------------------------------------------------
 
-sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-cli libapache2-mod-php7.0 graphviz aspell ghostscript clamav php7.0-pspell php7.0-curl php7.0-gd php7.0-intl php7.0-mysql php7.0-xml php7.0-xmlrpc php7.0-ldap php7.0-zip php7.0-soap php7.0-mbstring php7.2-mbstring php7.2-bcmath php7.2-common php7.0-apcu
-
+sudo apt-get install -y php7.0 php7.0-fpm php7.0-mysql php7.0-cli libapache2-mod-php7.0 graphviz aspell ghostscript clamav php7.0-pspell php7.0-curl php7.0-gd php7.0-intl php7.0-mysql php7.0-xml php7.0-xmlrpc php7.0-ldap php7.0-zip php7.0-soap php7.0-mbstring php7.0-bcmath php7.0-common php7.0-apcu php7.0-cgi php7.0-fpm php7.0-gd php7.0-imap php7.0-xml php7.0-mbstring php7.0-intl 
 
 -------------------------------------------------------------------------------------------------------
 sudo apt-get install -y php7.1 php7.1-fpm php7.1-mysql php7.1-cli libapache2-mod-php7.1 graphviz aspell ghostscript clamav php7.1-pspell php7.1-curl php7.1-gd php7.1-intl php7.1-mysql php7.1-xml php7.1-xmlrpc php7.1-ldap php7.1-zip php7.1-soap php7.1-mbstring php7.1-bcmath php7.1-common

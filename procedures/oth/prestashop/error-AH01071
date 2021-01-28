@@ -1,0 +1,52 @@
+error-AH01071
+
+[proxy_fcgi:error] [pid 10108] [client 45.74.75.201:53005] AH01071: Got error 'PHP message: PHP Notice:  Undefined variable: advice in /var/www/yoursite.com/www/modules/psaddonsconnect/psaddonsconnect.php on line 227\nPHP message: PHP Notice:  Undefined variable: link_advice in /var/www/yoursite.com/www/modules/psaddonsconnect/psaddonsconnect.php on line 228\n', referer: https://yoursite.com/admin089ukmxe1/index.php?controller=AdminLogin&token=89df0b1f58d452cb41442610829972d6&logout
+
+Here are the error messages:
+Notice à la ligne 227 du fichier /home/www/modules/psaddonsconnect/psaddonsconnect.php
+[8] Undefined variable: advice
+
+Notice à la ligne 228 du fichier /home/www/modules/psaddonsconnect/psaddonsconnect.php
+[8] Undefined variable: link_advice
+
+
+PrestaShop version: 1.6.1.18
+PHP version: 7.0.33-12+ubuntu18.04.1+deb.sury.org+1
+Thème actif : classic
+
+
+Important: enable debug mode TRUE
+edit the file config/defines.inc.php 
+
+/* Debug only */
+if (!defined('_PS_MODE_DEV_')) {
+define('_PS_MODE_DEV_', true);
+}
+
+
+
+https://github.com/PrestaShop/PrestaShop/issues/10934
+
+So this is my quick fix for the issue while Prestashop haven't provide any fix for it.
+
+Go to your root website folder
+Navigate to /modules/psaddonsconnect/
+Look for psaddonsconnect.php
+Add an "else" statement so that we can still fill value for the variables $advice and $link_advice. 
+See attached image https://user-images.githubusercontent.com/33541221/57740101-0f748080-76f1-11e9-9b84-81659f7f4dc8.png
+
+// API DATA
+include_once('classes/WeekAdvice.php');
+$api = new WeekAdvice();
+$api_json = $api->getWeekData();
+
+if (!empty($api_json)) {
+    $advice = $api_json->advice;
+    $link_advice = $api_json->link;
+} else{ //quick fix for the dashboard psaddonsconnect
+        $advice = "";
+        $link_advice = "";
+}
+
+
+
