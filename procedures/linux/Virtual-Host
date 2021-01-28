@@ -40,8 +40,8 @@ RewriteEngine on
 
 Important note: if you add https with certbot, the script will automatically write the next three lines:
 
-	RewriteCond %{SERVER_NAME} =www.store.educatools.ca [OR]
-	RewriteCond %{SERVER_NAME} =store.educatools.ca
+	RewriteCond %{SERVER_NAME} =www.mydomain.org [OR]
+	RewriteCond %{SERVER_NAME} =store.mydomain.org.ca
 	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 
 
@@ -73,3 +73,17 @@ SSLCertificateKeyFile /etc/letsencrypt/live/mydomain.org/privkey.pem
 Include /etc/letsencrypt/options-ssl-apache.conf
 </VirtualHost>
 </IfModule>
+
+
+# 
+
+<?php
+
+// Show all information, defaults to INFO_ALL
+phpinfo();
+
+// Show just the module information.
+// phpinfo(8) yields identical results.
+phpinfo(INFO_MODULES);
+
+?>

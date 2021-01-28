@@ -41,8 +41,9 @@ b) Installation in server
 	[ ok ] Reloading apache2 configuration (via systemctl): apache2.service.
 
 6. Add the certificate and ALWAYS choose the option Redirect (2) 
+	6.1 $ sudo certbot OR
 	6.2 $ sudo certbot –apache -d ejemplo.com -d www.ejemplo.com OR 
-	6.1 $ sudo certbot
+	
 	Saving debug log to /var/log/letsencrypt/letsencrypt.log
 	Plugins selected: Authenticator apache, Installer apache
 

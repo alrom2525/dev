@@ -8,7 +8,7 @@ Directorio origen: ruta del directorio completo que queremos copiar.
 Directorio destino: ruta donde queremos copiar el archivo.
 
 a) COPIAR ARCHIVOS DE LOCAL A SERVIDOR
-Si queremos subir el archivo archivo.txt de nuestro ordenador a la carpeta /home/usuario del servidor, hacemos lo siguiente:
+Si queremos subir zel archivo archivo.txt de nuestro ordenador a la carpeta /home/usuario del servidor, hacemos lo siguiente:
 
 $ scp archivo.txt usuario@dominio.com:/home/usuario
 
