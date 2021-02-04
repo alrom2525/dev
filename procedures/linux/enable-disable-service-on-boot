@@ -1,0 +1,5 @@
+enable-disable-service-on-boot
+
+$ systemctl enable service-name
+
+$ systemctl disable service-name

@@ -1,0 +1,36 @@
+error-404-not-found
+
+https://yoursite.com/en/
+Not Found
+
+The requested URL was not found on this server.
+Apache/2.4.29 (Ubuntu) Server at dev.boutiquepmeafrique.com Port 443
+
+
+https://askubuntu.com/questions/1154287/why-laravel-api-php-routes-give-a-404-error
+
+sudo a2enmod rewrite
+Changes in the file /etc/apache2/apache2.conf
+
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+Restart apache:
+
+sudo service apache2 restart
+
+
+
+
+Si no funciona, entonces desactivar las Friendly URLs
+Go to: Shop Parameters -> Traffic & SEO -> SEO & URLs -> Set up URLs 
+Set all [NO]
+
+[NO] URL rewriting (mod_rewrite) is not active on your server, or it is not possible to check your server configuration. If you want to use Friendly URLs, you must activate this mod. 
+
+Accented URL [NO]
+Redirect to the canonical URL [No redirection (you may have duplicate content issues)]
+Disable Apache's MultiViews option [NO]
+Disable Apache's mod_security module [NO]

@@ -14,25 +14,26 @@ Recordar que al acitvar el sitio, aparecera un acceso directo en el directorio /
 
 file /etc/apache2/sites-available/mydomain.org.conf 
 <VirtualHost ip_address:80>
-	ServerName mydomain.org
-	DocumentRoot /var/www/mydomain.org/mysite/
+ ServerName mydomain.org
+ DocumentRoot /var/www/mydomain.org/mysite/
         
-        ErrorLog /var/log/apache2/mydomain.org_error.log
-        CustomLog /var/log/apache2/mydomain.org_access.log full
-        AddDefaultCharset Off
+ ErrorLog /var/log/apache2/mydomain.org_error.log
+ CustomLog /var/log/apache2/mydomain.org_access.log full
+ AddDefaultCharset Off
 
 <FilesMatch \.php$>
-		# Apache 2.4.10+ can proxy to unix socket
-		SetHandler "proxy:unix:/var/run/php/php7.1-fpm.sock|fcgi://localhost/"
-	</FilesMatch>
+ # Apache 2.4.10+ can proxy to unix socket
+ SetHandler "proxy:unix:/var/run/php/php7.1-fpm.sock|fcgi://localhost/"
+</FilesMatch>
 
-	Alias / "/var/www/mydomain.org/mysite/" 
+Alias / "/var/www/mydomain.org/mysite/" 
 
-	<Directory /var/www/mydomain.org/mysite/*>
-		Options -Indexes +FollowSymLinks
-		AllowOverride All
-		Allow from all
-	</Directory>
+<Directory /var/www/mydomain.org/mysite/*>
+ Options -Indexes +FollowSymLinks
+ AllowOverride All
+ Allow from all
+</Directory>
+
 RewriteEngine on
 # Until here was writing by manual mode
 

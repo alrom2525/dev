@@ -1,0 +1,8 @@
+
+Configuration module standalone
+1. Supprimer le fichier : 
+	/var/www/your-site/www/mod/standalone/content/__dbcred.dat 
+2. Importation des schémas:
+	standalone_*
+3. creation d'utilisateur utilstandalone <<mysql>>
+4. Ajouter le droits sur les schémas precedentes au utilisateur utilstandalone

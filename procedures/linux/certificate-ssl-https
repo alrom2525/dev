@@ -22,6 +22,10 @@ b) Installation in server
 2. Create the folder in /var/www
 	2.1 $ sudo mkdir /var/www/www.site.com 
 	2.2 $ sudo mkdir /var/www/www.site.com/www
+	2.3 $ sudo vi /var/www/www.site.com/www/info.php
+	<?php
+		phpinfo();
+		phpinfo(INFO_MODULES);
 
 3. Add the permissions
 	3.1 $ sudo chmod -R 775 www.site.com  (chmod g+s)

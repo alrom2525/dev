@@ -1,0 +1,156 @@
+moodlebox initial setup
+
+https://moodlebox.net/en/help/how-to-access-the-moodlebox-via-ethernet/
+https://www.modmy.com/how-modify-hosts-file-your-android-device
+
+Distributor ID:	Raspbian
+Description:	Raspbian GNU/Linux 10 (buster)
+Release:	10
+Codename:	buster
+
+
+/var/www/moodle
+/var/www/moodledata
+
+/var/log/nginx/error.log
+/var/log/nginx/access.log 
+
+phpinfo
+PHP Version 7.3.19-1~deb10u1
+Configuration File (php.ini) Path 	/etc/php/7.3/fpm
+Scan this dir for additional .ini files 	/etc/php/7.3/fpm/conf.d 
+
+// 1. DATABASE SETUP
+ERROR 1698 (28000): Access denied for user 'root'@'localhost' at Ubuntu 18.04
+you need to change the root password
+sudo mysql -u root
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'test'; 
+
+<?php  // Moodle configuration file
+
+unset($CFG);
+global $CFG;
+$CFG = new stdClass();
+
+$CFG->dbtype    = 'mariadb';
+$CFG->dblibrary = 'native';
+$CFG->dbhost    = 'localhost';
+$CFG->dbname    = 'moodle';
+$CFG->dbuser    = 'moodlebox';
+$CFG->dbpass    = 'Moodlebox4$';
+$CFG->prefix    = 'mdl_';
+$CFG->dboptions = array (
+  'dbpersist' => 0,
+  'dbport' => '',
+  'dbsocket' => '',
+  'dbcollation' => 'utf8mb4_general_ci',
+);
+
+$CFG->wwwroot   = 'http://moodlebox.home';
+$CFG->dataroot  = '/var/www/moodledata';
+$CFG->admin     = 'admin';
+
+$CFG->backuptempdir = '/var/www/moodledata/backup';
+$CFG->xsendfile = 'X-Accel-Redirect';
+$CFG->xsendfilealiases = array('/dataroot/' => $CFG->dataroot);
+$CFG->customfiletypes = array(
+  (object)array(
+    'extension' => 'crt',
+    'icon' => 'sourcecode',
+    'type' => 'application/x-x509-ca-cert',
+    'customdescription' => 'X.509 CA certificate'
+  )
+);
+$CFG->showcampaigncontent = false;
+$CFG->directorypermissions = 02777;
+
+require_once(__DIR__ . '/lib/setup.php');
+
+// There is no php closing tag in this file,
+// it is intentional because it prevents trailing whitespace problems!
+
+
+$ nmap localhost
+Starting Nmap 7.70 ( https://nmap.org ) at 2021-02-01 15:25 CET
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00063s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+53/tcp   open  domain
+80/tcp   open  http
+443/tcp  open  https
+3306/tcp open  mysql
+
+
+disk-size
+moodlebox@moodlebox:~ $ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       361G  2.5G  344G   1% /
+devtmpfs        3.8G     0  3.8G   0% /dev
+tmpfs           3.9G     0  3.9G   0% /dev/shm
+tmpfs           3.9G  8.5M  3.9G   1% /run
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           3.9G     0  3.9G   0% /sys/fs/cgroup
+tmpfs            64M     0   64M   0% /var/www/moodledata/temp
+tmpfs            16M     0   16M   0% /var/www/moodledata/sessions
+tmpfs            64M   36M   29M  55% /var/cache/moodle
+/dev/mmcblk0p1  253M   55M  198M  22% /boot
+tmpfs           793M     0  793M   0% /run/user/1000
+
+
+/etc/nginx/sites-available/default
+
+# Default server configuration
+#
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	listen 443 ssl;
+	listen [::]:443 ssl;
+	ssl_certificate /etc/nginx/ssl/moodlebox.pem;
+	ssl_certificate_key /etc/nginx/ssl/moodlebox.key;
+
+	root /var/www/moodle;
+
+	index index.php index.html index.htm index.nginx-debian.html;
+
+	server_name moodlebox;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location /dataroot/ {
+		internal;
+		alias /var/www/moodledata/;
+	}
+
+	location ~ [^/]\.php(/|$) {
+		include fastcgi_params;
+		fastcgi_split_path_info	^(.+\.php)(/.+)$;
+		fastcgi_read_timeout	300;
+		fastcgi_pass	unix:/var/run/php/php7.3-fpm.sock;
+		fastcgi_index	index.php;
+		fastcgi_param	PATH_INFO	$fastcgi_path_info;
+		fastcgi_param	SCRIPT_FILENAME	$document_root$fastcgi_script_name;
+		fastcgi_param	PHP_VALUE "max_execution_time=300\n upload_max_filesize=50M\n post_max_size=50M";
+		client_max_body_size	50M;
+	}
+
+}
+
+HOSTNAME 
+https://moodlebox.net/en/help/domain-name-change/
+cat /etc/hosts
+	127.0.0.1	localhost
+	10.0.0.1	moodlebox
+
+cat /etc/hostname
+	moodlebox
+
+Moodle tells me that the version of PHP is not 64-bit. Is that a problem?
+No. Moodle works fine with a 32-bit version of PHP. This warning is due to the Linux kernel used by Raspberry Pi OS, which runs in 32 bits. It is currently not possible to fix it.
+

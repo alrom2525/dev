@@ -1,0 +1,7 @@
+enable-debug-mode
+edit the file config/defines.inc.php 
+
+/* Debug only */
+if (!defined('_PS_MODE_DEV_')) {
+define('_PS_MODE_DEV_', true);
+}

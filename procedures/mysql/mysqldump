@@ -2,10 +2,16 @@ mysqldump
 
 https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html
 
-shell> mysqldump [options] > dump.sql
+To make a backup of an entire database:
+	shell> mysqldump [options] > dump.sql
+
+	$ mysqldump -u administrator -p db-name > dump-bd-backup-file.sql
 
 
+To load the dump file back into the server:
+	$ mysql db_name < backup-file.sql
 
-$ mysqldump -u administrator -p my_bd > dump_my_bd.sql
-
+Another way to reload the dump file:
+	$ mysql -e "source /path-to-backup/backup-file.sql" db_name
+	$ mysql db_name < backup-file.sql
 

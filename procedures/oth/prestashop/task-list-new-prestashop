@@ -41,11 +41,11 @@ f) [24]Theme elements customisation
 	Text bloc
 	Footer
 
-g) [16]Modules configuration
+g) [16] Modules configuration
 	taxes
 	payment
 	shipping
-	rounded
+	rounding
 	terms ands conditions
 
 h) [8] Roles
@@ -54,7 +54,7 @@ h) [8] Roles
 	translator
 	administrator
 
-i) [16]Products catalog
+i) [16] Products catalog
 	Categories
 	Products
 	Attributes

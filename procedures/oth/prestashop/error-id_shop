@@ -1,0 +1,36 @@
+error-id_shop
+Fatal Error On Saving Theme
+
+When i press "USE THEME" i get this following error code:
+Fatal error: Redefinition of parameter $id_shop in /var/www/your-site.com/www/modules/tmmegamenu/classes/MegaMenu.php on line 124
+
+Linux #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019 x86_64
+Apache/2.4.29 (Ubuntu)
+Version de PHP 7.0.33-38+ubuntu18.04.1+deb.sury.org+1 
+
+I tried the code mentioned and it works.
+
+ 
+
+You should use an ftp file manager like Filezilla and navigate to /modules/tmmegamenu/classes/MegaMenu.php . You can edit the file with a code editor. I am using Adobe Edge Code editor. If you don't know how to do these and you want more detailed description, reply and I will post some tutorials.
+
+ 
+
+On line 126 replace:
+
+ 
+
+public function getCMSPages($id_cms_category, $id_shop = false, $id_lang = false, $id_shop = false, $is_list = false)
+{
+$id_shop = ($id_shop !== false) ? (int)$id_shop : (int)Context::getContext()->shop->id;
+$id_lang = $id_lang ? (int)$id_lang : (int)Context::getContext()->language->id;
+ 
+
+With
+
+ 
+public function getCMSPages($id_cms_category, $id_shop = false, $id_lang = false, $id_shop2 = false, $is_list = false)
+{
+$id_shop = ($id_shop !== false) ? (int)$id_shop : (int)Context::getContext()->shop->id;
+$id_shop = ($id_shop2 !== false) ? (int)$id_shop2 : (int)Context::getContext()->shop->id;
+That worked for me. I don't know if Template Monster knows about it. I will speak with them in the morning.

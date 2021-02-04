@@ -1,7 +1,11 @@
 Buscar y reemplazar texto en Moodle
 
-https://docs.moodle.org/38/en/Administration_via_command_line#Search_and_replace_text
+via web https://docs.moodle.org/35/en/Search_and_replace_tool
+Admins can search and replace text e.g. URLs in their Moodle database using the search and replace tool at http://yourmoodlesite.org/admin/tool/replace/index.php (replacing yourmoodlesite.org with the address of your Moodle site). This is useful when a Moodle site is moved from one server to another or when the URL changes.
 
+
+
+https://docs.moodle.org/38/en/Administration_via_command_line#Search_and_replace_text
 
 Search and replace tool
 Main page ► Managing a Moodle site ► Admin tools ► Search and replace tool
@@ -28,4 +32,9 @@ Options:
 --shorten             Shorten result if necessary.
 --non-interactive     Perform the replacement without confirming.
 -h, --help            Print out this help.
+
+$ sudo -u www-data /usr/bin/php7.1 admin/tool/replace/cli/replace.php --search=//dev.mocn.ca --replace=//moodlebox.home
+
+
+sudo -u www-data /usr/bin/php7.1 admin/tool/replace/cli/replace.php --search=//dev.mocn.ca/ --replace=//moodlebox.home/
 
