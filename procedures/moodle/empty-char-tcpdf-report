@@ -1,0 +1,17 @@
+empty-char-tcpdf
+<?php  
+
+// Set locale by your language 
+switch (current_language()) {
+	case 'en':
+		setlocale(LC_TIME, 'C.UTF-8');
+		break;
+	
+	case 'fr':
+		setlocale(LC_TIME, 'fr_FR.utf8');
+		break;
+
+	default:
+		setlocale(LC_TIME, 'fr_FR.utf8');
+		break;
+}

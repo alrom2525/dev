@@ -3,10 +3,21 @@ moodlebox initial setup
 https://moodlebox.net/en/help/how-to-access-the-moodlebox-via-ethernet/
 https://www.modmy.com/how-modify-hosts-file-your-android-device
 
+
+
+MoodleBox disk image for microSD card
+Version: 3.9.0
+Moodle version: 3.10.0 (Build: 20201109)
+Size: 737 MB
+Date: 8 Nov 2020
+
 Distributor ID:	Raspbian
 Description:	Raspbian GNU/Linux 10 (buster)
 Release:	10
 Codename:	buster
+
+
+
 
 
 /var/www/moodle
