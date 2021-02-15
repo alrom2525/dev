@@ -1,15 +1,53 @@
 static-ip
+The previous Ubuntu 17 versions were using ifconfig and its configuration file /etc/network/interfaces to configure the network.
+
 $ sudo vi /etc/network/interfaces
-	auto eth0
-	iface eth0 inet static
-	address 192.168.1.10
-	netmask 255.255.255.0
-	network 192.168.1.0
-	broadcast 192.168.1.255
-	gateway 192.168.1.1
+ auto eth0
+ iface eth0 inet static
+ address 192.168.1.10
+ netmask 255.255.255.0
+ network 192.168.1.0
+ broadcast 192.168.1.255
+ gateway 192.168.1.1
 
 
 $ sudo /etc/init.d/networking restart
 
 $ sudo ifconfig eth0 down 
 $ sudo ifconfig eth0 up
+
+
+Configuring Static IP address on Ubuntu Server #
+On Ubuntu 20.04
+
+sudo vi /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+network: {config: disabled}
+
+
+
+To assign a static IP address on the network interface, open the YAML configuration file with your text editor :
+
+
+sudo vi /etc/netplan/01-netcfg.yaml
+/etc/netplan/01-netcfg.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens3:
+      dhcp4: yes
+Copy
+
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: no
+      addresses:
+        - 192.168.1.220/24
+      gateway4: 192.168.121.1
+      nameservers:
+          addresses: [8.8.8.8, 1.1.1.1]

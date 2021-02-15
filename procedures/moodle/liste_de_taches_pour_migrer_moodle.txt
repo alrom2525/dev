@@ -57,6 +57,7 @@ Des étapes du plan de migration Moodle:
 
 	4.8	 Suprimer all roles sites admin
 	4.9  Renommer le dossier install
+	4.10 allowstealth in admin (stealth activities)
 
 5. Configurations Moodle
   5.1 Désactiver Analyses de données (enableanalytics)

@@ -1,4 +1,6 @@
 empty-char-tcpdf
+check first your locale settings in the operating system
+
 <?php  
 
 // Set locale by your language 

@@ -1,0 +1,35 @@
+show locale settings:
+	$ locale
+
+$ localectl status
+
+$ locale -k LC_TIME
+
+show a list of available locales
+$ locale -a
+
+Set LANG en en_IN.UTF-8
+$ sudo update-locale LANG=LANG=en_IN.UTF-8 LANGUAGE
+OR
+$ sudo localectl set-locale LANG=en_IN.UTF-8
+
+Para configurar un parámetro de locale específico, edite la variable apropiada. Por ejemplo.
+
+$ sudo update-locale LC_TIME=en_IN.UTF-8
+OR
+$ sudo localectl set-locale LC_TIME=en_IN.UTF-8
+Puede encontrar la configuración regional global en los siguientes archivos:
+
+/etc/default/locale – on Ubuntu/Debian
+/etc/locale.conf – on CentOS/RHEL
+Estos archivos también se pueden editar manualmente usando cualquiera de sus editores de línea de comando favoritos, como Vim o Nano, para configurar la configuración regional de su sistema.
+
+Para establecer una configuración regional global para un solo usuario, puede abrir el archivo ~/.bash_profile y agregar las siguientes líneas.
+
+LANG="en_IN.utf8"
+export LANG
+
+
+$ man locale
+$ man update-locale
+$ man localectl
