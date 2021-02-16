@@ -13,12 +13,11 @@ sudo wget https://moodle.org/plugins/download.php/10791/atto_pastespecial_moodle
 sudo wget https://moodle.org/plugins/download.php/9418/atto_chemistry_moodle31_2015092900.zip
 sudo wget https://moodle.org/plugins/download.php/16925/atto_corrections_moodle37_2018050201.zip
 sudo wget https://moodle.org/plugins/download.php/17250/atto_count_moodle35_2018062700.zip
-sudo wget https://moodle.org/plugins/download.php/17255/atto_morebackcolors_moodle37_2018050202.zip	
+sudo wget https://moodle.org/plugins/download.php/17255/atto_morebackcolors_moodle37_2018050202.zip
 sudo wget https://moodle.org/plugins/download.php/17937/atto_hr_moodle35_2018093000.zip
 sudo wget https://moodle.org/plugins/download.php/19626/atto_sketch_moodle37_2019052400.zip
-
-	sudo wget https://moodle.org/plugins/download.php/21174/atto_styles_moodle38_2020031100.zip
-	sudo wget https://moodle.org/plugins/download.php/17099/atto_preview_moodle38_2016021501.zip
+sudo wget https://moodle.org/plugins/download.php/21174/atto_styles_moodle38_2020031100.zip
+sudo wget https://moodle.org/plugins/download.php/17099/atto_preview_moodle38_2016021501.zip
 
 
 Moodle 3.3
@@ -34,4 +33,60 @@ sudo wget https://moodle.org/plugins/download.php/16925/atto_corrections_moodle3
 sudo wget https://moodle.org/plugins/download.php/17255/atto_morebackcolors_moodle37_2018050202.zip	
 sudo wget https://moodle.org/plugins/download.php/17937/atto_hr_moodle35_2018093000.zip
 sudo wget https://moodle.org/plugins/download.php/19626/atto_sketch_moodle37_2019052400.zip
-	sudo wget https://moodle.org/plugins/download.php/17250/atto_count_moodle35_2018062700.zip
+sudo wget https://moodle.org/plugins/download.php/17250/atto_count_moodle35_2018062700.zip
+
+
+atto_sketch
+atto_morefontcolors
+atto_morebackcolors
+atto_fullscreen
+atto_htmlplus
+atto_fontfamily
+atto_fontsize
+atto_hr
+atto_pastespecial
+atto_preview
+atto_sketch
+
+https://your-url/admin/settings.php?section=additionalhtml
+additionalhtmlhead
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Khand:wght@600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+
+https://your-url/admin/settings.php?section=atto_fontfamily_settings
+atto_fontfamily | fontselectlist
+Arial=Arial, Helvetica, sans-serif;
+Times=Times New Roman, Times, serif;
+Courier=Courier New, Courier, mono;
+Georgia=Georgia, Times New Roman, Times, serif;
+Verdana=Verdana, Geneva, sans-serif;
+Trebuchet=Trebuchet MS, Helvetica, sans-serif;
+Dancing='Dancing Script', cursive;
+Roboto=Roboto, sans-serif;
+Khand=Khand, sans-serif;
+Graduate=Graduate, cursive;
+Vast='Vast Shadow', cursive;
+Caveat=Caveat, cursive;
+Pangolin=Pangolin, cursive;
+
+
+https://your-url/admin/settings.php?section=atto_morefontcolors_settings
+atto_morefontcolors | availablecolors
+#FFFFFF #C0C0C0 #808080 #000000
+#FF0000 #800000 #FFA900 #F93154
+#00FF00 #008000 #00FFFF #008080
+#0000FF #000080 #39C0ED #0099FF
+#FF33CC #B23CFD #FF00FF #800080
+#FFFF00 #1266F1 #00B74A #808000
+
+https://your-url/admin/settings.php?section=atto_morebackcolors_settings
+atto_morebackcolors | availablecolors
+#FFFFFF #C0C0C0 #808080 #000000
+#FF0000 #800000 #FFA900 #F93154
+#00FF00 #008000 #00FFFF #008080
+#0000FF #000080 #39C0ED #0099FF
+#FF33CC #B23CFD #FF00FF #800080
+#FFFF00 #1266F1 #00B74A #808000

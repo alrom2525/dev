@@ -33,3 +33,8 @@ export LANG
 $ man locale
 $ man update-locale
 $ man localectl
+
+Générer de nouveau la bonne locale :
+locale-gen fr_FR.UTF-8
+Reconfigurer le paquet locales :
+dpkg-reconfigure locales
